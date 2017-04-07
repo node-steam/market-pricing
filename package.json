@@ -1,0 +1,105 @@
+{
+  "name": "@node-steam/market-pricing",
+  "version": "1.0.0",
+  "description": "Module to access the Steam Market Pricing API",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "homepage": "https://github.com/node-steam/market-pricing",
+  "bugs": "https://github.com/node-steam/market-pricing/issues",
+  "repository": {
+    "url": "https://github.com/node-steam/market-pricing",
+    "type": "git"
+  },
+  "author": "N|Steam",
+  "keywords": ["steam", "steam-api", "price", "pricing", "skin", "skins", "promises", "typescript", "es6", "es7"],
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts",
+    "example/*.js"
+  ],
+  "contributors": [
+    "Silas Rech <silas.rech@protonmail.com> (https://lenovouser.me)"
+  ],
+  "runkitExampleFilename": "example/runkit.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc -p .",
+    "test": "yarn compile && ava"
+  },
+  "eslintConfig": {
+    "parser": "typescript-eslint-parser",
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": [
+      "google"
+    ],
+    "ecmaFeatures": {
+      "modules": true
+    },
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": false,
+      "jquery": false
+    },
+    "rules": {
+      "indent": [
+        "error",
+        4
+      ],
+      "camelcase": "off",
+      "no-multi-spaces": "off",
+      "no-unused-vars": "off",
+      "object-curly-spacing": "off",
+      "require-jsdoc": "off",
+      "max-len": [
+        "error",
+        150,
+        4
+      ]
+    }
+  },
+  "ava": {
+    "files": [
+      "test/mock/*.js",
+      "test/mock/**/*.js"
+    ],
+    "source": [
+      "lib/*.js"
+    ],
+    "concurrency": 5,
+    "verbose": true,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "powerAssert": false,
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
+  },
+  "devDependencies": {
+    "@types/async": "^2.0.40",
+    "@types/bluebird-global": "^3.5.1",
+    "@types/node": "^7.0.12",
+    "app-module-path": "^2.2.0",
+    "ava": "^0.19.0",
+    "babel-core": "^6.24.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-register": "^6.24.0",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "nock": "^9.0.11",
+    "typescript": "^2.2.2",
+    "typescript-eslint-parser": "^2.1.0"
+  },
+  "dependencies": {
+    "async": "^2.3.0",
+    "bluebird": "^3.5.0",
+    "request": "^2.81.0",
+    "to-type": "^1.1.0"
+  }
+}

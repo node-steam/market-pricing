@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": [
+      "node",
+      "async",
+      "bluebird-global"
+    ],
+    "removeComments": true,
+    "baseUrl": "src/",
+    "declaration": true,
+    "declarationDir": "lib",
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src/**.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

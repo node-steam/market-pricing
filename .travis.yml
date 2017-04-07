@@ -1,0 +1,15 @@
+language: node_js
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+before_script:
+  - yarn global add typescript ava
+
+node_js:
+  - "7"
+  - "6"
+  - "5"
+  - "4"
