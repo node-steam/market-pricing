@@ -1,12 +1,15 @@
 language: node_js
 
 cache:
-  yarn: true
-  directories:
-    - node_modules
+  yarn: false
 
 before_script:
-  - yarn global add typescript ava tslint typedoc
+  - yarn global add typescript
+  - yarn global add ava
+  - yarn global add tslint
+  - yarn global add typedoc
+
+script: yarn test
 
 node_js:
   - "7"
