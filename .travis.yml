@@ -6,7 +6,7 @@ cache:
     - node_modules
 
 before_script:
-  - yarn global add typescript ava
+  - yarn global add typescript ava tslint typedoc
 
 node_js:
   - "7"
