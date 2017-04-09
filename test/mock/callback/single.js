@@ -11,7 +11,7 @@ import {
 
 // First Valid Item Request
 nock('https://steamcommunity.com')
-.get(`/market/priceoverview?currency=${Currency.USD}&appid=${Application.CSGO}&market_hash_name=FirstItem`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=FirstItem`)
 .reply(200, {
     success: true,
     lowest_price: '$1.00',

@@ -12,15 +12,15 @@ import {
 nock('https://steamcommunity.com')
 
 // Non-Existent Item With Status Code 500
-.get(`/market/priceoverview?currency=${Currency.USD}&appid=${Application.CSGO}&market_hash_name=DoesNotExist500-One`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist500-One`)
 .reply(500, {success: false})
-.get(`/market/priceoverview?currency=${Currency.USD}&appid=${Application.CSGO}&market_hash_name=DoesNotExist500-Two`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist500-Two`)
 .reply(500, {success: false})
 
 // Non-Existent Item With Status Code 404
-.get(`/market/priceoverview?currency=${Currency.USD}&appid=${Application.CSGO}&market_hash_name=DoesNotExist404-One`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist404-One`)
 .reply(404, {success: false})
-.get(`/market/priceoverview?currency=${Currency.USD}&appid=${Application.CSGO}&market_hash_name=DoesNotExist404-Two`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist404-Two`)
 .reply(404, {success: false});
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
@@ -34,19 +34,19 @@ test('Multiple Items That Do Not Exist', async (t) => {
     ]));
     const should = [
         {
-            error: 'Item not found! Status: 500',
+            error: 'Item Not Found! Status: 500',
             id: 'DoesNotExist500-One',
         },
         {
-            error: 'Item not found! Status: 500',
+            error: 'Item Not Found! Status: 500',
             id: 'DoesNotExist500-Two',
         },
         {
-            error: 'Item not found! Status: 404',
+            error: 'Item Not Found! Status: 404',
             id: 'DoesNotExist404-One',
         },
         {
-            error: 'Item not found! Status: 404',
+            error: 'Item Not Found! Status: 404',
             id: 'DoesNotExist404-Two',
         },
     ];

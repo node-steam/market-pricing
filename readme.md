@@ -50,6 +50,9 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 #### `Options.country: string`
 > Optional **[ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)** country code
 
+#### `Options.raw: boolean`
+> Will return all objects in their raw form when set to true
+
 #### `API.getPrice(skin: string)`
 > Get price for a skin
 
@@ -112,6 +115,10 @@ const x = await getPrices([ '★ Falchion Knife', '★ Karambit' ], { id: Applic
 ## Differences from the raw response of the original API:
 
 ### Object Layout:
+
+> **Info:**
+>
+> You can request the raw item by setting `{ raw: true }` in the options. This is not recommended though.
 
 **Raw:**
 ```javascript
@@ -230,6 +237,12 @@ yarn compile
 
 ```
 yarn test
+```
+
+**Generate Docs:**
+
+```
+yarn docs
 ```
 
 ## Tests:

@@ -19,20 +19,15 @@ nock('https://steamcommunity.com')
     median_price: '$1.30',
 });
 
-const API = new Market({ id: Application.CSGO, currency: Currency.USD });
+const API = new Market({ id: Application.CSGO, currency: Currency.USD, raw: true });
 
-test('One Item', async (t) => {
+test('Raw Request For Single Item', async (t) => {
     const item = await API.getPrice('FirstItem');
     const should = {
-        id: 'FirstItem',
-        price: {
-            type: 'us-dollar',
-            code: 'USD',
-            sign: '$',
-            lowest: 1,
-            median: 1.3,
-        },
-        volume: 328,
+        success: true,
+        lowest_price: '$1.00',
+        volume: '328',
+        median_price: '$1.30',
     };
     t.deepEqual(item, should);
 });

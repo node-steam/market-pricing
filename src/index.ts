@@ -1,106 +1,35 @@
-import * as request  from 'request';
-import * as type     from 'to-type';
 import * as async    from 'async';
 import * as bluebird from 'bluebird';
+import * as request  from 'request';
+import * as type     from 'to-type';
 
-import {
-    Currency,
-    CurrencyType,
-    CurrencySign,
-    Application,
-} from './enums';
-
+/**
+ * @hidden
+ */
 const Bluebird = bluebird;
 
-export {
-    Currency,
+import {
     Application,
-};
+    Currency,
+} from './enums';
 
-const base = 'https://steamcommunity.com';
-const path = '/market/priceoverview';
+import {
+    CleanItem,
+    Item,
+    ItemArray,
+    ItemError,
+    MarketOptions,
+    RawItem,
+} from './types';
 
-export type Options = {
-    id: number,
-    country?: string,
-    currency?: number,
-};
+import {
+    generateItem,
+} from './utils';
 
-export type Raw = {
-    success: boolean,
-    lowest_price: string,
-    volume: string,
-    median_price: string,
-};
-
-export type Item = {
-    id: string,
-    price: {
-        type: string,
-        code: string,
-        sign: string,
-        lowest: number,
-        median: number,
-    },
-    volume: number,
-};
-
-export type ItemError = {
-    id: string,
-    error: string,
-};
-
-export type ItemArray = {
-    errors: Array<ItemError>,
-    results: Array<Item>,
-};
-
-const unformat = (value: string|number) => {
-    // Fails silently (need decent errors):
-    value = value || 0;
-
-    // Return the value as-is if it's already a number:
-    if (typeof value === 'number') return value;
-
-    // Build regex to strip out everything except digits, decimal point and minus sign:
-    const regex = new RegExp('[^0-9-]', 'g');
-    const unformatted = parseInt(
-        ('' + value)
-        .replace(/\((?=\d+)(.*)\)/, '-$1')
-        .replace(',--', '00')
-        .replace(regex, '')
-	) / 100;
-
-    return !isNaN(unformatted) ? unformatted : 0;
-};
-
-const determineCurrencyCode = (currency: number): string => {
-    return Currency[currency];
-};
-
-const determineCurrencyType = (currency: number): string => {
-    return CurrencyType[Currency[currency]];
-};
-
-const determineCurrencySign = (currency: number): string => {
-    return CurrencySign[Currency[currency]];
-};
-
-const generateItem = (name: string, response: Raw, currency: number): Item => {
-    const result = {
-        id: name,
-        price: {
-            type: determineCurrencyType(currency),
-            code: determineCurrencyCode(currency),
-            sign: determineCurrencySign(currency),
-            lowest: unformat(response.lowest_price),
-            median: unformat(response.median_price),
-        },
-        volume: parseInt(response.volume, 10),
-    };
-
-    return result;
-};
+import {
+    base,
+    path,
+} from './base';
 
 /**
  * Retrieve price for a single item.
@@ -108,15 +37,15 @@ const generateItem = (name: string, response: Raw, currency: number): Item => {
  * @param {string} name Hashed Item Name
  * @param {Object} options Options
  * @param {Function} callback Callback
- * @return {Object} The item
  */
 export const getPrice = (
     name: string,
-    options: Options,
+    options: MarketOptions,
     callback?: Function,
 ): Promise<Item | Error> | Item | Error => {
     const x = new Bluebird((resolve, reject) => {
-        let { id, country, currency } = options;
+        // tslint:disable-next-line:prefer-const
+        let { id, country, currency, raw } = options;
 
         if (!id || type(id) !== 'number') {
             return reject(new Error('Invalid Application ID'));
@@ -127,29 +56,31 @@ export const getPrice = (
         }
 
         request({
-            uri: path,
             baseUrl: base,
             json: true,
             qs: {
-                currency: currency,
                 appid: id,
+                country,
+                currency,
                 market_hash_name: name,
-                country: country,
             },
+            uri: path,
         }, (error, response, body) => {
             if (response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
             } else if (response.statusCode === 500 || response.statusCode === 404) {
-                return reject(new Error(`Item not found! Status: ${response.statusCode}`));
+                return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
             } else if (!error && response.statusCode === 200) {
-                const item = generateItem(name, body, currency);
-                return resolve(item);
+                const item  = body;
+                const clean = generateItem(name, body, currency);
+                if (raw) return resolve(item);
+                return resolve(clean);
             } else if (error) {
                 return reject(error);
             } else if (response) {
-                return reject(new Error(`Unknown error! Status: ${response.statusCode}`));
+                return reject(new Error(`Unknown Error! Status: ${response.statusCode}`));
             } else {
-                return reject(new Error('Unknown error!'));
+                return reject(new Error('Unknown Error!'));
             }
         });
     });
@@ -165,15 +96,15 @@ export const getPrice = (
  * @param {Array<string>} names Array Of Hashed Item Names
  * @param {Object} options Options
  * @param {Function} callback Callback
- * @return {Array} The items
  */
 export const getPrices = (
-    names: Array<string>,
-    options: Options,
+    names: string[],
+    options: MarketOptions,
     callback?: Function,
 ): Promise<ItemArray | Error> | ItemArray | Error  => {
     const x = new Bluebird((resolve, reject) => {
-        let { id, country, currency } = options;
+        // tslint:disable-next-line:prefer-const
+        let { id, country, currency, raw } = options;
 
         if (!id || type(id) !== 'number') {
             return reject(new Error('Invalid Application ID'));
@@ -183,50 +114,55 @@ export const getPrices = (
             currency = Currency.USD;
         }
 
-        const x: ItemArray = {
+        const i: ItemArray = {
             errors: [],
             results: [],
         };
 
-        async.each(names, (name, callback) => {
+        async.each(names, (name, cb) => {
             request({
-                uri: path,
                 baseUrl: base,
                 json: true,
                 qs: {
-                    currency: currency,
                     appid: id,
+                    country,
+                    currency,
                     market_hash_name: name,
-                    country: country,
                 },
+                uri: path,
             }, (error, response, body) => {
                 if (response.statusCode === 429) {
                     return reject(new Error('Steam API Rate Limit Exceeded!'));
                 } else if (response.statusCode === 500 || response.statusCode === 404) {
-                    x.errors.push({ id: name, error: `Item not found! Status: ${response.statusCode}` });
-                    callback();
+                    i.errors.push({ id: name, error: `Item Not Found! Status: ${response.statusCode}` });
+                    cb();
                 } else if (!error && response.statusCode === 200) {
-                    const item = generateItem(name, body, currency);
-                    x.results.push(item);
-                    callback();
+                    const item  = body;
+                    const clean = generateItem(name, body, currency);
+                    if (raw) {
+                        i.results.push(item);
+                    } else {
+                        i.results.push(clean);
+                    }
+                    cb();
                 } else if (error) {
-                    x.errors.push({ id: name, error: error.toString() });
-                    callback();
+                    i.errors.push({ id: name, error: error.toString() });
+                    cb();
                 } else if (response) {
-                    x.errors.push({ id: name, error: `Unknown error! Status: ${response.statusCode}` });
-                    callback();
+                    i.errors.push({ id: name, error: `Unknown Error! Status: ${response.statusCode}` });
+                    cb();
                 } else {
-                    x.errors.push({ id: name, error: 'Unknown error!' });
-                    callback();
+                    i.errors.push({ id: name, error: 'Unknown Error!' });
+                    cb();
                 }
             });
         }, () => {
-            if (!x.results.length && x.errors.length) {
-                return reject(x.errors);
-            } else if (!x.results.length && !x.errors.length) {
-                return reject(new Error('Something really weird happened!'));
+            if (!i.results.length && i.errors.length) {
+                return reject(i.errors);
+            } else if (!i.results.length && !i.errors.length) {
+                return reject(new Error('Something Really Weird Happened!'));
             }
-            return resolve(x);
+            return resolve(i);
         });
     });
 
@@ -239,36 +175,62 @@ export const getPrices = (
  * Market Class.
  */
 export class Market {
-    appid: number;
-    currency: number;
-    country: string;
+    /**
+     * Application ID of the game you want to query skin/s for
+     */
+    public appid: number;
+    /**
+     * Optional [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
+     */
+    public country?: string;
+    /**
+     * Optional currency integer
+     */
+    public currency?: number;
+    /**
+     * Request the raw object
+     */
+    public raw?: boolean;
 
     /**
      * Create the API
      *
-     * @param {Object} options Options
+     * @param options Options
      */
-    constructor(options: Options) {
-        this.appid = options.id;
-        this.currency = options.currency;
-        this.country = options.country;
+    constructor(options: MarketOptions) {
+        if (type(options) !== 'object') throw new Error('Invalid Options Passed To Constructor!');
+
+        this.appid    = options.id;
+        this.currency = options.currency || Currency.USD;
+        this.country  = options.country;
+        this.raw      = options.raw || false;
+
+        if (type(this.appid) !== 'number') throw new Error('Invalid Application ID!');
     }
 
     /**
      * Get a item
-     * @param {string} name The name of the skin
-     * @return {Object} The item
+     * @param name The name of the skin
      */
-    getPrice(name: string, callback?: Function) {
-        return getPrice(name, { id: this.appid, currency: this.currency, country: this.country }, callback);
+    public getPrice(name: string, callback?: Function) {
+        return getPrice(name, { id: this.appid, currency: this.currency, country: this.country, raw: this.raw }, callback);
     }
 
     /**
      * Get a array of items
-     * @param {string} name Array with the names of the skins
-     * @return {Array} The items
+     * @param name Array with the names of the skins
+     * @param callback The `callback` if you use it
      */
-    getPrices(names: Array<string>, callback?: Function) {
-        return getPrices(names, { id: this.appid, currency: this.currency, country: this.country }, callback);
+    public getPrices(names: string[], callback?: Function) {
+        return getPrices(names, { id: this.appid, currency: this.currency, country: this.country, raw: this.raw }, callback);
     }
+}
+
+export {
+    Currency,
+    Application,
+    MarketOptions,
+    Item,
+    ItemError,
+    ItemArray,
 };

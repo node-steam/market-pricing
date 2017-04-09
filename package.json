@@ -11,7 +11,18 @@
     "type": "git"
   },
   "author": "N|Steam",
-  "keywords": ["steam", "steam-api", "price", "pricing", "skin", "skins", "promises", "typescript", "es6", "es7"],
+  "keywords": [
+    "steam",
+    "steam-api",
+    "price",
+    "pricing",
+    "skin",
+    "skins",
+    "promises",
+    "typescript",
+    "es6",
+    "es7"
+  ],
   "files": [
     "lib/*.js",
     "lib/*.d.ts",
@@ -27,41 +38,10 @@
   "license": "MIT",
   "scripts": {
     "compile": "tsc -p .",
-    "test": "yarn compile && ava"
-  },
-  "eslintConfig": {
-    "parser": "typescript-eslint-parser",
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "extends": [
-      "google"
-    ],
-    "ecmaFeatures": {
-      "modules": true
-    },
-    "env": {
-      "node": true,
-      "es6": true,
-      "browser": false,
-      "jquery": false
-    },
-    "rules": {
-      "indent": [
-        "error",
-        4
-      ],
-      "camelcase": "off",
-      "no-multi-spaces": "off",
-      "no-unused-vars": "off",
-      "object-curly-spacing": "off",
-      "require-jsdoc": "off",
-      "max-len": [
-        "error",
-        150,
-        4
-      ]
-    }
+    "test": "yarn compile && ava",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "docs": "typedoc src/index.ts",
+    "prepublish": "yarn lint && yarn test && yarn docs"
   },
   "ava": {
     "files": [
@@ -87,9 +67,9 @@
     "@types/node": "^7.0.12",
     "app-module-path": "^2.2.0",
     "ava": "^0.19.0",
-    "babel-core": "^6.24.0",
+    "babel-core": "^6.24.1",
     "babel-polyfill": "^6.23.0",
-    "babel-register": "^6.24.0",
+    "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
     "nock": "^9.0.11",

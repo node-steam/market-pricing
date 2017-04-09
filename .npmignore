@@ -6,8 +6,10 @@
 .travis.yml
 yarn.lock
 tsconfig.json
+typedoc.js
 src/
 test/
+docs/
 
 ### macOS ###
 *.DS_Store

@@ -12,14 +12,14 @@ import {
 nock('https://steamcommunity.com')
 
 // Non-Existent Item With Status Code 500
-.get(`/market/priceoverview?currency=${Currency.GBP}&appid=${Application.CSGO}&market_hash_name=DoesNotExist500`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=DoesNotExist500`)
 .reply(500, {success: false})
 // Non-Existent Item With Status Code 404
-.get(`/market/priceoverview?currency=${Currency.GBP}&appid=${Application.CSGO}&market_hash_name=DoesNotExist404`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=DoesNotExist404`)
 .reply(404, {success: false})
 
 // First Valid Item Request
-.get(`/market/priceoverview?currency=${Currency.GBP}&appid=${Application.CSGO}&market_hash_name=FirstItem`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=FirstItem`)
 .reply(200, {
     success: true,
     lowest_price: '£1.00',
@@ -28,7 +28,7 @@ nock('https://steamcommunity.com')
 })
 
 // Second Valid Item Request
-.get(`/market/priceoverview?currency=${Currency.GBP}&appid=${Application.CSGO}&market_hash_name=SecondItem`)
+.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=SecondItem`)
 .reply(200, {
     success: true,
     lowest_price: '£2.00',
@@ -48,11 +48,11 @@ test('Multiple Mixed Items That Do And Do Not Exist', async (t) => {
     const should = {
         errors: [
             {
-                error: 'Item not found! Status: 500',
+                error: 'Item Not Found! Status: 500',
                 id: 'DoesNotExist500',
             },
             {
-                error: 'Item not found! Status: 404',
+                error: 'Item Not Found! Status: 404',
                 id: 'DoesNotExist404',
             },
         ],

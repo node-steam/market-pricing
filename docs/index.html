@@ -1,0 +1,387 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>N|Steam Market-Pricing</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">N|Steam Market-Pricing</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> N|Steam Market-Pricing</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://gitter.im/node-steam/market-pricing"><img src="https://img.shields.io/gitter/room/node-steam/market-pricing.svg?style=flat-square" alt="Chat"></a>
+					<a href="https://travis-ci.org/node-steam/market-pricing"><img src="https://img.shields.io/travis/node-steam/market-pricing.svg?style=flat-square" alt="Travis CI"></a>
+					<a href="https://david-dm.org/node-steam/market-pricing"><img src="https://img.shields.io/david/node-steam/market-pricing.svg?style=flat-square" alt="Dependencies"></a>
+					<a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://img.shields.io/npm/v/@node-steam/market-pricing.svg?style=flat-square" alt="Version"></a>
+					<a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://img.shields.io/npm/dt/@node-steam/market-pricing.svg?style=flat-square" alt="Downloads"></a>
+					<a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://img.shields.io/npm/l/@node-steam/market-pricing.svg?style=flat-square" alt="License"></a>
+				<a href="https://runkit.com/npm/@node-steam/market-pricing"><img src="https://img.shields.io/badge/try%20on%20runkit-market--pricing-blue.svg?style=flat-square" alt="Runkit"></a></p>
+				<p><a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://nodei.co/npm/@node-steam/market-pricing.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="npm statistics"></a></p>
+				<p><strong>Market-Pricing</strong> is a wrapper for the unofficial <strong>Steam Market Pricing API</strong> using Typescript and Promises.</p>
+				<h2 id="installation">Installation</h2>
+				<p>You can install <strong>Market-Pricing</strong> through the command line by using the following command:</p>
+				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing
+</code></pre><h2 id="usage-">Usage:</h2>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {
+    Market,
+    Currency,
+    Application,
+    getPrice,
+    getPrices,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/market-pricing'</span>;
+
+<span class="hljs-keyword">const</span> API = <span class="hljs-keyword">new</span> Market({ <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR });
+</code></pre>
+				<h2 id="documentation-">Documentation:</h2>
+				<h4 id="-new-market-options-"><code>new Market(Options)</code></h4>
+				<blockquote>
+					<p>API class</p>
+				</blockquote>
+				<h4 id="-options-id-number-"><code>Options.id: number</code></h4>
+				<blockquote>
+					<p>Application ID of the game you want to query skin/s for</p>
+					<p>We provide a <strong><a href="src/enums.ts#L109-L120">enum</a></strong> for the most common used games.</p>
+				</blockquote>
+				<h4 id="-options-currency-number-"><code>Options.currency: number</code></h4>
+				<blockquote>
+					<p>Optional currency integer</p>
+					<p>We provide a <strong><a href="src/enums.ts#L1-L35">enum</a></strong>  for all available currencies</p>
+				</blockquote>
+				<h4 id="-options-country-string-"><code>Options.country: string</code></h4>
+				<blockquote>
+					<p>Optional <strong><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166</a></strong> country code</p>
+				</blockquote>
+				<h4 id="-options-raw-boolean-"><code>Options.raw: boolean</code></h4>
+				<blockquote>
+					<p>Will return all objects in their raw form when set to true</p>
+				</blockquote>
+				<h4 id="-api-getprice-skin-string-"><code>API.getPrice(skin: string)</code></h4>
+				<blockquote>
+					<p>Get price for a skin</p>
+				</blockquote>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
+
+<span class="hljs-comment">// or</span>
+
+<span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> getPrice(<span class="hljs-string">'★ Bayonet'</span>, { <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR })
+
+&gt; {
+    <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Bayonet'</span>,
+    <span class="hljs-attr">price</span>: {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
+        <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
+        <span class="hljs-attr">lowest</span>: <span class="hljs-number">135.44</span>,
+        <span class="hljs-attr">median</span>: <span class="hljs-number">136.61</span>,
+    },
+    <span class="hljs-attr">volume</span>: <span class="hljs-number">8</span>,
+};
+</code></pre>
+				<h4 id="-api-getprices-skins-array-string-"><code>API.getPrices(skins: Array&lt;string&gt;)</code></h4>
+				<blockquote>
+					<p>Get prices for a array of skins</p>
+				</blockquote>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ]);
+
+<span class="hljs-comment">// or</span>
+
+<span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ], { <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR })
+
+&gt; [
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Falchion Knife'</span>,
+        <span class="hljs-attr">price</span>: {
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
+            <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
+            <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
+            <span class="hljs-attr">lowest</span>: <span class="hljs-number">59.86</span>,
+            <span class="hljs-attr">median</span>: <span class="hljs-number">57.50</span>,
+        },
+        <span class="hljs-attr">volume</span>: <span class="hljs-number">27</span>,
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Karambit'</span>,
+        <span class="hljs-attr">price</span>: {
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
+            <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
+            <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
+            <span class="hljs-attr">lowest</span>: <span class="hljs-number">215</span>,
+            <span class="hljs-attr">median</span>: <span class="hljs-number">214.74</span>,
+        },
+        <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
+    }
+];
+</code></pre>
+				<h2 id="differences-from-the-raw-response-of-the-original-api-">Differences from the raw response of the original API:</h2>
+				<h3 id="object-layout-">Object Layout:</h3>
+				<blockquote>
+					<p><strong>Info:</strong></p>
+					<p>You can request the raw item by setting <code>{ raw: true }</code> in the options. This is not recommended though.</p>
+				</blockquote>
+				<p><strong>Raw:</strong></p>
+				<pre><code class="lang-javascript">{
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">lowest_price</span>: <span class="hljs-string">"215,--€"</span>,
+    <span class="hljs-attr">volume</span>: <span class="hljs-string">"6"</span>,
+    <span class="hljs-attr">median_price</span>: <span class="hljs-string">"214,74€"</span>
+}
+</code></pre>
+				<p><strong>This Module:</strong></p>
+				<pre><code class="lang-javascript">{
+    <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Karambit'</span>,
+    <span class="hljs-attr">price</span>: {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
+        <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
+        <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
+        <span class="hljs-attr">lowest</span>: <span class="hljs-number">215</span>,
+        <span class="hljs-attr">median</span>: <span class="hljs-number">214.74</span>,
+    },
+    <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
+}
+</code></pre>
+				<h3 id="prices-">Prices:</h3>
+				<p>The prices aren&#39;t available as a string, but rather split up in object properties with more precise information:</p>
+				<p><strong>Example:</strong></p>
+				<p>Price you would get from the API:</p>
+				<pre><code class="lang-javascript">{
+    <span class="hljs-attr">lowest_price</span>: <span class="hljs-string">"57,86€"</span>,
+    <span class="hljs-attr">median_price</span>: <span class="hljs-string">"59,63€"</span>
+}
+</code></pre>
+				<p>Price you get from this module:</p>
+				<pre><code class="lang-javascript">{
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
+    <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
+    <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
+    <span class="hljs-attr">lowest</span>: <span class="hljs-number">59.86</span>,
+    <span class="hljs-attr">median</span>: <span class="hljs-number">57.74</span>,
+}
+</code></pre>
+				<h3 id="volume-">Volume:</h3>
+				<p>The volume (of available skins) is a integer instead of a string</p>
+				<h2 id="async-promises-">Async / Promises:</h2>
+				<p>The examples are shown using <code>await</code> for simplicity  - if you don&#39;t want to make your function <code>async</code> you can always use <code>.catch().then()</code> or a <code>callback</code> instead.</p>
+				<h3 id="example-">Example:</h3>
+				<p><strong>Async:</strong></p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> item = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
+
+<span class="hljs-comment">// do something with the &lt;item&gt;</span>
+</code></pre>
+				<p><strong>Promise:</strong></p>
+				<pre><code class="lang-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>)
+.catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.error(e);
+})
+.then(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+    <span class="hljs-comment">// do something with the &lt;item&gt;</span>
+});
+</code></pre>
+				<p><strong>Callback:</strong></p>
+				<pre><code class="lang-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>, (error, item) =&gt; {
+    <span class="hljs-keyword">if</span> (error) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(error);
+    }
+
+    <span class="hljs-comment">// do something with the &lt;item&gt;</span>
+});
+</code></pre>
+				<h2 id="contributors">Contributors</h2>
+				<ul>
+					<li>Silas Rech aka. <strong><a href="mailto:silas.rech@protonmail.com">lenovouser</a></strong></li>
+				</ul>
+				<h2 id="contributing-">Contributing:</h2>
+				<p>Interested in contributing to <strong>Market-Pricing</strong>? Contributions are welcome, and are accepted via pull requests. Please <a href="contributing.md">review these guidelines</a> before submitting any pull requests.</p>
+				<h3 id="help-">Help:</h3>
+				<p><strong>Installing dependencies:</strong></p>
+				<pre><code><span class="hljs-attribute">yarn</span>
+</code></pre><p><strong>Compile:</strong></p>
+				<pre><code><span class="hljs-attribute">yarn compile</span>
+</code></pre><p><strong>Test:</strong></p>
+				<pre><code>yarn <span class="hljs-built_in">test</span>
+</code></pre><p><strong>Generate Docs:</strong></p>
+				<pre><code><span class="hljs-attribute">yarn docs</span>
+</code></pre><h2 id="tests-">Tests:</h2>
+				<p>This module is thoroughly tested with <strong><a href="https://github.com/avajs/ava">ava</a></strong></p>
+				<blockquote>
+					<p><strong>Note:</strong> All responses from the steam API are currently mocked because of rate limiting. Might change in the future, not sure how to proceed about this though.</p>
+				</blockquote>
+				<h2 id="license-">License:</h2>
+				<p>Code licensed under <a href="license.md">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/application.html" class="tsd-kind-icon">Application</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/currency.html" class="tsd-kind-icon">Currency</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/market.html" class="tsd-kind-icon">Market</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cleanitem.html" class="tsd-kind-icon">Clean<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/itemarray.html" class="tsd-kind-icon">Item<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/itemerror.html" class="tsd-kind-icon">Item<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/marketoptions.html" class="tsd-kind-icon">Market<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/price.html" class="tsd-kind-icon">Price</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rawitem.html" class="tsd-kind-icon">Raw<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#item" class="tsd-kind-icon">Item</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getprice" class="tsd-kind-icon">get<wbr>Price</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getprices" class="tsd-kind-icon">get<wbr>Prices</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-private">
+						<a href="globals.html#currencysign" class="tsd-kind-icon">Currency<wbr>Sign</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-private">
+						<a href="globals.html#currencytype" class="tsd-kind-icon">Currency<wbr>Type</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
