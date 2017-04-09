@@ -4,10 +4,10 @@ cache:
   yarn: false
 
 before_script:
-  - yarn global add typescript
-  - yarn global add ava
-  - yarn global add tslint
-  - yarn global add typedoc
+  - npm i -g typescript
+  - npm i -g ava
+  - npm i -g tslint
+  - npm i -g typedoc
 
 script: yarn test
 
