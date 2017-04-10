@@ -34,6 +34,8 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 
 ## Documentation:
 
+> **[Generated Documentation](https://node-steam.github.io/market-pricing/)**
+
 #### `new Market(Options)`
 > API class
 
