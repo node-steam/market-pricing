@@ -136,7 +136,7 @@ export enum Currency {
 /**
  * @private
  */
-export const CurrencyType = {
+export const CurrencyType: { [key: string]: string } = {
     /**
      * [United Arab Emirates dirham](https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham)
      */
@@ -274,7 +274,7 @@ export const CurrencyType = {
 /**
  * @private
  */
-export const CurrencySign = {
+export const CurrencySign: { [key: string]: string } = {
     /**
      * [United Arab Emirates dirham](https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham)
      */

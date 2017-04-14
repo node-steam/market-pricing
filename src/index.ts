@@ -1,9 +1,9 @@
 import * as async    from 'async';
 import * as bluebird from 'bluebird';
 import * as request  from 'request';
-import * as type     from 'to-type';
 
 /**
+ * Promise Polyfill
  * @hidden
  */
 const Bluebird = bluebird;
@@ -24,6 +24,7 @@ import {
 
 import {
     generateItem,
+    type,
 } from './utils';
 
 import {
@@ -51,7 +52,9 @@ export const getPrice = (
             return reject(new Error('Invalid Application ID'));
         }
 
-        if (!currency || type(currency) !== 'number') {
+        currency = currency || Currency.USD;
+
+        if (type(currency) !== 'number') {
             currency = Currency.USD;
         }
 
@@ -110,7 +113,9 @@ export const getPrices = (
             return reject(new Error('Invalid Application ID'));
         }
 
-        if (!currency || type(currency) !== 'number') {
+        currency = currency || Currency.USD;
+
+        if (type(currency) !== 'number') {
             currency = Currency.USD;
         }
 
@@ -227,10 +232,11 @@ export class Market {
 }
 
 export {
-    Currency,
     Application,
-    MarketOptions,
-    Item,
-    ItemError,
+    CleanItem,
+    Currency,
     ItemArray,
+    ItemError,
+    MarketOptions,
+    RawItem,
 };

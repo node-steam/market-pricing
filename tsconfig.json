@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "types": [
-      "node",
-      "async",
-      "bluebird-global"
-    ],
-    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "src/",
     "declaration": true,
     "declarationDir": "lib",
-    "sourceMap": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "lib",
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "target": "es5",
+    "types": [
+      "node",
+      "async",
+      "request",
+      "bluebird-global"
+    ]
   },
   "include": [
     "src/**.ts"

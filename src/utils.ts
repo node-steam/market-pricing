@@ -10,6 +10,7 @@ import {
 } from './types';
 
 /**
+ * Clean the currency string we get from the Steam API into a integer
  * @hidden
  */
 const unformat = (value: string|number): number => {
@@ -30,6 +31,7 @@ const unformat = (value: string|number): number => {
 };
 
 /**
+ * Determine Currency Code by Steam Currency ID
  * @hidden
  */
 const determineCurrencyCode = (currency: number): string => {
@@ -37,6 +39,7 @@ const determineCurrencyCode = (currency: number): string => {
 };
 
 /**
+ * Determine Currency Type by Steam Currency ID
  * @hidden
  */
 const determineCurrencyType = (currency: number): string => {
@@ -44,6 +47,7 @@ const determineCurrencyType = (currency: number): string => {
 };
 
 /**
+ * Determine Currency Sign by Steam Currency ID
  * @hidden
  */
 const determineCurrencySign = (currency: number): string => {
@@ -51,6 +55,15 @@ const determineCurrencySign = (currency: number): string => {
 };
 
 /**
+ * Determine type of variable
+ * @hidden
+ */
+export const type = (variable: any): string => {
+  return ({}).toString.call(variable).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+};
+
+/**
+ * Generates the cleaned price item
  * @hidden
  */
 export const generateItem = (name: string, response: RawItem, currency: number): Item => {
