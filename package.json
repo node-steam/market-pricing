@@ -33,7 +33,7 @@
   ],
   "runkitExampleFilename": "example/runkit.js",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "license": "MIT",
   "scripts": {

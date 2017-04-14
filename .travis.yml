@@ -14,5 +14,3 @@ script: yarn test
 node_js:
   - "7"
   - "6"
-  - "5"
-  - "4"
