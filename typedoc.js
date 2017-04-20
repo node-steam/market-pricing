@@ -3,5 +3,5 @@ module.exports = {
     'hideGenerator': false,
     'name': 'N|Steam Market-Pricing',
     'mode': 'file',
-    'out': 'docs/'
-}
+    'out': 'docs/',
+};

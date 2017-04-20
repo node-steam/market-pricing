@@ -1,10 +1,6 @@
-# Market-Pricing
+MIT License
 
-**Market-Pricing** is a wrapper around the unofficial Steam Pricing API
-
-### License:
-
-Copyright (c) 2013-2017 N|Steam and / or the [contributors](#contributors).
+Copyright (c) 2013-2017 N|Steam and / or the contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "software"),
@@ -23,7 +19,3 @@ authors or copyright holders be liable for any claim, damages or other
 liability, whether in an action of contract, tort or otherwise, arising
 from, out of or in connection with the software or the use or other dealings
 in the software.
-
-### Contributors:
-
- * Silas Rech aka. **[lenovouser](mailto:silas.rech@protonmail.com)**

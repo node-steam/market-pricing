@@ -3,7 +3,7 @@
 [![Dependencies](https://img.shields.io/david/node-steam/market-pricing.svg?style=flat-square)](https://david-dm.org/node-steam/market-pricing)
 [![Version](https://img.shields.io/npm/v/@node-steam/market-pricing.svg?style=flat-square)](https://www.npmjs.com/package/@node-steam/market-pricing)
 [![Downloads](https://img.shields.io/npm/dt/@node-steam/market-pricing.svg?style=flat-square)](https://www.npmjs.com/package/@node-steam/market-pricing)
-[![License](https://img.shields.io/npm/l/@node-steam/market-pricing.svg?style=flat-square)](https://www.npmjs.com/package/@node-steam/market-pricing)
+[![License](https://img.shields.io/github/license/node-steam/market-pricing.svg?style=flat-square)](https://www.npmjs.com/package/@node-steam/market-pricing)
 [![Runkit](https://img.shields.io/badge/try%20on%20runkit-market--pricing-blue.svg?style=flat-square)](https://runkit.com/npm/@node-steam/market-pricing)
 
 [![npm statistics](https://nodei.co/npm/@node-steam/market-pricing.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@node-steam/market-pricing)
