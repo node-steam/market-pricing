@@ -9,10 +9,20 @@ import {
     Application,
 } from 'lib';
 
-nock('https://steamcommunity.com')
+import {
+    base,
+    path,
+} from 'test/settings';
+
+nock(base)
 
 // First Valid Item Request
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=FirstItem`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'FirstItem',
+})
 .reply(200, {
     success: true,
     lowest_price: '$1.00',
@@ -21,7 +31,12 @@ nock('https://steamcommunity.com')
 })
 
 // Second Valid Item Request
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=SecondItem`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'SecondItem',
+})
 .reply(200, {
     success: true,
     lowest_price: '$2.00',
@@ -56,7 +71,7 @@ test('Callback Support For Multiple Items', (t) => {
             volume: 612,
         },
     ];
-    API.getPrices(['FirstItem', 'SecondItem'], (error, item) => {
+    return API.getPrices(['FirstItem', 'SecondItem'], (error, item) => {
         t.deepEqual(item.results, should);
     });
 });

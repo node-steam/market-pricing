@@ -9,18 +9,43 @@ import {
     Application,
 } from 'lib';
 
-nock('https://steamcommunity.com')
+import {
+    base,
+    path,
+} from 'test/settings';
+
+nock(base)
 
 // Non-Existent Item With Status Code 500
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist500-One`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist500-One',
+})
 .reply(500, {success: false})
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist500-Two`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist500-Two',
+})
 .reply(500, {success: false})
 
 // Non-Existent Item With Status Code 404
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist404-One`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist404-One',
+})
 .reply(404, {success: false})
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=DoesNotExist404-Two`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist404-Two',
+})
 .reply(404, {success: false});
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });

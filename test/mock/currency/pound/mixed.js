@@ -9,17 +9,37 @@ import {
     Application,
 } from 'lib';
 
-nock('https://steamcommunity.com')
+import {
+    base,
+    path,
+} from 'test/settings';
+
+nock(base)
 
 // Non-Existent Item With Status Code 500
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=DoesNotExist500`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.GBP,
+    market_hash_name: 'DoesNotExist500',
+})
 .reply(500, {success: false})
 // Non-Existent Item With Status Code 404
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=DoesNotExist404`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.GBP,
+    market_hash_name: 'DoesNotExist404',
+})
 .reply(404, {success: false})
 
 // First Valid Item Request
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=FirstItem`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.GBP,
+    market_hash_name: 'FirstItem',
+})
 .reply(200, {
     success: true,
     lowest_price: '£1.00',
@@ -28,7 +48,12 @@ nock('https://steamcommunity.com')
 })
 
 // Second Valid Item Request
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.GBP}&market_hash_name=SecondItem`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.GBP,
+    market_hash_name: 'SecondItem',
+})
 .reply(200, {
     success: true,
     lowest_price: '£2.00',

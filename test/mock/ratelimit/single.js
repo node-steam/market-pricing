@@ -9,9 +9,19 @@ import {
     Application,
 } from 'lib';
 
+import {
+    base,
+    path,
+} from 'test/settings';
+
 // One Item Rate Limited Request
-nock('https://steamcommunity.com')
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=TestRateLimitForOneItem`)
+nock(base)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'TestRateLimitForOneItem',
+})
 .reply(429);
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });

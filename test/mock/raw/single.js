@@ -9,9 +9,19 @@ import {
     Application,
 } from 'lib';
 
+import {
+    base,
+    path,
+} from 'test/settings';
+
 // First Valid Item Request
-nock('https://steamcommunity.com')
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=FirstItem`)
+nock(base)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'FirstItem',
+})
 .reply(200, {
     success: true,
     lowest_price: '$1.00',

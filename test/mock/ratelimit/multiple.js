@@ -9,12 +9,27 @@ import {
     Application,
 } from 'lib';
 
-nock('https://steamcommunity.com')
+import {
+    base,
+    path,
+} from 'test/settings';
+
+nock(base)
 
 // Several Items Rate Limited Request
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=TestRateLimitForSeveralItemsOne`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'TestRateLimitForSeveralItemsOne',
+})
 .reply(429)
-.get(`/market/priceoverview?appid=${Application.CSGO}&currency=${Currency.USD}&market_hash_name=TestRateLimitForSeveralItemsTwo`)
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'TestRateLimitForSeveralItemsTwo',
+})
 .reply(429);
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
