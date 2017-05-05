@@ -42,18 +42,27 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 #### `Options.id: number`
 > Application ID of the game you want to query skin/s for
 >
-> We provide a **[enum](src/enums.ts#L109-L120)** for the most common used games.
+> We provide a **[enum](src/enums.ts#L412-L453)** for the most common used games.
 
 #### `Options.currency: number`
 > Optional currency integer
 >
-> We provide a **[enum](src/enums.ts#L1-L35)**  for all available currencies
+> We provide a **[enum](src/enums.ts#L1-L134)**  for all available currencies
 
 #### `Options.country: string`
 > Optional **[ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)** country code
 
+#### `Options.address: string`
+> Optional local interface to bind for network connections
+
+#### `Options.timeout: number`
+> Optional number of milliseconds before declaring the request as timed out
+>
+> We recommend **[zeit/ms](https://github.com/zeit/ms)** to easily convert human readable time to milliseconds.
+> (Or just use a calculator 😏)
+
 #### `Options.raw: boolean`
-> Will return all objects in their raw form when set to true
+> Optional - if set all objects will be returned in their raw form when set to true
 
 #### `API.getPrice(skin: string)`
 > Get price for a skin

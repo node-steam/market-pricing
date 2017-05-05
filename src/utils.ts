@@ -55,14 +55,6 @@ const determineCurrencySign = (currency: number): string => {
 };
 
 /**
- * Determine type of variable
- * @hidden
- */
-export const type = (variable: any): string => {
-  return ({}).toString.call(variable).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-};
-
-/**
  * Generates the cleaned price item
  * @hidden
  */

@@ -1,12 +1,6 @@
 import * as async    from 'async';
-import * as bluebird from 'bluebird';
+import * as Bluebird from 'bluebird';
 import * as request  from 'request';
-
-/**
- * Promise Polyfill
- * @hidden
- */
-const Bluebird = bluebird;
 
 import {
     Application,
@@ -24,20 +18,20 @@ import {
 
 import {
     generateItem,
-    type,
 } from './utils';
 
 import {
     base,
     path,
+    version,
 } from './base';
 
 /**
  * Retrieve price for a single item.
  *
- * @param {string} name Hashed Item Name
- * @param {Object} options Options
- * @param {Function} callback Callback
+ * @param {string}   name       - Hashed Item Name
+ * @param {object}   options    - Options
+ * @param {function} [callback] - Callback
  */
 export const getPrice = (
     name: string,
@@ -45,39 +39,60 @@ export const getPrice = (
     callback?: Function,
 ): Promise<Item | Error> | Item | Error => {
     const x = new Bluebird((resolve, reject) => {
-        // tslint:disable-next-line:prefer-const
-        let { id, country, currency, raw } = options;
+        const {
+            id,
+            country,
+            raw,
+            address,
+            timeout,
+        } = options;
 
-        if (!id || type(id) !== 'number') {
+        let {
+            currency,
+        } = options;
+
+        if (!id || typeof id !== 'number') {
             return reject(new Error('Invalid Application ID'));
+        }
+
+        if (typeof currency !== 'number') {
+            currency = Currency.USD;
         }
 
         currency = currency || Currency.USD;
 
-        if (type(currency) !== 'number') {
-            currency = Currency.USD;
-        }
-
         request({
             baseUrl: base,
+            gzip: true,
+            headers: {
+                'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
+            },
             json: true,
+            localAddress: address,
             qs: {
                 appid: id,
                 country,
                 currency,
                 market_hash_name: name,
             },
+            removeRefererHeader: true,
+            strictSSL: true,
+            timeout,
             uri: path,
         }, (error, response, body) => {
-            if (response.statusCode === 429) {
+            if (response && response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
-            } else if (response.statusCode === 500 || response.statusCode === 404) {
+            } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
                 return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
             } else if (!error && response.statusCode === 200) {
-                const item  = body;
-                const clean = generateItem(name, body, currency);
-                if (raw) return resolve(item);
-                return resolve(clean);
+                if (raw) return resolve(body);
+                return resolve(generateItem(name, body, currency));
+            } else if (error && error.message === 'ETIMEDOUT') {
+                return reject(new Error('Connection Timed Out!'));
+            } else if (error && error.message === 'ESOCKETTIMEDOUT') {
+                return reject(new Error('Socket Timed Out!'));
+            } else if (error && error.message === 'ECONNRESET') {
+                return reject(new Error('Connection Was Reset!'));
             } else if (error) {
                 return reject(error);
             } else if (response) {
@@ -96,9 +111,9 @@ export const getPrice = (
 /**
  * Retrieve price for a array of items.
  *
- * @param {Array<string>} names Array Of Hashed Item Names
- * @param {Object} options Options
- * @param {Function} callback Callback
+ * @param {array}    names      - Array Of Hashed Item Names
+ * @param {object}   options    - Options
+ * @param {function} [callback] - Callback
  */
 export const getPrices = (
     names: string[],
@@ -106,18 +121,27 @@ export const getPrices = (
     callback?: Function,
 ): Promise<ItemArray | Error> | ItemArray | Error  => {
     const x = new Bluebird((resolve, reject) => {
-        // tslint:disable-next-line:prefer-const
-        let { id, country, currency, raw } = options;
+        const {
+            id,
+            country,
+            raw,
+            address,
+            timeout,
+        } = options;
 
-        if (!id || type(id) !== 'number') {
+        let {
+            currency,
+        } = options;
+
+        if (!id || typeof id !== 'number') {
             return reject(new Error('Invalid Application ID'));
         }
 
-        currency = currency || Currency.USD;
-
-        if (type(currency) !== 'number') {
+        if (typeof currency !== 'number') {
             currency = Currency.USD;
         }
+
+        currency = currency || Currency.USD;
 
         const i: ItemArray = {
             errors: [],
@@ -127,29 +151,41 @@ export const getPrices = (
         async.each(names, (name, cb) => {
             request({
                 baseUrl: base,
+                gzip: true,
+                headers: {
+                    'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
+                },
                 json: true,
+                localAddress: address,
                 qs: {
                     appid: id,
                     country,
                     currency,
                     market_hash_name: name,
                 },
+                removeRefererHeader: true,
+                strictSSL: true,
+                timeout,
                 uri: path,
             }, (error, response, body) => {
-                if (response.statusCode === 429) {
+                if (response && response.statusCode === 429) {
                     return reject(new Error('Steam API Rate Limit Exceeded!'));
-                } else if (response.statusCode === 500 || response.statusCode === 404) {
+                } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
                     i.errors.push({ id: name, error: `Item Not Found! Status: ${response.statusCode}` });
                     cb();
                 } else if (!error && response.statusCode === 200) {
-                    const item  = body;
-                    const clean = generateItem(name, body, currency);
                     if (raw) {
-                        i.results.push(item);
+                        i.results.push(body);
                     } else {
-                        i.results.push(clean);
+                        i.results.push(generateItem(name, body, currency));
                     }
                     cb();
+                } else if (error && error.message === 'ETIMEDOUT') {
+                    i.errors.push({ id: name, error: 'Connection Timed Out!' });
+                } else if (error && error.message === 'ESOCKETTIMEDOUT') {
+                    i.errors.push({ id: name, error: 'Socket Timed Out!' });
+                } else if (error && error.message === 'ECONNRESET') {
+                    i.errors.push({ id: name, error: 'Connection Was Reset!' });
                 } else if (error) {
                     i.errors.push({ id: name, error: error.toString() });
                     cb();
@@ -196,38 +232,85 @@ export class Market {
      * Request the raw object
      */
     public raw?: boolean;
+    /**
+     * Local interface to bind for network connections
+     */
+    public address?: string;
+    /**
+     * Number of milliseconds to wait for a server to send response headers
+     */
+    public timeout?: number;
+    /**
+     * All the settings in one object
+     * @hidden
+     */
+    private settings: MarketOptions;
 
     /**
      * Create the API
      *
-     * @param options Options
+     * @param {object} options - Options
      */
     constructor(options: MarketOptions) {
-        if (type(options) !== 'object') throw new Error('Invalid Options Passed To Constructor!');
+        if (typeof options !== 'object') throw new Error('Invalid Options Passed To Constructor!');
 
         this.appid    = options.id;
         this.currency = options.currency || Currency.USD;
         this.country  = options.country;
+        this.address  = options.address;
+        this.timeout  = options.timeout;
         this.raw      = options.raw || false;
 
-        if (type(this.appid) !== 'number') throw new Error('Invalid Application ID!');
+        this.settings = {
+            address:  this.address,
+            country:  this.country,
+            currency: this.currency,
+            id:       this.appid,
+            raw:      this.raw,
+            timeout:  this.timeout,
+        };
+
+        if (typeof this.appid !== 'number') throw new Error('Invalid Application ID!');
     }
 
     /**
      * Get a item
-     * @param name The name of the skin
+     *
+     * @param {string}   name       - The name of the skin
+     * @param {object}   [options]  - Options
+     * @param {function} [callback] - Callback
      */
-    public getPrice(name: string, callback?: Function) {
-        return getPrice(name, { id: this.appid, currency: this.currency, country: this.country, raw: this.raw }, callback);
+    public getPrice(name: string, options?: MarketOptions, callback?: Function) {
+        if (typeof options === 'object') {
+            const settings = {
+                ...this.settings,
+                ...options,
+            };
+            return getPrice(name, settings, callback);
+        } else if (typeof options === 'function') {
+            return getPrice(name, this.settings, options);
+        }
+        return getPrice(name, this.settings, callback);
     }
 
     /**
      * Get a array of items
-     * @param name Array with the names of the skins
-     * @param callback The `callback` if you use it
+     *
+     * @param {array}    names      - Array with the names of the skins
+     * @param {object}   [options]  - Options
+     * @param {function} [callback] - Callback
      */
-    public getPrices(names: string[], callback?: Function) {
-        return getPrices(names, { id: this.appid, currency: this.currency, country: this.country, raw: this.raw }, callback);
+    public getPrices(names: string[], options?: MarketOptions | Function, callback?: Function) {
+        if (typeof options === 'object') {
+            const settings = {
+                ...this.settings,
+                ...options,
+            };
+            return getPrices(names, settings, callback);
+        } else if (typeof options === 'function') {
+            return getPrices(names, this.settings, options);
+        }
+        return getPrices(names, this.settings, callback);
     }
 }
 

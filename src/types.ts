@@ -15,6 +15,14 @@ export interface MarketOptions {
      */
     currency?: number;
     /**
+     * Local interface to bind for network connections
+     */
+    address?: string;
+    /**
+     * Number of milliseconds to wait for a server to send response headers
+     */
+    timeout?: number;
+    /**
      * Request the raw object
      */
     raw?: boolean;

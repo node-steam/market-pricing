@@ -21,11 +21,11 @@
     "types": [
       "node",
       "async",
-      "request",
       "bluebird-global"
     ]
   },
   "include": [
+    "types/**/*.d.ts",
     "src/**.ts"
   ],
   "exclude": [
