@@ -1,6 +1,6 @@
 {
   "name": "@node-steam/market-pricing",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Module to access the Steam Market Pricing API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,16 +12,20 @@
   },
   "author": "N|Steam",
   "keywords": [
-    "steam",
-    "steam-api",
+    "api",
+    "es6",
+    "es7",
+    "market-pricing",
+    "market",
     "price",
     "pricing",
+    "promises",
     "skin",
     "skins",
-    "promises",
-    "typescript",
-    "es6",
-    "es7"
+    "steam-api",
+    "steam-market",
+    "steam",
+    "typescript"
   ],
   "files": [
     "lib/*.js",
