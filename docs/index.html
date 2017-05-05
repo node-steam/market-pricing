@@ -98,20 +98,30 @@
 				<h4 id="-options-id-number-"><code>Options.id: number</code></h4>
 				<blockquote>
 					<p>Application ID of the game you want to query skin/s for</p>
-					<p>We provide a <strong><a href="src/enums.ts#L109-L120">enum</a></strong> for the most common used games.</p>
+					<p>We provide a <strong><a href="src/enums.ts#L412-L453">enum</a></strong> for the most common used games.</p>
 				</blockquote>
 				<h4 id="-options-currency-number-"><code>Options.currency: number</code></h4>
 				<blockquote>
 					<p>Optional currency integer</p>
-					<p>We provide a <strong><a href="src/enums.ts#L1-L35">enum</a></strong>  for all available currencies</p>
+					<p>We provide a <strong><a href="src/enums.ts#L1-L134">enum</a></strong>  for all available currencies</p>
 				</blockquote>
 				<h4 id="-options-country-string-"><code>Options.country: string</code></h4>
 				<blockquote>
 					<p>Optional <strong><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166</a></strong> country code</p>
 				</blockquote>
+				<h4 id="-options-address-string-"><code>Options.address: string</code></h4>
+				<blockquote>
+					<p>Optional local interface to bind for network connections</p>
+				</blockquote>
+				<h4 id="-options-timeout-number-"><code>Options.timeout: number</code></h4>
+				<blockquote>
+					<p>Optional number of milliseconds before declaring the request as timed out</p>
+					<p>We recommend <strong><a href="https://github.com/zeit/ms">zeit/ms</a></strong> to easily convert human readable time to milliseconds.
+					(Or just use a calculator 😏)</p>
+				</blockquote>
 				<h4 id="-options-raw-boolean-"><code>Options.raw: boolean</code></h4>
 				<blockquote>
-					<p>Will return all objects in their raw form when set to true</p>
+					<p>Optional - if set all objects will be returned in their raw form when set to true</p>
 				</blockquote>
 				<h4 id="-api-getprice-skin-string-"><code>API.getPrice(skin: string)</code></h4>
 				<blockquote>
