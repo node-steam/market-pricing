@@ -27,6 +27,54 @@ import {
 } from './base';
 
 /**
+ * Make a request to the Steam API
+ * @hidden
+ */
+const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number): Promise<any> => {
+    return new Bluebird((resolve, reject) => {
+        request({
+            baseUrl: base,
+            gzip: true,
+            headers: {
+                'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
+            },
+            json: true,
+            localAddress: address,
+            qs: {
+                appid: id,
+                country,
+                currency,
+                market_hash_name: name,
+            },
+            removeRefererHeader: true,
+            strictSSL: true,
+            timeout,
+            uri: path,
+        }, (error, response, body) => {
+            if (response && response.statusCode === 429) {
+                return reject(new Error('Steam API Rate Limit Exceeded!'));
+            } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
+                return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
+            } else if (!error && response.statusCode === 200) {
+                return resolve(body);
+            } else if (error && error.message === 'ETIMEDOUT') {
+                return reject(new Error('Connection Timed Out!'));
+            } else if (error && error.message === 'ESOCKETTIMEDOUT') {
+                return reject(new Error('Socket Timed Out!'));
+            } else if (error && error.message === 'ECONNRESET') {
+                return reject(new Error('Connection Was Reset!'));
+            } else if (error) {
+                return reject(error);
+            } else if (response) {
+                return reject(new Error(`Unknown Error! Status: ${response.statusCode}`));
+            }
+
+            return reject(new Error('Unknown Error!'));
+        });
+    });
+};
+
+/**
  * Retrieve price for a single item.
  *
  * @param {string}   name       - Hashed Item Name
@@ -61,45 +109,16 @@ export const getPrice = (
 
         currency = currency || Currency.USD;
 
-        request({
-            baseUrl: base,
-            gzip: true,
-            headers: {
-                'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
-            },
-            json: true,
-            localAddress: address,
-            qs: {
-                appid: id,
-                country,
-                currency,
-                market_hash_name: name,
-            },
-            removeRefererHeader: true,
-            strictSSL: true,
-            timeout,
-            uri: path,
-        }, (error, response, body) => {
-            if (response && response.statusCode === 429) {
-                return reject(new Error('Steam API Rate Limit Exceeded!'));
-            } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
-                return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
-            } else if (!error && response.statusCode === 200) {
-                if (raw) return resolve(body);
-                return resolve(generateItem(name, body, currency));
-            } else if (error && error.message === 'ETIMEDOUT') {
-                return reject(new Error('Connection Timed Out!'));
-            } else if (error && error.message === 'ESOCKETTIMEDOUT') {
-                return reject(new Error('Socket Timed Out!'));
-            } else if (error && error.message === 'ECONNRESET') {
-                return reject(new Error('Connection Was Reset!'));
-            } else if (error) {
-                return reject(error);
-            } else if (response) {
-                return reject(new Error(`Unknown Error! Status: ${response.statusCode}`));
+        get(name, id, currency, country, address, timeout)
+        .then((body) => {
+            if (raw) {
+                return resolve(body);
             } else {
-                return reject(new Error('Unknown Error!'));
+                return resolve(generateItem(name, body, currency));
             }
+        })
+        .catch((error) => {
+            return reject(error);
         });
     });
 
@@ -149,53 +168,22 @@ export const getPrices = (
         };
 
         async.each(names, (name, cb) => {
-            request({
-                baseUrl: base,
-                gzip: true,
-                headers: {
-                    'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
-                },
-                json: true,
-                localAddress: address,
-                qs: {
-                    appid: id,
-                    country,
-                    currency,
-                    market_hash_name: name,
-                },
-                removeRefererHeader: true,
-                strictSSL: true,
-                timeout,
-                uri: path,
-            }, (error, response, body) => {
-                if (response && response.statusCode === 429) {
-                    return reject(new Error('Steam API Rate Limit Exceeded!'));
-                } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
-                    i.errors.push({ id: name, error: `Item Not Found! Status: ${response.statusCode}` });
-                    cb();
-                } else if (!error && response.statusCode === 200) {
-                    if (raw) {
-                        i.results.push(body);
-                    } else {
-                        i.results.push(generateItem(name, body, currency));
-                    }
-                    cb();
-                } else if (error && error.message === 'ETIMEDOUT') {
-                    i.errors.push({ id: name, error: 'Connection Timed Out!' });
-                } else if (error && error.message === 'ESOCKETTIMEDOUT') {
-                    i.errors.push({ id: name, error: 'Socket Timed Out!' });
-                } else if (error && error.message === 'ECONNRESET') {
-                    i.errors.push({ id: name, error: 'Connection Was Reset!' });
-                } else if (error) {
-                    i.errors.push({ id: name, error: error.toString() });
-                    cb();
-                } else if (response) {
-                    i.errors.push({ id: name, error: `Unknown Error! Status: ${response.statusCode}` });
-                    cb();
+            get(name, id, currency, country, address, timeout)
+            .then((body) => {
+                if (raw) {
+                    i.results.push(body);
                 } else {
-                    i.errors.push({ id: name, error: 'Unknown Error!' });
-                    cb();
+                    i.results.push(generateItem(name, body, currency));
                 }
+                cb();
+            })
+            .catch((error) => {
+                if (error.message === 'Steam API Rate Limit Exceeded!') {
+                    return reject(error);
+                }
+
+                i.errors.push({ id: name, error: error.message });
+                cb();
             });
         }, () => {
             if (!i.results.length && i.errors.length) {
