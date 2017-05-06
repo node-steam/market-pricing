@@ -54,7 +54,7 @@ export interface Price {
     /**
      * Median Price On The [Steam Community Market](https://steamcommunity.com/market/)
      */
-    median: number;
+    median?: number;
 }
 
 /**
@@ -72,7 +72,7 @@ export interface CleanItem {
     /**
      * Number Of Available Skins On The Steam Market
      */
-    volume: number;
+    volume?: number;
 }
 
 /**
@@ -86,7 +86,7 @@ export interface RawItem {
     /**
      * Median Price On The [Steam Community Market](https://steamcommunity.com/market/)
      */
-    median_price: string;
+    median_price?: string;
     /**
      * Wether the request was successful or not
      */
@@ -94,7 +94,7 @@ export interface RawItem {
     /**
      * Number Of Available Skins On The Steam Market
      */
-    volume: string;
+    volume?: string;
 }
 
 /**

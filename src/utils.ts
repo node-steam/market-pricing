@@ -59,17 +59,23 @@ const determineCurrencySign = (currency: number): string => {
  * @hidden
  */
 export const generateItem = (name: string, response: RawItem, currency: number): Item => {
-    const result = {
+    const result: Item = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),
             lowest: unformat(response.lowest_price),
-            median: unformat(response.median_price),
             sign: determineCurrencySign(currency),
             type: determineCurrencyType(currency),
         },
-        volume: parseInt(response.volume, 10),
     };
+
+    if (response.median_price) {
+        result.price.median = unformat(response.median_price);
+    }
+
+    if (response.volume) {
+        result.volume = parseInt(response.volume, 10);
+    }
 
     return result;
 };
