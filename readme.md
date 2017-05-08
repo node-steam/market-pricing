@@ -61,6 +61,9 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 > We recommend **[zeit/ms](https://github.com/zeit/ms)** to easily convert human readable time to milliseconds.
 > (Or just use a calculator 😏)
 
+#### `Options.timings: boolean`
+> Optional - if set request timings will be returned
+
 #### `Options.raw: boolean`
 > Optional - if set all objects will be returned in their raw form when set to true
 
