@@ -100,6 +100,7 @@ declare module 'request' {
         maxRedirects?: number;
         encoding?: string | null;
         localAddress?: string;
+        time?: boolean;
         removeRefererHeader?: boolean;
         pool?: any;
         timeout?: number;
@@ -138,6 +139,9 @@ declare module 'request' {
     interface RequestResponse extends http.IncomingMessage {
         request: Options;
         body: any;
+        timings: any;
+        timingStart: any;
+        timingPhases: any;
     }
 
     interface HttpArchiveRequest {

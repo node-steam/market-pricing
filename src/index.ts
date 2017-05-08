@@ -13,6 +13,7 @@ import {
     ItemArray,
     ItemError,
     MarketOptions,
+    OverwriteMarketOptions,
     RawItem,
 } from './types';
 
@@ -30,7 +31,7 @@ import {
  * Make a request to the Steam API
  * @hidden
  */
-const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number): Promise<any> => {
+const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Promise<any> => {
     return new Bluebird((resolve, reject) => {
         request({
             baseUrl: base,
@@ -48,6 +49,7 @@ const get = (name: string, id: number, currency: number, country?: string, addre
             },
             removeRefererHeader: true,
             strictSSL: true,
+            time: timings,
             timeout,
             uri: path,
         }, (error, response, body) => {
@@ -56,7 +58,15 @@ const get = (name: string, id: number, currency: number, country?: string, addre
             } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
                 return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
             } else if (!error && response.statusCode === 200) {
-                return resolve(body);
+                const result = body;
+                if (timings) {
+                    result.timings = {
+                        phases: response.timings,
+                        start: response.timingStart,
+                        timestamps: response.timingPhases,
+                    };
+                }
+                return resolve(result);
             } else if (error && error.message === 'ETIMEDOUT') {
                 return reject(new Error('Connection Timed Out!'));
             } else if (error && error.message === 'ESOCKETTIMEDOUT') {
@@ -93,6 +103,7 @@ export const getPrice = (
             raw,
             address,
             timeout,
+            timings,
         } = options;
 
         let {
@@ -109,12 +120,14 @@ export const getPrice = (
 
         currency = currency || Currency.USD;
 
-        get(name, id, currency, country, address, timeout)
+        get(name, id, currency, country, address, timeout, timings)
         .then((body) => {
             if (raw) {
-                return resolve(body);
+                const item = body;
+                return resolve(item);
             } else {
-                return resolve(generateItem(name, body, currency));
+                const item = generateItem(name, body, currency);
+                return resolve(item);
             }
         })
         .catch((error) => {
@@ -146,6 +159,7 @@ export const getPrices = (
             raw,
             address,
             timeout,
+            timings,
         } = options;
 
         let {
@@ -168,7 +182,7 @@ export const getPrices = (
         };
 
         async.each(names, (name, cb) => {
-            get(name, id, currency, country, address, timeout)
+            get(name, id, currency, country, address, timeout, timings)
             .then((body) => {
                 if (raw) {
                     i.results.push(body);
@@ -225,6 +239,10 @@ export class Market {
      */
     public address?: string;
     /**
+     * Whether to return request timings
+     */
+    public timings?: boolean;
+    /**
      * Number of milliseconds to wait for a server to send response headers
      */
     public timeout?: number;
@@ -246,6 +264,7 @@ export class Market {
         this.currency = options.currency || Currency.USD;
         this.country  = options.country;
         this.address  = options.address;
+        this.timings  = options.timings || false;
         this.timeout  = options.timeout;
         this.raw      = options.raw || false;
 
@@ -256,6 +275,7 @@ export class Market {
             id:       this.appid,
             raw:      this.raw,
             timeout:  this.timeout,
+            timings:  this.timings,
         };
 
         if (typeof this.appid !== 'number') throw new Error('Invalid Application ID!');
@@ -268,7 +288,7 @@ export class Market {
      * @param {object}   [options]  - Options
      * @param {function} [callback] - Callback
      */
-    public getPrice(name: string, options?: MarketOptions, callback?: Function) {
+    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: Function) {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -288,7 +308,7 @@ export class Market {
      * @param {object}   [options]  - Options
      * @param {function} [callback] - Callback
      */
-    public getPrices(names: string[], options?: MarketOptions | Function, callback?: Function) {
+    public getPrices(names: string[], options?: OverwriteMarketOptions | Function, callback?: Function) {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,

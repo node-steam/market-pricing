@@ -1,11 +1,7 @@
 /**
  * Constructor Options
  */
-export interface MarketOptions {
-    /**
-     * Application ID Of The Game You Want To Query Skin/s For
-     */
-    id: number;
+export interface RawMarketOptions {
     /**
      * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Country Code
      */
@@ -23,9 +19,27 @@ export interface MarketOptions {
      */
     timeout?: number;
     /**
+     * Whether to return request timings
+     */
+    timings?: boolean;
+    /**
      * Request the raw object
      */
     raw?: boolean;
+}
+
+export interface MarketOptions extends RawMarketOptions {
+    /**
+     * Application ID Of The Game You Want To Query Skin/s For
+     */
+    id: number;
+}
+
+export interface OverwriteMarketOptions extends RawMarketOptions {
+    /**
+     * Application ID Of The Game You Want To Query Skin/s For
+     */
+    id?: number;
 }
 
 /**
@@ -58,6 +72,28 @@ export interface Price {
 }
 
 /**
+ * Request Timings Object
+ */
+export interface Timing {
+    start: number;
+    timestamps: {
+        socket: number;
+        lookup: number;
+        connect: number;
+        response: number;
+        end: number;
+    };
+    phases: {
+        wait: number;
+        dns: number;
+        tcp: number;
+        firstByte: number;
+        download: number;
+        total: number;
+    };
+}
+
+/**
  * Clean Item Object
  */
 export interface CleanItem {
@@ -73,6 +109,10 @@ export interface CleanItem {
      * Number Of Available Skins On The Steam Market
      */
     volume?: number;
+    /**
+     * Optional request timings
+     */
+    timings?: Timing;
 }
 
 /**
@@ -95,6 +135,10 @@ export interface RawItem {
      * Number Of Available Skins On The Steam Market
      */
     volume?: string;
+    /**
+     * Optional request timings
+     */
+    timings?: Timing;
 }
 
 /**

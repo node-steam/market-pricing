@@ -77,5 +77,9 @@ export const generateItem = (name: string, response: RawItem, currency: number):
         result.volume = parseInt(response.volume, 10);
     }
 
+    if (response.timings) {
+        result.timings = response.timings;
+    }
+
     return result;
 };
