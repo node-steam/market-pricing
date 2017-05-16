@@ -1,6 +1,6 @@
 {
   "name": "@node-steam/market-pricing",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Module to access the Steam Market Pricing API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
