@@ -1,10 +1,11 @@
-import * as fs from 'fs';
+import * as fs  from 'fs';
+import * as dir from 'path';
 
 /**
  * Module version
  * @hidden
  */
-export const version: string = JSON.parse(fs.readFileSync('package.json', 'utf-8')).version;
+export const version: string = JSON.parse(fs.readFileSync(dir.join(__dirname, '../package.json'), 'utf-8')).version;
 
 /**
  * Base URL

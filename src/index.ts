@@ -31,7 +31,7 @@ import {
  * Make a request to the Steam API
  * @hidden
  */
-const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Promise<any> => {
+const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Promise<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
             baseUrl: base,
@@ -87,15 +87,17 @@ const get = (name: string, id: number, currency: number, country?: string, addre
 /**
  * Retrieve price for a single item.
  *
- * @param {string}   name       - Hashed Item Name
- * @param {object}   options    - Options
- * @param {function} [callback] - Callback
+ * @param  {String}   name       - Hashed Item Name
+ * @param  {Object}   options    - Options
+ * @param  {Function} [callback] - Callback
+ * @return {Promise<Item>}
+ *
  */
 export const getPrice = (
     name: string,
     options: MarketOptions,
-    callback?: Function,
-): Promise<Item | Error> | Item | Error => {
+    callback?: (error: Error, result: Item) => void,
+): Promise<Item> => {
     const x = new Bluebird((resolve, reject) => {
         const {
             id,
@@ -143,15 +145,17 @@ export const getPrice = (
 /**
  * Retrieve price for a array of items.
  *
- * @param {array}    names      - Array Of Hashed Item Names
- * @param {object}   options    - Options
- * @param {function} [callback] - Callback
+ * @param  {Array}    names      - Array Of Hashed Item Names
+ * @param  {Object}   options    - Options
+ * @param  {Function} [callback] - Callback
+ * @return {Promise<ItemArray>}
+ *
  */
 export const getPrices = (
     names: string[],
     options: MarketOptions,
-    callback?: Function,
-): Promise<ItemArray | Error> | ItemArray | Error  => {
+    callback?: (error: Error, result: ItemArray) => void,
+): Promise<ItemArray> => {
     const x = new Bluebird((resolve, reject) => {
         const {
             id,
@@ -255,7 +259,8 @@ export class Market {
     /**
      * Create the API
      *
-     * @param {object} options - Options
+     * @param {Object} options - Options
+     *
      */
     constructor(options: MarketOptions) {
         if (typeof options !== 'object') throw new Error('Invalid Options Passed To Constructor!');
@@ -284,11 +289,13 @@ export class Market {
     /**
      * Get a item
      *
-     * @param {string}   name       - The name of the skin
-     * @param {object}   [options]  - Options
-     * @param {function} [callback] - Callback
+     * @param  {String}   name       - The name of the skin
+     * @param  {Object}   [options]  - Options
+     * @param  {Function} [callback] - Callback
+     * @return {Promise<Item>}
+     *
      */
-    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: Function) {
+    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: (error: Error, result: Item) => void): Promise<Item> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -304,11 +311,13 @@ export class Market {
     /**
      * Get a array of items
      *
-     * @param {array}    names      - Array with the names of the skins
-     * @param {object}   [options]  - Options
-     * @param {function} [callback] - Callback
+     * @param  {Array}    names      - Array with the names of the skins
+     * @param  {Object}   [options]  - Options
+     * @param  {Function} [callback] - Callback
+     * @return {Promise<Item>}
+     *
      */
-    public getPrices(names: string[], options?: OverwriteMarketOptions | Function, callback?: Function) {
+    public getPrices(names: string[], options?: OverwriteMarketOptions, callback?: (error: Error, result: ItemArray) => void): Promise<ItemArray> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
