@@ -1,0 +1,19 @@
+{
+  "ignore": [
+    "**/example/**",
+    "**/docs/**",
+    "**/test/**",
+    "**/types/**"
+  ],
+  "test": [
+    "**/test/**"
+  ],
+  "critics": {
+    "lint": {
+      "engine": "tslint"
+    },
+    "wc": {
+      "limit": 1000
+    }
+  }
+}
