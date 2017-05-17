@@ -71,7 +71,6 @@
 					<a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://img.shields.io/npm/dt/@node-steam/market-pricing.svg?style=flat-square" alt="Downloads"></a>
 					<a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://img.shields.io/github/license/node-steam/market-pricing.svg?style=flat-square" alt="License"></a>
 				<a href="https://runkit.com/npm/@node-steam/market-pricing"><img src="https://img.shields.io/badge/try%20on%20runkit-market--pricing-blue.svg?style=flat-square" alt="Runkit"></a></p>
-				<p><a href="https://www.npmjs.com/package/@node-steam/market-pricing"><img src="https://nodei.co/npm/@node-steam/market-pricing.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="npm statistics"></a></p>
 				<p><strong>Market-Pricing</strong> is a wrapper for the unofficial <strong>Steam Market Pricing API</strong> using Typescript and Promises.</p>
 				<h2 id="installation">Installation</h2>
 				<p>You can install <strong>Market-Pricing</strong> through the command line by using the following command:</p>
@@ -127,7 +126,7 @@
 				<blockquote>
 					<p>Optional - if set all objects will be returned in their raw form when set to true</p>
 				</blockquote>
-				<h4 id="-api-getprice-skin-string-"><code>API.getPrice(skin: string)</code></h4>
+				<h4 id="-api-getprice-skin-string-options-object-callback-function-"><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
 				<blockquote>
 					<p>Get price for a skin</p>
 				</blockquote>
@@ -149,7 +148,7 @@
     <span class="hljs-attr">volume</span>: <span class="hljs-number">8</span>,
 };
 </code></pre>
-				<h4 id="-api-getprices-skins-array-string-"><code>API.getPrices(skins: Array&lt;string&gt;)</code></h4>
+				<h4 id="-api-getprices-skins-string-options-object-callback-function-"><code>API.getPrices(skins: string[], options?: object, callback?: function)</code></h4>
 				<blockquote>
 					<p>Get prices for a array of skins</p>
 				</blockquote>
@@ -241,8 +240,8 @@
 </code></pre>
 				<p><strong>Promise:</strong></p>
 				<pre><code class="lang-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>)
-.catch(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
-    <span class="hljs-built_in">console</span>.error(e);
+.catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.error(error);
 })
 .then(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
     <span class="hljs-comment">// do something with the &lt;item&gt;</span>
@@ -264,15 +263,22 @@
 				<h2 id="contributing-">Contributing:</h2>
 				<p>Interested in contributing to <strong>Market-Pricing</strong>? Contributions are welcome, and are accepted via pull requests. Please <a href="contributing.md">review these guidelines</a> before submitting any pull requests.</p>
 				<h3 id="help-">Help:</h3>
+				<p><strong>Install required global modules:</strong></p>
+				<pre><code class="lang-bash">yarn global add typescript tslint typedoc ava
+</code></pre>
 				<p><strong>Installing dependencies:</strong></p>
-				<pre><code><span class="hljs-attribute">yarn</span>
-</code></pre><p><strong>Compile:</strong></p>
-				<pre><code><span class="hljs-attribute">yarn compile</span>
-</code></pre><p><strong>Test:</strong></p>
-				<pre><code>yarn <span class="hljs-built_in">test</span>
-</code></pre><p><strong>Generate Docs:</strong></p>
-				<pre><code><span class="hljs-attribute">yarn docs</span>
-</code></pre><h2 id="tests-">Tests:</h2>
+				<pre><code class="lang-bash">yarn
+</code></pre>
+				<p><strong>Compile:</strong></p>
+				<pre><code class="lang-bash">yarn compile
+</code></pre>
+				<p><strong>Test:</strong></p>
+				<pre><code class="lang-bash">yarn <span class="hljs-built_in">test</span>
+</code></pre>
+				<p><strong>Generate Docs:</strong></p>
+				<pre><code class="lang-bash">yarn docs
+</code></pre>
+				<h2 id="tests-">Tests:</h2>
 				<p>This module is thoroughly tested with <strong><a href="https://github.com/avajs/ava">ava</a></strong></p>
 				<blockquote>
 					<p><strong>Note:</strong> All responses from the steam API are currently mocked because of rate limiting. Might change in the future, not sure how to proceed about this though.</p>

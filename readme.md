@@ -6,8 +6,6 @@
 [![License](https://img.shields.io/github/license/node-steam/market-pricing.svg?style=flat-square)](https://www.npmjs.com/package/@node-steam/market-pricing)
 [![Runkit](https://img.shields.io/badge/try%20on%20runkit-market--pricing-blue.svg?style=flat-square)](https://runkit.com/npm/@node-steam/market-pricing)
 
-[![npm statistics](https://nodei.co/npm/@node-steam/market-pricing.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/@node-steam/market-pricing)
-
 **Market-Pricing** is a wrapper for the unofficial **Steam Market Pricing API** using Typescript and Promises.
 
 ## Installation
@@ -67,7 +65,7 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 #### `Options.raw: boolean`
 > Optional - if set all objects will be returned in their raw form when set to true
 
-#### `API.getPrice(skin: string)`
+#### `API.getPrice(skin: string, options?: object, callback?: function)`
 > Get price for a skin
 
 ```javascript
@@ -90,7 +88,7 @@ const x = await getPrice('★ Bayonet', { id: Application.CSGO, currency: Curren
 };
 ```
 
-#### `API.getPrices(skins: Array<string>)`
+#### `API.getPrices(skins: string[], options?: object, callback?: function)`
 > Get prices for a array of skins
 
 ```javascript
@@ -206,8 +204,8 @@ const item = await API.getPrice('★ Bayonet');
 **Promise:**
 ```javascript
 API.getPrice('★ Bayonet')
-.catch((e) => {
-    console.error(e);
+.catch((error) => {
+    console.error(error);
 })
 .then((item) => {
     // do something with the <item>
@@ -235,27 +233,33 @@ Interested in contributing to **Market-Pricing**? Contributions are welcome, and
 
 ### Help:
 
+**Install required global modules:**
+
+```bash
+yarn global add typescript tslint typedoc ava
+```
+
 **Installing dependencies:**
 
-```
+```bash
 yarn
 ```
 
 **Compile:**
 
-```
+```bash
 yarn compile
 ```
 
 **Test:**
 
-```
+```bash
 yarn test
 ```
 
 **Generate Docs:**
 
-```
+```bash
 yarn docs
 ```
 
