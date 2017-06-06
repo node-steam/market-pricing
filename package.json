@@ -69,20 +69,17 @@
     "@types/async": "^2.0.40",
     "@types/bluebird-global": "^3.5.2",
     "@types/form-data": "^0.0.33",
-    "@types/node": "^7.0.18",
+    "@types/node": "^7.0.28",
     "app-module-path": "^2.2.0",
     "ava": "^0.19.1",
     "babel-core": "^6.24.1",
     "babel-polyfill": "^6.23.0",
     "babel-register": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.1",
     "nock": "^9.0.13",
-    "typescript": "^2.3.2",
-    "typescript-eslint-parser": "^2.1.0"
+    "typescript": "^2.3.4"
   },
   "dependencies": {
-    "async": "^2.4.0",
+    "async": "^2.4.1",
     "bluebird": "^3.5.0",
     "request": "^2.81.0"
   }

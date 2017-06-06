@@ -19,6 +19,7 @@ import {
 
 import {
     generateItem,
+    type,
 } from './utils';
 
 import {
@@ -191,7 +192,11 @@ export const getPrices = (
                 if (raw) {
                     i.results.push(body);
                 } else {
-                    i.results.push(generateItem(name, body, currency));
+                    const item = generateItem(name, body, currency);
+
+                    if (type(item) === 'error') return reject(item);
+
+                    i.results.push(item as Item);
                 }
                 cb();
             })

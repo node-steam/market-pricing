@@ -5,29 +5,46 @@ import {
 } from './enums';
 
 import {
-    Item,
+    CleanItem,
     RawItem,
 } from './types';
+
+/**
+ * Determines the type of a variable.
+ * Useful for e.g. checking if a object is an error
+ * @hidden
+ */
+export const type = (variable: any):
+'boolean'  |
+'date'     |
+'error'    |
+'function' |
+'json'     |
+'math'     |
+'number'   |
+'object'   |
+'string'   |
+'symbol' => {
+    return ({}).toString.call(variable).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+};
 
 /**
  * Clean the currency string we get from the Steam API into a integer
  * @hidden
  */
-const unformat = (value: string|number): number => {
-    // Fails silently (need decent errors):
-    value = value || 0;
+const unformat = (value: string): number | Error => {
+    if (type(value) !== 'string') return new TypeError(`Supplied value isn't a string!`);
 
-    // Return the value as-is if it's already a number:
-    if (typeof value === 'number') return value;
-
-    // Build regex to strip out everything except digits, decimal point and minus sign:
-    const regex = new RegExp('[^0-9-]', 'g');
-    const unformatted = parseInt(('' + value)
+    const x = parseInt(('' + value)
     .replace(/\((?=\d+)(.*)\)/, '-$1')
     .replace(',--', '00')
-    .replace(regex, ''), 10 ) / 100;
+    .replace(/[^0-9-]/g, ''), 10 ) / 100;
 
-    return !isNaN(unformatted) ? unformatted : 0;
+    if (isNaN(x) || x <= 0) {
+        return new Error(`Something went wrong when trying to parse the value: ${value}`);
+    }
+
+    return x;
 };
 
 /**
@@ -58,19 +75,27 @@ const determineCurrencySign = (currency: number): string => {
  * Generates the cleaned price item
  * @hidden
  */
-export const generateItem = (name: string, response: RawItem, currency: number): Item => {
-    const result: Item = {
+export const generateItem = (name: string, response: RawItem, currency: number): CleanItem | Error => {
+    const lowest = unformat(response.lowest_price);
+
+    if (type(lowest) === 'error') return lowest as Error;
+
+    const result: CleanItem = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),
-            lowest: unformat(response.lowest_price),
+            lowest: lowest as number,
             sign: determineCurrencySign(currency),
             type: determineCurrencyType(currency),
         },
     };
 
     if (response.median_price) {
-        result.price.median = unformat(response.median_price);
+        const median = unformat(response.median_price);
+
+        if (type(median) === 'error') return median as Error;
+
+        result.price.median = median as number;
     }
 
     if (response.volume) {
