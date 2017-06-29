@@ -9,6 +9,7 @@ import {
 
 import {
     CleanItem,
+    HTTPRequestOptions,
     Item,
     ItemArray,
     ItemError,
@@ -32,7 +33,7 @@ import {
  * Make a request to the Steam API
  * @hidden
  */
-const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Bluebird<RawItem> => {
+const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
             baseUrl: base,
@@ -41,17 +42,17 @@ const get = (name: string, id: number, currency: number, country?: string, addre
                 'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
             },
             json: true,
-            localAddress: address,
+            localAddress: options.address,
             qs: {
-                appid: id,
-                country,
-                currency,
-                market_hash_name: name,
+                appid: options.id,
+                country: options.country,
+                currency: options.currency,
+                market_hash_name: options.name,
             },
             removeRefererHeader: true,
             strictSSL: true,
-            time: timings,
-            timeout,
+            time: options.timings,
+            timeout: options.timeout,
             uri: path,
         }, (error, response, body) => {
             if (response && response.statusCode === 429) {
@@ -60,7 +61,7 @@ const get = (name: string, id: number, currency: number, country?: string, addre
                 return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
             } else if (!error && response.statusCode === 200) {
                 const result = body;
-                if (timings) {
+                if (options.timings) {
                     result.timings = {
                         phases: response.timings,
                         start: response.timingStart,
@@ -123,7 +124,15 @@ export const getPrice = (
 
         currency = currency || Currency.USD;
 
-        get(name, id, currency, country, address, timeout, timings)
+        get({
+            address,
+            country,
+            currency,
+            id,
+            name,
+            timeout,
+            timings,
+        })
         .then((body) => {
             if (raw) {
                 const item = body;
@@ -187,7 +196,15 @@ export const getPrices = (
         };
 
         async.each(names, (name, cb) => {
-            get(name, id, currency, country, address, timeout, timings)
+            get({
+                address,
+                country,
+                currency,
+                id,
+                name,
+                timeout,
+                timings,
+            })
             .then((body) => {
                 if (raw) {
                     i.results.push(body);

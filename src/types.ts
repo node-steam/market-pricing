@@ -43,6 +43,20 @@ export interface OverwriteMarketOptions extends RawMarketOptions {
 }
 
 /**
+ * Options for the raw HTTP request
+ * @hidden
+ */
+export interface HTTPRequestOptions {
+    name:     string;
+    id:       number;
+    currency: number;
+    country?: string;
+    address?: string;
+    timeout?: number;
+    timings?: boolean;
+}
+
+/**
  * Price Object
  */
 export interface Price {
