@@ -18,10 +18,15 @@
     "removeComments": true,
     "sourceMap": false,
     "target": "es5",
+    "lib": [
+        "es2015",
+        "es2016",
+        "es2017"
+    ],
     "types": [
       "node",
       "async",
-      "bluebird-global"
+      "bluebird"
     ]
   },
   "include": [

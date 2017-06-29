@@ -32,7 +32,7 @@ import {
  * Make a request to the Steam API
  * @hidden
  */
-const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Promise<RawItem> => {
+const get = (name: string, id: number, currency: number, country?: string, address?: string, timeout?: number, timings?: boolean): Bluebird<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
             baseUrl: base,
@@ -82,7 +82,7 @@ const get = (name: string, id: number, currency: number, country?: string, addre
 
             return reject(new Error('Unknown Error!'));
         });
-    });
+    }) as Bluebird<RawItem>;
 };
 
 /**
@@ -98,7 +98,7 @@ export const getPrice = (
     name: string,
     options: MarketOptions,
     callback?: (error: Error, result: Item) => void,
-): Promise<Item> => {
+): Bluebird<Item> => {
     const x = new Bluebird((resolve, reject) => {
         const {
             id,
@@ -138,9 +138,9 @@ export const getPrice = (
         });
     });
 
-    if (callback) return x.asCallback(callback);
+    if (callback) return x.asCallback(callback) as Bluebird<Item>;
 
-    return x;
+    return x as Bluebird<Item>;
 };
 
 /**
@@ -156,7 +156,7 @@ export const getPrices = (
     names: string[],
     options: MarketOptions,
     callback?: (error: Error, result: ItemArray) => void,
-): Promise<ItemArray> => {
+): Bluebird<ItemArray> => {
     const x = new Bluebird((resolve, reject) => {
         const {
             id,
@@ -218,9 +218,9 @@ export const getPrices = (
         });
     });
 
-    if (callback) return x.asCallback(callback);
+    if (callback) return x.asCallback(callback) as Bluebird<ItemArray>;
 
-    return x;
+    return x as Bluebird<ItemArray>;
 };
 
 /**
@@ -300,7 +300,7 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: (error: Error, result: Item) => void): Promise<Item> {
+    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: (error: Error, result: Item) => void): Bluebird<Item> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -322,7 +322,7 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options?: OverwriteMarketOptions, callback?: (error: Error, result: ItemArray) => void): Promise<ItemArray> {
+    public getPrices(names: string[], options?: OverwriteMarketOptions, callback?: (error: Error, result: ItemArray) => void): Bluebird<ItemArray> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
