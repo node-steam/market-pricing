@@ -60,13 +60,42 @@ declare module 'request' {
         TUriUrlOptions> extends RequestAPI<TRequest, TOptions, TUriUrlOptions> {
 
         defaults(options: TOptions): DefaultUriUrlRequestApi<TRequest, TOptions, OptionalUriUrl>;
-        (): TRequest;
-        get(): TRequest;
-        post(): TRequest;
-        put(): TRequest;
-        head(): TRequest;
-        patch(): TRequest;
-        del(): TRequest;
+        (callback?: RequestCallback): TRequest;
+
+        get(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        get(uri: string, callback?: RequestCallback): TRequest;
+        get(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        get(callback?: RequestCallback): TRequest;
+
+        post(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        post(uri: string, callback?: RequestCallback): TRequest;
+        post(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        post(callback?: RequestCallback): TRequest;
+
+        put(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        put(uri: string, callback?: RequestCallback): TRequest;
+        put(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        put(callback?: RequestCallback): TRequest;
+
+        head(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        head(uri: string, callback?: RequestCallback): TRequest;
+        head(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        head(callback?: RequestCallback): TRequest;
+
+        patch(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        patch(uri: string, callback?: RequestCallback): TRequest;
+        patch(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        patch(callback?: RequestCallback): TRequest;
+
+        del(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        del(uri: string, callback?: RequestCallback): TRequest;
+        del(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        del(callback?: RequestCallback): TRequest;
+
+        delete(uri: string, options?: TOptions, callback?: RequestCallback): TRequest;
+        delete(uri: string, callback?: RequestCallback): TRequest;
+        delete(options: TUriUrlOptions & TOptions, callback?: RequestCallback): TRequest;
+        delete(callback?: RequestCallback): TRequest;
     }
 
     interface CoreOptions {
@@ -109,6 +138,7 @@ declare module 'request' {
         gzip?: boolean;
         preambleCRLF?: boolean;
         postambleCRLF?: boolean;
+        withCredentials?: boolean;
         key?: Buffer;
         cert?: Buffer;
         passphrase?: string;
@@ -125,10 +155,7 @@ declare module 'request' {
     }
     type RequiredUriUrl = UriOptions | UrlOptions;
 
-    interface OptionalUriUrl {
-        uri?: string;
-        url?: string;
-    }
+    type OptionalUriUrl = RequiredUriUrl | {};
 
     type OptionsWithUri = UriOptions & CoreOptions;
     type OptionsWithUrl = UrlOptions & CoreOptions;
@@ -177,8 +204,6 @@ declare module 'request' {
         writable: boolean;
 
         getAgent(): http.Agent;
-        // start(): void;
-        // abort(): void;
         pipeDest(dest: any): void;
         setHeader(name: string, value: string, clobber?: boolean): Request;
         setHeaders(headers: Headers): Request;
@@ -199,7 +224,7 @@ declare module 'request' {
         on(event: 'error', listener: (e: Error) => void): this;
         on(event: 'complete', listener: (resp: http.IncomingMessage, body?: string | Buffer) => void): this;
 
-        write(x: Buffer | string, cb?: Function): boolean;
+        write(buffer: Buffer | string, cb?: Function): boolean;
         write(str: string, encoding: string, cb?: Function): boolean;
         write(str: string, encoding?: string, fd?: string): boolean;
         end(chunk?: Buffer | string, cb?: Function): void;
@@ -230,6 +255,7 @@ declare module 'request' {
         consumer_secret?: string;
         token?: string;
         token_secret?: string;
+        transport_method?: 'body' | 'header' | 'query';
         verifier?: string;
     }
 
