@@ -87,12 +87,17 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#base" class="tsd-kind-icon">base</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#country" class="tsd-kind-icon">country</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#currency" class="tsd-kind-icon">currency</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#gzip" class="tsd-kind-icon">gzip</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="marketoptions.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#path" class="tsd-kind-icon">path</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#raw" class="tsd-kind-icon">raw</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#strictssl" class="tsd-kind-icon">strictSSL</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#timeout" class="tsd-kind-icon">timeout</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#timings" class="tsd-kind-icon">timings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="marketoptions.html#useragent" class="tsd-kind-icon">useragent</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,6 +118,22 @@
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Local interface to bind for network connections</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="base" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> base</h3>
+					<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="rawmarketoptions.html">RawMarketOptions</a>.<a href="rawmarketoptions.html#base">base</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L36">types.ts:36</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Base domain for the HTTP request</p>
 						</div>
 					</div>
 				</section>
@@ -148,18 +169,50 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="gzip" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gzip</h3>
+					<div class="tsd-signature tsd-kind-icon">gzip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="rawmarketoptions.html">RawMarketOptions</a>.<a href="rawmarketoptions.html#gzip">gzip</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L40">types.ts:40</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Use GZIP compression for the HTTP request</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L35">types.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L55">types.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Application ID Of The Game You Want To Query Skin/s For</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="path" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="rawmarketoptions.html">RawMarketOptions</a>.<a href="rawmarketoptions.html#path">path</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L48">types.ts:48</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Base path for the HTTP request</p>
 						</div>
 					</div>
 				</section>
@@ -176,6 +229,22 @@
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Request the raw object</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="strictssl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> strictSSL</h3>
+					<div class="tsd-signature tsd-kind-icon">strictSSL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="rawmarketoptions.html">RawMarketOptions</a>.<a href="rawmarketoptions.html#strictssl">strictSSL</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L44">types.ts:44</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Force strict SSL for the HTTP request</p>
 						</div>
 					</div>
 				</section>
@@ -208,6 +277,22 @@
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Whether to return request timings</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="useragent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> useragent</h3>
+					<div class="tsd-signature tsd-kind-icon">useragent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="rawmarketoptions.html">RawMarketOptions</a>.<a href="rawmarketoptions.html#useragent">useragent</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L32">types.ts:32</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Custom user agent for the HTTP request</p>
 						</div>
 					</div>
 				</section>
@@ -250,22 +335,37 @@
 								<a href="marketoptions.html#address" class="tsd-kind-icon">address</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="marketoptions.html#base" class="tsd-kind-icon">base</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="marketoptions.html#country" class="tsd-kind-icon">country</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="marketoptions.html#currency" class="tsd-kind-icon">currency</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="marketoptions.html#gzip" class="tsd-kind-icon">gzip</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="marketoptions.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="marketoptions.html#path" class="tsd-kind-icon">path</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="marketoptions.html#raw" class="tsd-kind-icon">raw</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="marketoptions.html#strictssl" class="tsd-kind-icon">strictSSL</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="marketoptions.html#timeout" class="tsd-kind-icon">timeout</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="marketoptions.html#timings" class="tsd-kind-icon">timings</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="marketoptions.html#useragent" class="tsd-kind-icon">useragent</a>
 							</li>
 						</ul>
 					</li>

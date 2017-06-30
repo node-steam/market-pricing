@@ -103,6 +103,8 @@
 				<blockquote>
 					<p>Optional currency integer</p>
 					<p>We provide a <strong><a href="src/enums.ts#L1-L134">enum</a></strong>  for all available currencies</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-number">1</span>
+</code></pre>
 				</blockquote>
 				<h4 id="-options-country-string-"><code>Options.country: string</code></h4>
 				<blockquote>
@@ -121,10 +123,44 @@
 				<h4 id="-options-timings-boolean-"><code>Options.timings: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set request timings will be returned</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span>
+</code></pre>
 				</blockquote>
 				<h4 id="-options-raw-boolean-"><code>Options.raw: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set all objects will be returned in their raw form when set to true</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span>
+</code></pre>
+				</blockquote>
+				<h4 id="-options-base-string-"><code>Options.base: string</code></h4>
+				<blockquote>
+					<p>Optional - base domain</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'https://steamcommunity.com'</span>
+</code></pre>
+				</blockquote>
+				<h4 id="-options-path-string-"><code>Options.path: string</code></h4>
+				<blockquote>
+					<p>Optional - base path</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'/market/priceoverview'</span>
+</code></pre>
+				</blockquote>
+				<h4 id="-options-useragent-string-"><code>Options.useragent: string</code></h4>
+				<blockquote>
+					<p>Optional - custom user agent for the HTTP request</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">`N|Steam Market-Pricing v<span class="hljs-subst">${version}</span> (https://github.com/node-steam/market-pricing)`</span>
+</code></pre>
+				</blockquote>
+				<h4 id="-options-gzip-boolean-"><code>Options.gzip: boolean</code></h4>
+				<blockquote>
+					<p>Optional - if set GZIP compression will be used for the connection</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span>
+</code></pre>
+				</blockquote>
+				<h4 id="-options-strictssl-boolean-"><code>Options.strictSSL: boolean</code></h4>
+				<blockquote>
+					<p>Optional - if set strict SSL will be forced for the connection</p>
+					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span>
+</code></pre>
 				</blockquote>
 				<h4 id="-api-getprice-skin-string-options-object-callback-function-"><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
 				<blockquote>
