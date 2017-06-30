@@ -46,6 +46,9 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 > Optional currency integer
 >
 > We provide a **[enum](src/enums.ts#L1-L134)**  for all available currencies
+> ```js
+> default = 1
+> ```
 
 #### `Options.country: string`
 > Optional **[ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)** country code
@@ -61,24 +64,45 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 
 #### `Options.timings: boolean`
 > Optional - if set request timings will be returned
+> ```js
+> default = false
+> ```
 
 #### `Options.raw: boolean`
 > Optional - if set all objects will be returned in their raw form when set to true
+> ```js
+> default = false
+> ```
 
 #### `Options.base: string`
 > Optional - base domain
+> ```js
+> default = 'https://steamcommunity.com'
+> ```
 
 #### `Options.path: string`
 > Optional - base path
+> ```js
+> default = '/market/priceoverview'
+> ```
 
 #### `Options.useragent: string`
 > Optional - custom user agent for the HTTP request
+> ```js
+> default = `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`
+> ```
 
 #### `Options.gzip: boolean`
 > Optional - if set GZIP compression will be used for the connection
+> ```js
+> default = true
+> ```
 
 #### `Options.strictSSL: boolean`
 > Optional - if set strict SSL will be forced for the connection
+> ```js
+> default = true
+> ```
 
 #### `API.getPrice(skin: string, options?: object, callback?: function)`
 > Get price for a skin
