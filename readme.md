@@ -65,6 +65,21 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 #### `Options.raw: boolean`
 > Optional - if set all objects will be returned in their raw form when set to true
 
+#### `Options.base: string`
+> Optional - base domain
+
+#### `Options.path: string`
+> Optional - base path
+
+#### `Options.useragent: string`
+> Optional - custom user agent for the HTTP request
+
+#### `Options.gzip: boolean`
+> Optional - if set GZIP compression will be used for the connection
+
+#### `Options.strictSSL: boolean`
+> Optional - if set strict SSL will be forced for the connection
+
 #### `API.getPrice(skin: string, options?: object, callback?: function)`
 > Get price for a skin
 

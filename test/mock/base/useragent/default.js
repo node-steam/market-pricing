@@ -36,7 +36,7 @@ nock(base, {
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
-test('User Agent', async (t) => {
+test('Default User Agent', async (t) => {
     const item = await API.getPrice('UserAgent');
     const should = {
         id: 'UserAgent',

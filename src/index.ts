@@ -36,10 +36,10 @@ import {
 const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
-            baseUrl: base,
-            gzip: true,
+            baseUrl: options.base,
+            gzip: options.gzip,
             headers: {
-                'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
+                'User-Agent': options.useragent,
             },
             json: true,
             localAddress: options.address,
@@ -50,10 +50,10 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
                 market_hash_name: options.name,
             },
             removeRefererHeader: true,
-            strictSSL: true,
+            strictSSL: options.strictSSL,
             time: options.timings,
             timeout: options.timeout,
-            uri: path,
+            uri: options.path,
         }, (error, response, body) => {
             if (response && response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
@@ -102,12 +102,17 @@ export const getPrice = (
 ): Bluebird<Item> => {
     const x = new Bluebird((resolve, reject) => {
         const {
-            id,
-            country,
-            raw,
             address,
+            base,
+            country,
+            gzip,
+            id,
+            path,
+            raw,
+            strictSSL,
             timeout,
             timings,
+            useragent,
         } = options;
 
         let {
@@ -126,12 +131,17 @@ export const getPrice = (
 
         get({
             address,
+            base,
             country,
             currency,
+            gzip,
             id,
             name,
+            path,
+            strictSSL,
             timeout,
             timings,
+            useragent,
         })
         .then((body) => {
             if (raw) {
@@ -168,12 +178,17 @@ export const getPrices = (
 ): Bluebird<ItemArray> => {
     const x = new Bluebird((resolve, reject) => {
         const {
-            id,
-            country,
-            raw,
             address,
+            base,
+            country,
+            gzip,
+            id,
+            path,
+            raw,
+            strictSSL,
             timeout,
             timings,
+            useragent,
         } = options;
 
         let {
@@ -198,12 +213,17 @@ export const getPrices = (
         async.each(names, (name, cb) => {
             get({
                 address,
+                base,
                 country,
                 currency,
+                gzip,
                 id,
                 name,
+                path,
+                strictSSL,
                 timeout,
                 timings,
+                useragent,
             })
             .then((body) => {
                 if (raw) {
@@ -245,9 +265,17 @@ export const getPrices = (
  */
 export class Market {
     /**
+     * Local interface to bind for network connections
+     */
+    public address?: string;
+    /**
      * Application ID of the game you want to query skin/s for
      */
     public appid: number;
+    /**
+     * Base domain for the HTTP request
+     */
+    public base?: string;
     /**
      * Optional [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
      */
@@ -257,21 +285,34 @@ export class Market {
      */
     public currency?: number;
     /**
+     * Use GZIP compression for the HTTP request
+     */
+    public gzip?: boolean;
+    /**
+     * Base path for the HTTP request
+     */
+    public path?: string;
+    /**
      * Request the raw object
      */
     public raw?: boolean;
     /**
-     * Local interface to bind for network connections
+     * Force strict SSL for the HTTP request
      */
-    public address?: string;
+    public strictSSL?: boolean;
+    /**
+     * Number of milliseconds to wait for a server to send response headers
+     */
+    public timeout?: number;
     /**
      * Whether to return request timings
      */
     public timings?: boolean;
     /**
-     * Number of milliseconds to wait for a server to send response headers
+     * Custom user agent for the HTTP request
      */
-    public timeout?: number;
+    public useragent?: string;
+
     /**
      * All the settings in one object
      * @hidden
@@ -287,22 +328,32 @@ export class Market {
     constructor(options: MarketOptions) {
         if (typeof options !== 'object') throw new Error('Invalid Options Passed To Constructor!');
 
-        this.appid    = options.id;
-        this.currency = options.currency || Currency.USD;
-        this.country  = options.country;
-        this.address  = options.address;
-        this.timings  = options.timings || false;
-        this.timeout  = options.timeout;
-        this.raw      = options.raw || false;
+        this.address   = options.address;
+        this.appid     = options.id;
+        this.base      = options.base      || base;
+        this.country   = options.country;
+        this.currency  = options.currency  || Currency.USD;
+        this.gzip      = options.gzip      || true;
+        this.path      = options.path      || path;
+        this.raw       = options.raw       || false;
+        this.strictSSL = options.strictSSL || true;
+        this.timeout   = options.timeout;
+        this.timings   = options.timings   || false;
+        this.useragent = options.useragent || `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`;
 
         this.settings = {
-            address:  this.address,
-            country:  this.country,
-            currency: this.currency,
-            id:       this.appid,
-            raw:      this.raw,
-            timeout:  this.timeout,
-            timings:  this.timings,
+            address:   this.address,
+            base:      this.base,
+            country:   this.country,
+            currency:  this.currency,
+            gzip:      this.gzip,
+            id:        this.appid,
+            path:      this.path,
+            raw:       this.raw,
+            strictSSL: this.strictSSL,
+            timeout:   this.timeout,
+            timings:   this.timings,
+            useragent: this.useragent,
         };
 
         if (typeof this.appid !== 'number') throw new Error('Invalid Application ID!');

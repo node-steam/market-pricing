@@ -26,6 +26,26 @@ export interface RawMarketOptions {
      * Request the raw object
      */
     raw?: boolean;
+    /**
+     * Custom user agent for the HTTP request
+     */
+    useragent?: string;
+    /**
+     * Base domain for the HTTP request
+     */
+    base?: string;
+    /**
+     * Use GZIP compression for the HTTP request
+     */
+    gzip?: boolean;
+    /**
+     * Force strict SSL for the HTTP request
+     */
+    strictSSL?: boolean;
+    /**
+     * Base path for the HTTP request
+     */
+    path?: string;
 }
 
 export interface MarketOptions extends RawMarketOptions {
@@ -47,13 +67,18 @@ export interface OverwriteMarketOptions extends RawMarketOptions {
  * @hidden
  */
 export interface HTTPRequestOptions {
-    name:     string;
-    id:       number;
-    currency: number;
-    country?: string;
-    address?: string;
-    timeout?: number;
-    timings?: boolean;
+    address?:   string;
+    base?:      string;
+    country?:   string;
+    currency:   number;
+    gzip?:      boolean;
+    id:         number;
+    name:       string;
+    path?:      string;
+    strictSSL?: boolean;
+    timeout?:   number;
+    timings?:   boolean;
+    useragent?: string;
 }
 
 /**
