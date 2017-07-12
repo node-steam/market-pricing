@@ -21,5 +21,6 @@ export const path = '/market/priceoverview';
 
 /**
  * User agent
+ * @hidden
  */
 export const useragent = `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`;
