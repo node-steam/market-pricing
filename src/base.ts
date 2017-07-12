@@ -14,7 +14,12 @@ export const version: string = JSON.parse(fs.readFileSync(dir.join(__dirname, '.
 export const base = 'https://steamcommunity.com';
 
 /**
- * Base Path
+ * Base path
  * @hidden
  */
 export const path = '/market/priceoverview';
+
+/**
+ * User agent
+ */
+export const useragent = `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`;

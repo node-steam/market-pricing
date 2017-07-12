@@ -26,7 +26,7 @@ import {
 import {
     base,
     path,
-    version,
+    useragent,
 } from './base';
 
 /**
@@ -36,10 +36,10 @@ import {
 const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
-            baseUrl: options.base,
-            gzip: options.gzip,
+            baseUrl: options.base || base,
+            gzip: options.gzip || true,
             headers: {
-                'User-Agent': options.useragent,
+                'User-Agent': options.useragent || useragent,
             },
             json: true,
             localAddress: options.address,
@@ -50,10 +50,10 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
                 market_hash_name: options.name,
             },
             removeRefererHeader: true,
-            strictSSL: options.strictSSL,
+            strictSSL: options.strictSSL || true,
             time: options.timings,
             timeout: options.timeout,
-            uri: options.path,
+            uri: options.path || path,
         }, (error, response, body) => {
             if (response && response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
@@ -339,7 +339,7 @@ export class Market {
         this.strictSSL = options.strictSSL || true;
         this.timeout   = options.timeout;
         this.timings   = options.timings   || false;
-        this.useragent = options.useragent || `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`;
+        this.useragent = options.useragent || useragent;
 
         this.settings = {
             address:   this.address,
