@@ -24,9 +24,9 @@ import {
 } from './utils';
 
 import {
-    base,
-    path,
-    useragent,
+    base as baseURL,
+    path as basePath,
+    useragent as UA,
 } from './base';
 
 /**
@@ -36,10 +36,10 @@ import {
 const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
     return new Bluebird((resolve, reject) => {
         request({
-            baseUrl: options.base || base,
+            baseUrl: options.base || baseURL,
             gzip: options.gzip || true,
             headers: {
-                'User-Agent': options.useragent || useragent,
+                'User-Agent': options.useragent || UA,
             },
             json: true,
             localAddress: options.address,
@@ -53,7 +53,7 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
             strictSSL: options.strictSSL || true,
             time: options.timings,
             timeout: options.timeout,
-            uri: options.path || path,
+            uri: options.path || basePath,
         }, (error, response, body) => {
             if (response && response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
@@ -330,16 +330,16 @@ export class Market {
 
         this.address   = options.address;
         this.appid     = options.id;
-        this.base      = options.base      || base;
+        this.base      = options.base      || baseURL;
         this.country   = options.country;
         this.currency  = options.currency  || Currency.USD;
         this.gzip      = options.gzip      || true;
-        this.path      = options.path      || path;
+        this.path      = options.path      || basePath;
         this.raw       = options.raw       || false;
         this.strictSSL = options.strictSSL || true;
         this.timeout   = options.timeout;
         this.timings   = options.timings   || false;
-        this.useragent = options.useragent || useragent;
+        this.useragent = options.useragent || UA;
 
         this.settings = {
             address:   this.address,
