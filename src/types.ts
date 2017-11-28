@@ -1,13 +1,13 @@
 /**
- * Constructor Options
+ * Constructor options
  */
 export interface RawMarketOptions {
     /**
-     * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) Country Code
+     * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
      */
     country?: string;
     /**
-     * Currency Integer
+     * Currency integer
      */
     currency?: number;
     /**
@@ -50,14 +50,14 @@ export interface RawMarketOptions {
 
 export interface MarketOptions extends RawMarketOptions {
     /**
-     * Application ID Of The Game You Want To Query Skin/s For
+     * Application ID of the game to query skin/s for
      */
     id: number;
 }
 
 export interface OverwriteMarketOptions extends RawMarketOptions {
     /**
-     * Application ID Of The Game You Want To Query Skin/s For
+     * Application ID of the game to query skin/s for
      */
     id?: number;
 }
@@ -82,36 +82,36 @@ export interface HTTPRequestOptions {
 }
 
 /**
- * Price Object
+ * Price object
  */
 export interface Price {
     /**
-     * Type Of Currency
+     * Type of currency
      * @see {@link CurrencyType}
      */
     type: string;
     /**
-     * [ISO-4217 Currency Code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+     * [ISO-4217 Currency code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
      * @see {@link Currency}
      */
     code: string;
     /**
-     * [Currency Symbol](https://en.wikipedia.org/wiki/Currency_symbol#List_of_presently-circulating_currency_symbols)
+     * [Currency symbol](https://en.wikipedia.org/wiki/Currency_symbol#List_of_presently-circulating_currency_symbols)
      * @see {@link CurrencySign}
      */
     sign: string;
     /**
-     * Lowest Price On The [Steam Community Market](https://steamcommunity.com/market/)
+     * Lowest price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
-    lowest: number;
+    lowest?: number;
     /**
-     * Median Price On The [Steam Community Market](https://steamcommunity.com/market/)
+     * Median price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
     median?: number;
 }
 
 /**
- * Request Timings Object
+ * Request timings object
  */
 export interface Timing {
     start: number;
@@ -133,19 +133,19 @@ export interface Timing {
 }
 
 /**
- * Clean Item Object
+ * Clean item object
  */
 export interface CleanItem {
     /**
-     * Market Hash Name Of The Skin
+     * Market hash name of the skin
      */
     id: string;
     /**
-     * Price Object
+     * Price object
      */
     price: Price;
     /**
-     * Number Of Available Skins On The Steam Market
+     * Number of available skins on the steam market
      */
     volume?: number;
     /**
@@ -155,15 +155,15 @@ export interface CleanItem {
 }
 
 /**
- * Raw Item Object
+ * Raw item object
  */
 export interface RawItem {
     /**
-     * Lowest Price On The [Steam Community Market](https://steamcommunity.com/market/)
+     * Lowest price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
     lowest_price: string;
     /**
-     * Median Price On The [Steam Community Market](https://steamcommunity.com/market/)
+     * Median price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
     median_price?: string;
     /**
@@ -171,7 +171,7 @@ export interface RawItem {
      */
     success: boolean;
     /**
-     * Number Of Available Skins On The Steam Market
+     * Number of available skins on the steam market
      */
     volume?: string;
     /**
@@ -181,34 +181,34 @@ export interface RawItem {
 }
 
 /**
- * Item Object
+ * Item object
  */
 export type Item = CleanItem | RawItem;
 
 /**
- * Thrown Error When Item Was Queried
+ * Thrown error when item was queried
  */
 export interface ItemError {
     /**
-     * Market Hash Name Of The Skin
+     * Market hash name of the skin
      */
     id: string;
     /**
-     * Error Object
+     * Error object
      */
     error: string;
 }
 
 /**
- * Object With Arrays Of Item Objects And/Or Errors
+ * Object with arrays of item objects and/or errors
  */
 export interface ItemArray {
     /**
-     * Array Of Thrown Errors
+     * Array of thrown errors
      */
     errors: ItemError[];
     /**
-     * Array Of Item Objects
+     * Array of item objects
      */
     results: Item[];
 }

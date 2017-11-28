@@ -48,7 +48,7 @@ const unformat = (value: string): number | Error => {
 };
 
 /**
- * Determine Currency Code by Steam Currency ID
+ * Determine currency code by Steam currency ID
  * @hidden
  */
 const determineCurrencyCode = (currency: number): string => {
@@ -56,7 +56,7 @@ const determineCurrencyCode = (currency: number): string => {
 };
 
 /**
- * Determine Currency Type by Steam Currency ID
+ * Determine currency type by Steam currency ID
  * @hidden
  */
 const determineCurrencyType = (currency: number): string => {
@@ -64,7 +64,7 @@ const determineCurrencyType = (currency: number): string => {
 };
 
 /**
- * Determine Currency Sign by Steam Currency ID
+ * Determine currency sign by Steam currency ID
  * @hidden
  */
 const determineCurrencySign = (currency: number): string => {
@@ -76,19 +76,22 @@ const determineCurrencySign = (currency: number): string => {
  * @hidden
  */
 export const generateItem = (name: string, response: RawItem, currency: number): CleanItem | Error => {
-    const lowest = unformat(response.lowest_price);
-
-    if (type(lowest) === 'error') return lowest as Error;
-
     const result: CleanItem = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),
-            lowest: lowest as number,
             sign: determineCurrencySign(currency),
             type: determineCurrencyType(currency),
         },
     };
+
+    if (response.lowest_price) {
+        const lowest = unformat(response.lowest_price);
+
+        if (type(lowest) === 'error') return lowest as Error;
+
+        result.price.lowest = lowest as number;
+    }
 
     if (response.median_price) {
         const median = unformat(response.median_price);

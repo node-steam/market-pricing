@@ -326,7 +326,7 @@ export class Market {
      *
      */
     constructor(options: MarketOptions) {
-        if (typeof options !== 'object') throw new Error('Invalid Options Passed To Constructor!');
+        if (typeof options !== 'object') throw new Error('Invalid options passed to constructor!');
 
         this.address   = options.address;
         this.appid     = options.id;
