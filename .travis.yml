@@ -12,5 +12,6 @@ before_install:
 script: yarn test
 
 node_js:
+  - "8"
   - "7"
   - "6"
