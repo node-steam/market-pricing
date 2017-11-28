@@ -136,278 +136,278 @@ export enum Currency {
 /**
  * @private
  */
-export const CurrencyType: { [key: string]: string } = {
+export enum CurrencyType {
     /**
      * [United Arab Emirates dirham](https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham)
      */
-    AED: 'dirham',
+    AED = 'dirham',
     /**
      * [Australian dollar](https://en.wikipedia.org/wiki/Australian_dollar)
      */
-    AUD: 'australian-dollar',
+    AUD = 'australian-dollar',
     /**
      * [Brazilian real](https://en.wikipedia.org/wiki/Brazilian_real)
      */
-    BRL: 'real',
+    BRL = 'real',
     /**
      * [Canadian dollar](https://en.wikipedia.org/wiki/Canadian_dollar)
      */
-    CAD: 'canadian-dollar',
+    CAD = 'canadian-dollar',
     /**
      * [Swiss franc](https://en.wikipedia.org/wiki/Swiss_franc)
      */
-    CHF: 'franc',
+    CHF = 'franc',
     /**
      * [Chilean peso](https://en.wikipedia.org/wiki/Chilean_peso)
      */
-    CLP: 'chilean-peso',
+    CLP = 'chilean-peso',
     /**
      * [Chinese yuan](https://en.wikipedia.org/wiki/Renminbi)
      */
-    CNY: 'renminbi',
+    CNY = 'renminbi',
     /**
      * [Colombian peso](https://en.wikipedia.org/wiki/Colombian_peso)
      */
-    COP: 'colombian-peso',
+    COP = 'colombian-peso',
     /**
      * [Euro](https://en.wikipedia.org/wiki/Euro)
      */
-    EUR: 'euro',
+    EUR = 'euro',
     /**
      * [Pound sterling](https://en.wikipedia.org/wiki/Pound_sterling)
      */
-    GBP: 'pound',
+    GBP = 'pound',
     /**
      * [Hong Kong dollar](https://en.wikipedia.org/wiki/Hong_Kong_dollar)
      */
-    HKD: 'hong-kong-dollar',
+    HKD = 'hong-kong-dollar',
     /**
      * [Indonesian rupiah](https://en.wikipedia.org/wiki/Indonesian_rupiah)
      */
-    IDR: 'rupiah',
+    IDR = 'rupiah',
     /**
      * [Indian rupee](https://en.wikipedia.org/wiki/Indian_rupee)
      */
-    INR: 'rupee',
+    INR = 'rupee',
     /**
      * [Japanese yen](https://en.wikipedia.org/wiki/Japanese_yen)
      */
-    JPY: 'yen',
+    JPY = 'yen',
     /**
      * [South Korean won](https://en.wikipedia.org/wiki/South_Korean_won)
      */
-    KRW: 'won',
+    KRW = 'won',
     /**
      * [Mexican peso](https://en.wikipedia.org/wiki/Mexican_peso)
      */
-    MXN: 'mexican-peso',
+    MXN = 'mexican-peso',
     /**
      * [Malaysian ringgit](https://en.wikipedia.org/wiki/Malaysian_ringgit)
      */
-    MYR: 'ringgit',
+    MYR = 'ringgit',
     /**
      * [Norwegian krone](https://en.wikipedia.org/wiki/Norwegian_krone)
      */
-    NOK: 'krone',
+    NOK = 'krone',
     /**
      * [New Zealand dollar](https://en.wikipedia.org/wiki/New_Zealand_dollar)
      */
-    NZD: 'new-zealand-dollar',
+    NZD = 'new-zealand-dollar',
     /**
      * [Peruvian Sol](https://en.wikipedia.org/wiki/Peruvian_Sol)
      */
-    PEN: 'sol',
+    PEN = 'sol',
     /**
      * [Philippine peso](https://en.wikipedia.org/wiki/Philippine_peso)
      */
-    PHP: 'philippine-peso',
+    PHP = 'philippine-peso',
     /**
      * [Polish złoty](https://en.wikipedia.org/wiki/Polish_złoty)
      */
-    PLN: 'zloty',
+    PLN = 'zloty',
     /**
      * [Russian ruble](https://en.wikipedia.org/wiki/Russian_ruble)
      */
-    RUB: 'ruble',
+    RUB = 'ruble',
     /**
      * [Saudi riyal](https://en.wikipedia.org/wiki/Saudi_riyal)
      */
-    SAR: 'riyal',
+    SAR = 'riyal',
     /**
      * [Swedish krona](https://en.wikipedia.org/wiki/Swedish_krona)
      */
-    SEK: 'krona',
+    SEK = 'krona',
     /**
      * [Singapore dollar](https://en.wikipedia.org/wiki/Singapore_dollar)
      */
-    SGD: 'singaporean-dollar',
+    SGD = 'singaporean-dollar',
     /**
      * [Thai baht](https://en.wikipedia.org/wiki/Thai_baht)
      */
-    THB: 'baht',
+    THB = 'baht',
     /**
      * [Turkish lira](https://en.wikipedia.org/wiki/Turkish_lira)
      */
-    TRY: 'lira',
+    TRY = 'lira',
     /**
      * [New Taiwan dollar](https://en.wikipedia.org/wiki/New_Taiwan_dollar)
      */
-    TWD: 'taiwan-dollar',
+    TWD = 'taiwan-dollar',
     /**
      * [Ukrainian hryvnia](https://en.wikipedia.org/wiki/Ukrainian_hryvnia)
      */
-    UAH: 'hryvnia',
+    UAH = 'hryvnia',
     /**
      * [United States dollar](https://en.wikipedia.org/wiki/United_States_dollar)
      */
-    USD: 'us-dollar',
+    USD = 'us-dollar',
     /**
      * [Vietnamese đồng](https://en.wikipedia.org/wiki/Vietnamese_đồng)
      */
-    VND: 'dong',
+    VND = 'dong',
     /**
      * [South African rand](https://en.wikipedia.org/wiki/South_African_rand)
      */
-    ZAR: 'rand',
-};
+    ZAR = 'rand',
+}
 
 /**
  * @private
  */
-export const CurrencySign: { [key: string]: string } = {
+export enum CurrencySign {
     /**
      * [United Arab Emirates dirham](https://en.wikipedia.org/wiki/United_Arab_Emirates_dirham)
      */
-    AED: 'د.إ',
+    AED = 'د.إ',
     /**
      * [Australian dollar](https://en.wikipedia.org/wiki/Australian_dollar)
      */
-    AUD: '$',
+    AUD = '$',
     /**
      * [Brazilian real](https://en.wikipedia.org/wiki/Brazilian_real)
      */
-    BRL: 'R$',
+    BRL = 'R$',
     /**
      * [Canadian dollar](https://en.wikipedia.org/wiki/Canadian_dollar)
      */
-    CAD: '$',
+    CAD = '$',
     /**
      * [Swiss franc](https://en.wikipedia.org/wiki/Swiss_franc)
      */
-    CHF: 'SFr.',
+    CHF = 'SFr.',
     /**
      * [Chilean peso](https://en.wikipedia.org/wiki/Chilean_peso)
      */
-    CLP: '$',
+    CLP = '$',
     /**
      * [Chinese yuan](https://en.wikipedia.org/wiki/Renminbi)
      */
-    CNY: '¥',
+    CNY = '¥',
     /**
      * [Colombian peso](https://en.wikipedia.org/wiki/Colombian_peso)
      */
-    COP: '$',
+    COP = '$',
     /**
      * [Euro](https://en.wikipedia.org/wiki/Euro)
      */
-    EUR: '€',
+    EUR = '€',
     /**
      * [Pound sterling](https://en.wikipedia.org/wiki/Pound_sterling)
      */
-    GBP: '£',
+    GBP = '£',
     /**
      * [Hong Kong dollar](https://en.wikipedia.org/wiki/Hong_Kong_dollar)
      */
-    HKD: '$',
+    HKD = '$',
     /**
      * [Indonesian rupiah](https://en.wikipedia.org/wiki/Indonesian_rupiah)
      */
-    IDR: 'Rp',
+    IDR = 'Rp',
     /**
      * [Indian rupee](https://en.wikipedia.org/wiki/Indian_rupee)
      */
-    INR: '₹',
+    INR = '₹',
     /**
      * [Japanese yen](https://en.wikipedia.org/wiki/Japanese_yen)
      */
-    JPY: '¥',
+    JPY = '¥',
     /**
      * [South Korean won](https://en.wikipedia.org/wiki/South_Korean_won)
      */
-    KRW: '₩',
+    KRW = '₩',
     /**
      * [Mexican peso](https://en.wikipedia.org/wiki/Mexican_peso)
      */
-    MXN: '$',
+    MXN = '$',
     /**
      * [Malaysian ringgit](https://en.wikipedia.org/wiki/Malaysian_ringgit)
      */
-    MYR: 'RM',
+    MYR = 'RM',
     /**
      * [Norwegian krone](https://en.wikipedia.org/wiki/Norwegian_krone)
      */
-    NOK: 'kr',
+    NOK = 'kr',
     /**
      * [New Zealand dollar](https://en.wikipedia.org/wiki/New_Zealand_dollar)
      */
-    NZD: '$',
+    NZD = '$',
     /**
      * [Peruvian Sol](https://en.wikipedia.org/wiki/Peruvian_Sol)
      */
-    PEN: 'S/',
+    PEN = 'S/',
     /**
      * [Philippine peso](https://en.wikipedia.org/wiki/Philippine_peso)
      */
-    PHP: '₱',
+    PHP = '₱',
     /**
      * [Polish złoty](https://en.wikipedia.org/wiki/Polish_złoty)
      */
-    PLN: 'zł',
+    PLN = 'zł',
     /**
      * [Russian ruble](https://en.wikipedia.org/wiki/Russian_ruble)
      */
-    RUB: '₽',
+    RUB = '₽',
     /**
      * [Saudi riyal](https://en.wikipedia.org/wiki/Saudi_riyal)
      */
-    SAR: 'ر.س',
+    SAR = 'ر.س',
     /**
      * [Swedish krona](https://en.wikipedia.org/wiki/Swedish_krona)
      */
-    SEK: 'kr',
+    SEK = 'kr',
     /**
      * [Singapore dollar](https://en.wikipedia.org/wiki/Singapore_dollar)
      */
-    SGD: '$',
+    SGD = '$',
     /**
      * [Thai baht](https://en.wikipedia.org/wiki/Thai_baht)
      */
-    THB: '฿',
+    THB = '฿',
     /**
      * [Turkish lira](https://en.wikipedia.org/wiki/Turkish_lira)
      */
-    TRY: '₺',
+    TRY = '₺',
     /**
      * [New Taiwan dollar](https://en.wikipedia.org/wiki/New_Taiwan_dollar)
      */
-    TWD: 'NT$',
+    TWD = 'NT$',
     /**
      * [Ukrainian hryvnia](https://en.wikipedia.org/wiki/Ukrainian_hryvnia)
      */
-    UAH: '₴',
+    UAH = '₴',
     /**
      * [United States dollar](https://en.wikipedia.org/wiki/United_States_dollar)
      */
-    USD: '$',
+    USD = '$',
     /**
      * [Vietnamese đồng](https://en.wikipedia.org/wiki/Vietnamese_đồng)
      */
-    VND: '₫',
+    VND = '₫',
     /**
      * [South African rand](https://en.wikipedia.org/wiki/South_African_rand)
      */
-    ZAR: 'R',
-};
+    ZAR = 'R',
+}
 
 export enum Application {
     /**

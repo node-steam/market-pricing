@@ -60,7 +60,7 @@ const determineCurrencyCode = (currency: number): string => {
  * @hidden
  */
 const determineCurrencyType = (currency: number): string => {
-    return CurrencyType[Currency[currency]];
+    return CurrencyType[Currency[currency] as any];
 };
 
 /**
@@ -68,7 +68,7 @@ const determineCurrencyType = (currency: number): string => {
  * @hidden
  */
 const determineCurrencySign = (currency: number): string => {
-    return CurrencySign[Currency[currency]];
+    return CurrencySign[Currency[currency] as any];
 };
 
 /**
