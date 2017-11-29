@@ -1,13 +1,8 @@
-import {
-    Currency,
-    CurrencySign,
-    CurrencyType,
-} from './enums';
-
-import {
-    CleanItem,
-    RawItem,
-} from './types';
+/**
+ * project dependencies
+ */
+import * as enums from './enums';
+import * as types from './types';
 
 /**
  * Determines the type of a variable.
@@ -52,7 +47,7 @@ const unformat = (value: string): number | Error => {
  * @hidden
  */
 const determineCurrencyCode = (currency: number): string => {
-    return Currency[currency];
+    return enums.Currency[currency];
 };
 
 /**
@@ -60,7 +55,7 @@ const determineCurrencyCode = (currency: number): string => {
  * @hidden
  */
 const determineCurrencyType = (currency: number): string => {
-    return CurrencyType[Currency[currency] as any];
+    return enums.CurrencyType[enums.Currency[currency] as any];
 };
 
 /**
@@ -68,15 +63,15 @@ const determineCurrencyType = (currency: number): string => {
  * @hidden
  */
 const determineCurrencySign = (currency: number): string => {
-    return CurrencySign[Currency[currency] as any];
+    return enums.CurrencySign[enums.Currency[currency] as any];
 };
 
 /**
  * Generates the cleaned price item
  * @hidden
  */
-export const generateItem = (name: string, response: RawItem, currency: number): CleanItem | Error => {
-    const result: CleanItem = {
+export const generateItem = (name: string, response: types.RawItem, currency: number): types.CleanItem | Error => {
+    const result: types.CleanItem = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),

@@ -1,45 +1,29 @@
+/**
+ * npm dependencies
+ */
 import * as async    from 'async';
-import * as Bluebird from 'bluebird';
+import * as bluebird from 'bluebird';
 import * as request  from 'request';
 
-import {
-    Application,
-    Currency,
-} from './enums';
-
-import {
-    CleanItem,
-    HTTPRequestOptions,
-    Item,
-    ItemArray,
-    ItemError,
-    MarketOptions,
-    OverwriteMarketOptions,
-    RawItem,
-} from './types';
-
-import {
-    generateItem,
-    type,
-} from './utils';
-
-import {
-    base as baseURL,
-    path as basePath,
-    useragent as UA,
-} from './base';
+/**
+ * project dependencies
+ */
+import * as data  from './base';
+import * as enums from './enums';
+import * as types from './types';
+import * as util  from './utils';
 
 /**
  * Make a request to the Steam API
  * @hidden
  */
-const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
-    return new Bluebird((resolve, reject) => {
+const get = (options: types.HTTPRequestOptions): bluebird<types.RawItem> => {
+    return new bluebird((resolve, reject) => {
         request({
-            baseUrl: options.base || baseURL,
+            baseUrl: options.base || data.base,
             gzip: options.gzip || true,
             headers: {
-                'User-Agent': options.useragent || UA,
+                'User-Agent': options.useragent || data.useragent,
             },
             json: true,
             localAddress: options.address,
@@ -53,7 +37,7 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
             strictSSL: options.strictSSL || true,
             time: options.timings,
             timeout: options.timeout,
-            uri: options.path || basePath,
+            uri: options.path || data.path,
         }, (error, response, body) => {
             if (response && response.statusCode === 429) {
                 return reject(new Error('Steam API Rate Limit Exceeded!'));
@@ -83,7 +67,7 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
 
             return reject(new Error('Unknown Error!'));
         });
-    }) as Bluebird<RawItem>;
+    }) as bluebird<types.RawItem>;
 };
 
 /**
@@ -97,10 +81,10 @@ const get = (options: HTTPRequestOptions): Bluebird<RawItem> => {
  */
 export const getPrice = (
     name: string,
-    options: MarketOptions,
-    callback?: (error: Error, result: Item) => void,
-): Bluebird<Item> => {
-    const x = new Bluebird((resolve, reject) => {
+    options: types.MarketOptions,
+    callback?: (error: Error, result: types.Item) => void,
+): bluebird<types.Item> => {
+    const x = new bluebird((resolve, reject) => {
         const {
             address,
             base,
@@ -124,10 +108,10 @@ export const getPrice = (
         }
 
         if (typeof currency !== 'number') {
-            currency = Currency.USD;
+            currency = enums.Currency.USD;
         }
 
-        currency = currency || Currency.USD;
+        currency = currency || enums.Currency.USD;
 
         get({
             address,
@@ -148,7 +132,7 @@ export const getPrice = (
                 const item = body;
                 return resolve(item);
             } else {
-                const item = generateItem(name, body, currency);
+                const item = util.generateItem(name, body, currency);
                 return resolve(item);
             }
         })
@@ -157,9 +141,9 @@ export const getPrice = (
         });
     });
 
-    if (callback) return x.asCallback(callback) as Bluebird<Item>;
+    if (callback) return x.asCallback(callback) as bluebird<types.Item>;
 
-    return x as Bluebird<Item>;
+    return x as bluebird<types.Item>;
 };
 
 /**
@@ -173,10 +157,10 @@ export const getPrice = (
  */
 export const getPrices = (
     names: string[],
-    options: MarketOptions,
-    callback?: (error: Error, result: ItemArray) => void,
-): Bluebird<ItemArray> => {
-    const x = new Bluebird((resolve, reject) => {
+    options: types.MarketOptions,
+    callback?: (error: Error, result: types.ItemArray) => void,
+): bluebird<types.ItemArray> => {
+    const x = new bluebird((resolve, reject) => {
         const {
             address,
             base,
@@ -200,12 +184,12 @@ export const getPrices = (
         }
 
         if (typeof currency !== 'number') {
-            currency = Currency.USD;
+            currency = enums.Currency.USD;
         }
 
-        currency = currency || Currency.USD;
+        currency = currency || enums.Currency.USD;
 
-        const i: ItemArray = {
+        const i: types.ItemArray = {
             errors: [],
             results: [],
         };
@@ -229,11 +213,11 @@ export const getPrices = (
                 if (raw) {
                     i.results.push(body);
                 } else {
-                    const item = generateItem(name, body, currency);
+                    const item = util.generateItem(name, body, currency);
 
-                    if (type(item) === 'error') return reject(item);
+                    if (util.type(item) === 'error') return reject(item);
 
-                    i.results.push(item as Item);
+                    i.results.push(item as types.Item);
                 }
                 cb();
             })
@@ -255,9 +239,9 @@ export const getPrices = (
         });
     });
 
-    if (callback) return x.asCallback(callback) as Bluebird<ItemArray>;
+    if (callback) return x.asCallback(callback) as bluebird<types.ItemArray>;
 
-    return x as Bluebird<ItemArray>;
+    return x as bluebird<types.ItemArray>;
 };
 
 /**
@@ -317,7 +301,7 @@ export class Market {
      * All the settings in one object
      * @hidden
      */
-    private settings: MarketOptions;
+    private settings: types.MarketOptions;
 
     /**
      * Create the API
@@ -325,21 +309,21 @@ export class Market {
      * @param {Object} options - Options
      *
      */
-    constructor(options: MarketOptions) {
+    constructor(options: types.MarketOptions) {
         if (typeof options !== 'object') throw new Error('Invalid options passed to constructor!');
 
         this.address   = options.address;
         this.appid     = options.id;
-        this.base      = options.base      || baseURL;
+        this.base      = options.base      || data.base;
         this.country   = options.country;
-        this.currency  = options.currency  || Currency.USD;
+        this.currency  = options.currency  || enums.Currency.USD;
         this.gzip      = options.gzip      || true;
-        this.path      = options.path      || basePath;
+        this.path      = options.path      || data.path;
         this.raw       = options.raw       || false;
         this.strictSSL = options.strictSSL || true;
         this.timeout   = options.timeout;
         this.timings   = options.timings   || false;
-        this.useragent = options.useragent || UA;
+        this.useragent = options.useragent || data.useragent;
 
         this.settings = {
             address:   this.address,
@@ -368,7 +352,7 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options?: OverwriteMarketOptions, callback?: (error: Error, result: Item) => void): Bluebird<Item> {
+    public getPrice(name: string, options?: types.OverwriteMarketOptions, callback?: (error: Error, result: types.Item) => void): bluebird<types.Item> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -390,7 +374,7 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options?: OverwriteMarketOptions, callback?: (error: Error, result: ItemArray) => void): Bluebird<ItemArray> {
+    public getPrices(names: string[], options?: types.OverwriteMarketOptions, callback?: (error: Error, result: types.ItemArray) => void): bluebird<types.ItemArray> {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -404,12 +388,12 @@ export class Market {
     }
 }
 
-export {
-    Application,
-    CleanItem,
-    Currency,
-    ItemArray,
-    ItemError,
-    MarketOptions,
-    RawItem,
-};
+/**
+ * @deprecated since version >= 2.0.0
+ */
+export const Application = enums.Application;
+
+/**
+ * @deprecated since version >= 2.0.0
+ */
+export const Currency    = enums.Currency;
