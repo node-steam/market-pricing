@@ -77,9 +77,12 @@
 				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing
 </code></pre><h2 id="usage-">Usage:</h2>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {
-    Market,
     Currency,
     Application,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/data'</span>;
+
+<span class="hljs-keyword">import</span> {
+    Market,
     getPrice,
     getPrices,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/market-pricing'</span>;
@@ -97,12 +100,12 @@
 				<h4 id="-options-id-number-"><code>Options.id: number</code></h4>
 				<blockquote>
 					<p>Application ID of the game you want to query skin/s for</p>
-					<p>We provide a <strong><a href="src/enums.ts#L412-L453">enum</a></strong> for the most common used games.</p>
+					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/application.ts">enum</a></strong> for the most common used games.</p>
 				</blockquote>
 				<h4 id="-options-currency-number-"><code>Options.currency: number</code></h4>
 				<blockquote>
 					<p>Optional currency integer</p>
-					<p>We provide a <strong><a href="src/enums.ts#L1-L134">enum</a></strong>  for all available currencies</p>
+					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/currency/base.ts">enum</a></strong>  for all available currencies</p>
 					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-number">1</span>
 </code></pre>
 				</blockquote>
@@ -333,18 +336,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="enums/application.html" class="tsd-kind-icon">Application</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="enums/currency.html" class="tsd-kind-icon">Currency</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-private tsd-is-external">
-						<a href="enums/currencysign.html" class="tsd-kind-icon">Currency<wbr>Sign</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-private tsd-is-external">
-						<a href="enums/currencytype.html" class="tsd-kind-icon">Currency<wbr>Type</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/market.html" class="tsd-kind-icon">Market</a>
 					</li>
