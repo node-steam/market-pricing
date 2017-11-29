@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@node-steam/data": "1.1.0",
     "@types/async": "^2.0.45",
     "@types/bluebird": "^3.5.18",
     "@types/form-data": "2.2.1",

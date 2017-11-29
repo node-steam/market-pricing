@@ -87,17 +87,17 @@ export interface HTTPRequestOptions {
 export interface Price {
     /**
      * Type of currency
-     * @see {@link CurrencyType}
+     * @see {@link https://node-steam.github.io/data/enums/currencytype.html CurrencyType}
      */
     type: string;
     /**
      * [ISO-4217 Currency code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-     * @see {@link Currency}
+     * @see {@link https://node-steam.github.io/data/enums/currency.html Currency}
      */
     code: string;
     /**
      * [Currency symbol](https://en.wikipedia.org/wiki/Currency_symbol#List_of_presently-circulating_currency_symbols)
-     * @see {@link CurrencySign}
+     * @see {@link https://node-steam.github.io/data/enums/currencysign.html CurrencySign}
      */
     sign: string;
     /**

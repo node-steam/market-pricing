@@ -20,9 +20,12 @@ yarn add @node-steam/market-pricing
 
 ```javascript
 import {
-    Market,
     Currency,
     Application,
+} from '@node-steam/data';
+
+import {
+    Market,
     getPrice,
     getPrices,
 } from '@node-steam/market-pricing';
@@ -40,12 +43,12 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 #### `Options.id: number`
 > Application ID of the game you want to query skin/s for
 >
-> We provide a **[enum](src/enums.ts#L412-L453)** for the most common used games.
+> We provide a **[enum](https://github.com/node-steam/data/blob/master/src/application.ts)** for the most common used games.
 
 #### `Options.currency: number`
 > Optional currency integer
 >
-> We provide a **[enum](src/enums.ts#L1-L134)**  for all available currencies
+> We provide a **[enum](https://github.com/node-steam/data/blob/master/src/currency/base.ts)**  for all available currencies
 > ```js
 > default = 1
 > ```

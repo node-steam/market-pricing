@@ -44,6 +44,10 @@
   dependencies:
     arrify "^1.0.1"
 
+"@node-steam/data@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@node-steam/data/-/data-1.1.0.tgz#302b5876e5243a31426b874bdb0db50f0faf75b4"
+
 "@types/async@^2.0.45":
   version "2.0.45"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.45.tgz#0cfe971d7ed5542695740338e0455c91078a0e83"

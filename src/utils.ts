@@ -1,7 +1,11 @@
 /**
+ * npm dependencies
+ */
+import * as enums from '@node-steam/data';
+
+/**
  * project dependencies
  */
-import * as enums from './enums';
 import * as types from './types';
 
 /**

@@ -1,6 +1,7 @@
 /**
  * npm dependencies
  */
+import * as enums    from '@node-steam/data';
 import * as async    from 'async';
 import * as bluebird from 'bluebird';
 import * as request  from 'request';
@@ -9,7 +10,6 @@ import * as request  from 'request';
  * project dependencies
  */
 import * as data  from './base';
-import * as enums from './enums';
 import * as types from './types';
 import * as util  from './utils';
 
@@ -53,14 +53,17 @@ const get = (options: types.HTTPRequestOptions): bluebird<types.RawItem> => {
                     };
                 }
                 return resolve(result);
-            } else if (error && error.message === 'ETIMEDOUT') {
-                return reject(new Error('Connection Timed Out!'));
-            } else if (error && error.message === 'ESOCKETTIMEDOUT') {
-                return reject(new Error('Socket Timed Out!'));
-            } else if (error && error.message === 'ECONNRESET') {
-                return reject(new Error('Connection Was Reset!'));
             } else if (error) {
-                return reject(error);
+                switch (error.message) {
+                  case 'ETIMEDOUT':
+                    return reject(new Error('Connection Timed Out!'));
+                  case 'ESOCKETTIMEDOUT':
+                    return reject(new Error('Socket Timed Out!'));
+                  case 'ECONNRESET':
+                    return reject(new Error('Connection Was Reset!'));
+                  default:
+                    return reject(error);
+                }
             } else if (response) {
                 return reject(new Error(`Unknown Error! Status: ${response.statusCode}`));
             }
@@ -389,11 +392,11 @@ export class Market {
 }
 
 /**
- * @deprecated since version >= 2.0.0
+ * @deprecated since version >= 1.3.0
  */
-export const Application = enums.Application;
+export { Application } from '@node-steam/data';
 
 /**
- * @deprecated since version >= 2.0.0
+ * @deprecated since version >= 1.3.0
  */
-export const Currency    = enums.Currency;
+export { Currency }    from '@node-steam/data';
