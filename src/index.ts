@@ -11,8 +11,8 @@ import * as request  from 'request';
 /**
  * project dependencies
  */
-import * as data  from './base';
-import * as util  from './utils';
+import * as data from './base';
+import * as util from './utils';
 
 /**
  * Make a request to the Steam API
@@ -84,8 +84,8 @@ const get = (options: HTTPRequestOptions): bluebird<RawItem> => {
  *
  */
 function getPrice(
-    name: string,
-    options: MarketOptions,
+    name:      string,
+    options:   MarketOptions,
     callback?: Callback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
@@ -160,8 +160,8 @@ function getPrice(
  *
  */
 function getPrices(
-    names: string[],
-    options: MarketOptions,
+    names:     string[],
+    options:   MarketOptions,
     callback?: Callback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
@@ -359,14 +359,15 @@ export class Market {
     public getPrice(name: string, options: OverwriteMarketOptionsWithRaw): bluebird<RawItem>;
     public getPrice(name: string, options: OverwriteMarketOptionsWithRaw, callback: Callback<RawItem>): void;
 
-    public getPrice(name: string, options?: OverwriteMarketOptions): bluebird<CleanItem>;
     public getPrice(name: string, callback: Callback<CleanItem>): void;
-    public getPrice(name: string, options: OverwriteMarketOptions, callback: Callback<CleanItem>): void;
+    public getPrice(name: string, options:  OverwriteMarketOptions, callback: Callback<CleanItem>): void;
+
+    public getPrice(name: string, options?: OverwriteMarketOptions): bluebird<CleanItem>;
 
     public getPrice(
-        name: string,
-        options?: OverwriteMarketOptions | Callback<CleanItem> | Callback<RawItem>,
-        callback?: Callback<CleanItem> | Callback<RawItem>,
+        name:      string,
+        options?:  OverwriteMarketOptions | Callback<CleanItem> | Callback<RawItem>,
+        callback?: Callback<CleanItem>    | Callback<RawItem>,
     ) {
         if (typeof options === 'object') {
             const settings = {
@@ -389,17 +390,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options: OverwriteMarketOptionsWithRaw): bluebird<RawItemArray>;
-    public getPrices(names: string[], options: OverwriteMarketOptionsWithRaw, callback: Callback<RawItemArray>): void;
+    public getPrices(names: string[], options:  OverwriteMarketOptionsWithRaw): bluebird<RawItemArray>;
+    public getPrices(names: string[], options:  OverwriteMarketOptionsWithRaw, callback: Callback<RawItemArray>): void;
+
+    public getPrices(names: string[], callback: Callback<ItemArray>): void;
+    public getPrices(names: string[], options:  OverwriteMarketOptions, callback: Callback<ItemArray>): void;
 
     public getPrices(names: string[], options?: OverwriteMarketOptions): bluebird<ItemArray>;
-    public getPrices(names: string[], callback: Callback<ItemArray>): void;
-    public getPrices(names: string[], options: OverwriteMarketOptions, callback: Callback<ItemArray>): void;
 
     public getPrices(
-        names: string[],
-        options?: OverwriteMarketOptions | Callback<ItemArray> | Callback<RawItemArray>,
-        callback?: Callback<ItemArray> | Callback<RawItemArray>,
+        names:     string[],
+        options?:  OverwriteMarketOptions | Callback<ItemArray> | Callback<RawItemArray>,
+        callback?: Callback<ItemArray>    | Callback<RawItemArray>,
     ) {
         if (typeof options === 'object') {
             const settings = {
