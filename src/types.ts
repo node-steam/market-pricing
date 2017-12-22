@@ -1,7 +1,7 @@
 /**
  * Constructor options
  */
-export interface RawMarketOptions {
+interface StandardMarketOptions {
     /**
      * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
      */
@@ -48,25 +48,47 @@ export interface RawMarketOptions {
     path?: string;
 }
 
-export interface MarketOptions extends RawMarketOptions {
+interface MarketOptions extends StandardMarketOptions {
     /**
      * Application ID of the game to query skin/s for
      */
     id: number;
 }
 
-export interface OverwriteMarketOptions extends RawMarketOptions {
+interface OverwriteMarketOptions extends StandardMarketOptions {
     /**
      * Application ID of the game to query skin/s for
      */
     id?: number;
 }
 
+interface MarketOptionsWithRaw extends StandardMarketOptions {
+    /**
+     * Application ID of the game to query skin/s for
+     */
+    id: number;
+    /**
+     * Request the raw object
+     */
+    raw: true;
+}
+
+interface OverwriteMarketOptionsWithRaw extends StandardMarketOptions {
+    /**
+     * Application ID of the game to query skin/s for
+     */
+    id?: number;
+    /**
+     * Request the raw object
+     */
+    raw: true;
+}
+
 /**
  * Options for the raw HTTP request
  * @hidden
  */
-export interface HTTPRequestOptions {
+interface HTTPRequestOptions {
     address?:   string;
     base?:      string;
     country?:   string;
@@ -84,7 +106,7 @@ export interface HTTPRequestOptions {
 /**
  * Price object
  */
-export interface Price {
+interface Price {
     /**
      * Type of currency
      * @see {@link https://node-steam.github.io/data/enums/currencytype.html CurrencyType}
@@ -113,7 +135,7 @@ export interface Price {
 /**
  * Request timings object
  */
-export interface Timing {
+interface Timing {
     start: number;
     timestamps: {
         socket: number;
@@ -135,7 +157,7 @@ export interface Timing {
 /**
  * Clean item object
  */
-export interface CleanItem {
+interface CleanItem {
     /**
      * Market hash name of the skin
      */
@@ -157,7 +179,7 @@ export interface CleanItem {
 /**
  * Raw item object
  */
-export interface RawItem {
+interface RawItem {
     /**
      * Lowest price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
@@ -181,14 +203,9 @@ export interface RawItem {
 }
 
 /**
- * Item object
- */
-export type Item = CleanItem | RawItem;
-
-/**
  * Thrown error when item was queried
  */
-export interface ItemError {
+interface ItemError {
     /**
      * Market hash name of the skin
      */
@@ -202,7 +219,7 @@ export interface ItemError {
 /**
  * Object with arrays of item objects and/or errors
  */
-export interface ItemArray {
+interface ItemArray {
     /**
      * Array of thrown errors
      */
@@ -210,5 +227,21 @@ export interface ItemArray {
     /**
      * Array of item objects
      */
-    results: Item[];
+    results: CleanItem[];
 }
+
+/**
+ * Object with arrays of raw item objects and/or errors
+ */
+interface RawItemArray {
+    /**
+     * Array of thrown errors
+     */
+    errors: ItemError[];
+    /**
+     * Array of item objects
+     */
+    results: RawItem[];
+}
+
+type Callback<T> = (error: Error, result: T) => void;

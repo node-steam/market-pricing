@@ -4,11 +4,6 @@
 import * as enums from '@node-steam/data';
 
 /**
- * project dependencies
- */
-import * as types from './types';
-
-/**
  * Determines the type of a variable.
  * Useful for e.g. checking if a object is an error
  * @hidden
@@ -74,8 +69,8 @@ const determineCurrencySign = (currency: number): string => {
  * Generates the cleaned price item
  * @hidden
  */
-export const generateItem = (name: string, response: types.RawItem, currency: number): types.CleanItem | Error => {
-    const result: types.CleanItem = {
+export const generateItem = (name: string, response: RawItem, currency: number): CleanItem | Error => {
+    const result: CleanItem = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),

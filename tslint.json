@@ -7,6 +7,7 @@
 
   },
   "rules": {
+    "no-reference": false,
     "max-line-length": false,
     "interface-name": [true, "never-prefix"],
     "import-spacing": false,

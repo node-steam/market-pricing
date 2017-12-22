@@ -1,3 +1,5 @@
+/// <reference path="types.ts" />
+
 /**
  * npm dependencies
  */
@@ -10,14 +12,13 @@ import * as request  from 'request';
  * project dependencies
  */
 import * as data  from './base';
-import * as types from './types';
 import * as util  from './utils';
 
 /**
  * Make a request to the Steam API
  * @hidden
  */
-const get = (options: types.HTTPRequestOptions): bluebird<types.RawItem> => {
+const get = (options: HTTPRequestOptions): bluebird<RawItem> => {
     return new bluebird((resolve, reject) => {
         request({
             baseUrl: options.base || data.base,
@@ -70,7 +71,7 @@ const get = (options: types.HTTPRequestOptions): bluebird<types.RawItem> => {
 
             return reject(new Error('Unknown Error!'));
         });
-    }) as bluebird<types.RawItem>;
+    }) as bluebird<RawItem>;
 };
 
 /**
@@ -82,11 +83,11 @@ const get = (options: types.HTTPRequestOptions): bluebird<types.RawItem> => {
  * @return {Promise<Item>}
  *
  */
-export const getPrice = (
+function getPrice(
     name: string,
-    options: types.MarketOptions,
-    callback?: (error: Error, result: types.Item) => void,
-): bluebird<types.Item> => {
+    options: MarketOptions,
+    callback?: Callback<any>,
+) {
     const x = new bluebird((resolve, reject) => {
         const {
             address,
@@ -144,10 +145,10 @@ export const getPrice = (
         });
     });
 
-    if (callback) return x.asCallback(callback) as bluebird<types.Item>;
+    if (callback) return x.asCallback(callback);
 
-    return x as bluebird<types.Item>;
-};
+    return x;
+}
 
 /**
  * Retrieve price for a array of items.
@@ -158,11 +159,11 @@ export const getPrice = (
  * @return {Promise<ItemArray>}
  *
  */
-export const getPrices = (
+function getPrices(
     names: string[],
-    options: types.MarketOptions,
-    callback?: (error: Error, result: types.ItemArray) => void,
-): bluebird<types.ItemArray> => {
+    options: MarketOptions,
+    callback?: Callback<any>,
+) {
     const x = new bluebird((resolve, reject) => {
         const {
             address,
@@ -192,7 +193,7 @@ export const getPrices = (
 
         currency = currency || enums.Currency.USD;
 
-        const i: types.ItemArray = {
+        const i: any = {
             errors: [],
             results: [],
         };
@@ -214,13 +215,13 @@ export const getPrices = (
             })
             .then((body) => {
                 if (raw) {
-                    i.results.push(body);
+                    i.results.push(body as RawItem);
                 } else {
                     const item = util.generateItem(name, body, currency);
 
                     if (util.type(item) === 'error') return reject(item);
 
-                    i.results.push(item as types.Item);
+                    i.results.push(item as CleanItem);
                 }
                 cb();
             })
@@ -242,10 +243,10 @@ export const getPrices = (
         });
     });
 
-    if (callback) return x.asCallback(callback) as bluebird<types.ItemArray>;
+    if (callback) return x.asCallback(callback);
 
-    return x as bluebird<types.ItemArray>;
-};
+    return x;
+}
 
 /**
  * Market Class.
@@ -304,7 +305,7 @@ export class Market {
      * All the settings in one object
      * @hidden
      */
-    private settings: types.MarketOptions;
+    private settings: MarketOptions;
 
     /**
      * Create the API
@@ -312,7 +313,7 @@ export class Market {
      * @param {Object} options - Options
      *
      */
-    constructor(options: types.MarketOptions) {
+    constructor(options: MarketOptions) {
         if (typeof options !== 'object') throw new Error('Invalid options passed to constructor!');
 
         this.address   = options.address;
@@ -355,7 +356,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options?: types.OverwriteMarketOptions, callback?: (error: Error, result: types.Item) => void): bluebird<types.Item> {
+    public getPrice(name: string, options: OverwriteMarketOptionsWithRaw): bluebird<RawItem>;
+    public getPrice(name: string, options: OverwriteMarketOptionsWithRaw, callback: Callback<RawItem>): void;
+
+    public getPrice(name: string, options?: OverwriteMarketOptions): bluebird<CleanItem>;
+    public getPrice(name: string, callback: Callback<CleanItem>): void;
+    public getPrice(name: string, options: OverwriteMarketOptions, callback: Callback<CleanItem>): void;
+
+    public getPrice(
+        name: string,
+        options?: OverwriteMarketOptions | Callback<CleanItem> | Callback<RawItem>,
+        callback?: Callback<CleanItem> | Callback<RawItem>,
+    ) {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
@@ -377,7 +389,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options?: types.OverwriteMarketOptions, callback?: (error: Error, result: types.ItemArray) => void): bluebird<types.ItemArray> {
+    public getPrices(names: string[], options: OverwriteMarketOptionsWithRaw): bluebird<RawItemArray>;
+    public getPrices(names: string[], options: OverwriteMarketOptionsWithRaw, callback: Callback<RawItemArray>): void;
+
+    public getPrices(names: string[], options?: OverwriteMarketOptions): bluebird<ItemArray>;
+    public getPrices(names: string[], callback: Callback<ItemArray>): void;
+    public getPrices(names: string[], options: OverwriteMarketOptions, callback: Callback<ItemArray>): void;
+
+    public getPrices(
+        names: string[],
+        options?: OverwriteMarketOptions | Callback<ItemArray> | Callback<RawItemArray>,
+        callback?: Callback<ItemArray> | Callback<RawItemArray>,
+    ) {
         if (typeof options === 'object') {
             const settings = {
                 ...this.settings,
