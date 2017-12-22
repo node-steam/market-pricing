@@ -4,9 +4,12 @@ import test from 'ava';
 import nock from 'nock';
 
 import {
-    Market,
     Currency,
     Application,
+} from '@node-steam/data';
+
+import {
+    Market,
 } from 'lib';
 
 import {

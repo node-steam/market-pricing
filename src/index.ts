@@ -413,13 +413,3 @@ export class Market {
         return getPrices(names, this.settings, callback);
     }
 }
-
-/**
- * @deprecated since version >= 1.3.0
- */
-export { Application } from '@node-steam/data';
-
-/**
- * @deprecated since version >= 1.3.0
- */
-export { Currency }    from '@node-steam/data';
