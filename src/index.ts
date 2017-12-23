@@ -18,7 +18,7 @@ import * as util from './utils';
  * Make a request to the Steam API
  * @hidden
  */
-const get = (options: HTTPRequestOptions): bluebird<RawItem> => {
+const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> => {
     return new bluebird((resolve, reject) => {
         request({
             baseUrl: options.base || data.base,
@@ -71,7 +71,7 @@ const get = (options: HTTPRequestOptions): bluebird<RawItem> => {
 
             return reject(new Error('Unknown Error!'));
         });
-    }) as bluebird<RawItem>;
+    }) as bluebird<NodeSteamRawItem>;
 };
 
 /**
@@ -85,8 +85,8 @@ const get = (options: HTTPRequestOptions): bluebird<RawItem> => {
  */
 function getPrice(
     name:      string,
-    options:   MarketOptions,
-    callback?: Callback<any>,
+    options:   NodeSteamMarketOptions,
+    callback?: NodeSteamCallback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
         const {
@@ -159,8 +159,8 @@ function getPrice(
  */
 function getPrices(
     names:     string[],
-    options:   MarketOptions,
-    callback?: Callback<any>,
+    options:   NodeSteamMarketOptions,
+    callback?: NodeSteamCallback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
         const {
@@ -211,13 +211,13 @@ function getPrices(
             })
             .then((body) => {
                 if (raw) {
-                    i.results.push(body as RawItem);
+                    i.results.push(body as NodeSteamRawItem);
                 } else {
                     const item = util.generateItem(name, body, currency || enums.Currency.USD);
 
                     if (util.type(item) === 'error') return reject(item);
 
-                    i.results.push(item as CleanItem);
+                    i.results.push(item as NodeSteamCleanItem);
                 }
                 cb();
             })
@@ -301,7 +301,7 @@ export class Market {
      * All the settings in one object
      * @hidden
      */
-    private settings: MarketOptions;
+    private settings: NodeSteamMarketOptions;
 
     /**
      * Create the API
@@ -309,7 +309,7 @@ export class Market {
      * @param {Object} options - Options
      *
      */
-    constructor(options: MarketOptions) {
+    constructor(options: NodeSteamMarketOptions) {
         if (typeof options !== 'object') throw new Error('Invalid options passed to constructor!');
 
         this.address   = options.address;
@@ -352,18 +352,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options: OverwriteMarketOptionsWithRaw): bluebird<RawItem>;
-    public getPrice(name: string, options: OverwriteMarketOptionsWithRaw, callback: Callback<RawItem>): void;
+    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw): bluebird<NodeSteamRawItem>;
+    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItem>): void;
 
-    public getPrice(name: string, callback: Callback<CleanItem>): void;
-    public getPrice(name: string, options:  OverwriteMarketOptions, callback: Callback<CleanItem>): void;
+    public getPrice(name: string, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
+    public getPrice(name: string, options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
 
-    public getPrice(name: string, options?: OverwriteMarketOptions): bluebird<CleanItem>;
+    public getPrice(name: string, options?: NodeSteamOverwriteMarketOptions): bluebird<NodeSteamCleanItem>;
 
     public getPrice(
         name:      string,
-        options?:  OverwriteMarketOptions | Callback<CleanItem> | Callback<RawItem>,
-        callback?: Callback<CleanItem>    | Callback<RawItem>,
+        options?:  NodeSteamOverwriteMarketOptions | NodeSteamCallback<NodeSteamCleanItem> | NodeSteamCallback<NodeSteamRawItem>,
+        callback?: NodeSteamCallback<NodeSteamCleanItem>    | NodeSteamCallback<NodeSteamRawItem>,
     ) {
         if (typeof options === 'object') {
             const settings = {
@@ -386,18 +386,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options:  OverwriteMarketOptionsWithRaw): bluebird<RawItemArray>;
-    public getPrices(names: string[], options:  OverwriteMarketOptionsWithRaw, callback: Callback<RawItemArray>): void;
+    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw): bluebird<NodeSteamRawItemArray>;
+    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItemArray>): void;
 
-    public getPrices(names: string[], callback: Callback<ItemArray>): void;
-    public getPrices(names: string[], options:  OverwriteMarketOptions, callback: Callback<ItemArray>): void;
+    public getPrices(names: string[], callback: NodeSteamCallback<NodeSteamItemArray>): void;
+    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamItemArray>): void;
 
-    public getPrices(names: string[], options?: OverwriteMarketOptions): bluebird<ItemArray>;
+    public getPrices(names: string[], options?: NodeSteamOverwriteMarketOptions): bluebird<NodeSteamItemArray>;
 
     public getPrices(
         names:     string[],
-        options?:  OverwriteMarketOptions | Callback<ItemArray> | Callback<RawItemArray>,
-        callback?: Callback<ItemArray>    | Callback<RawItemArray>,
+        options?:  NodeSteamOverwriteMarketOptions | NodeSteamCallback<NodeSteamItemArray> | NodeSteamCallback<NodeSteamRawItemArray>,
+        callback?: NodeSteamCallback<NodeSteamItemArray> | NodeSteamCallback<NodeSteamRawItemArray>,
     ) {
         if (typeof options === 'object') {
             const settings = {

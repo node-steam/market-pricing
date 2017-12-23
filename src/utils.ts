@@ -69,8 +69,8 @@ const determineCurrencySign = (currency: number): string => {
  * Generates the cleaned price item
  * @hidden
  */
-export const generateItem = (name: string, response: RawItem, currency: number): CleanItem | Error => {
-    const result: CleanItem = {
+export const generateItem = (name: string, response: NodeSteamRawItem, currency: number): NodeSteamCleanItem | Error => {
+    const result: NodeSteamCleanItem = {
         id: name,
         price: {
             code: determineCurrencyCode(currency),
