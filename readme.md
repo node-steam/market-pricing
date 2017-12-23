@@ -26,8 +26,6 @@ import {
 
 import {
     Market,
-    getPrice,
-    getPrices,
 } from '@node-steam/market-pricing';
 
 const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
@@ -113,10 +111,6 @@ const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 ```javascript
 const x = await API.getPrice('★ Bayonet');
 
-// or
-
-const x = await getPrice('★ Bayonet', { id: Application.CSGO, currency: Currency.EUR })
-
 > {
     id: '★ Bayonet',
     price: {
@@ -135,10 +129,6 @@ const x = await getPrice('★ Bayonet', { id: Application.CSGO, currency: Curren
 
 ```javascript
 const x = await API.getPrices([ '★ Falchion Knife', '★ Karambit' ]);
-
-// or
-
-const x = await getPrices([ '★ Falchion Knife', '★ Karambit' ], { id: Application.CSGO, currency: Currency.EUR })
 
 > [
     {

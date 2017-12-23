@@ -83,8 +83,6 @@
 
 <span class="hljs-keyword">import</span> {
     Market,
-    getPrice,
-    getPrices,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/market-pricing'</span>;
 
 <span class="hljs-keyword">const</span> API = <span class="hljs-keyword">new</span> Market({ <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR });
@@ -171,10 +169,6 @@
 				</blockquote>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
 
-<span class="hljs-comment">// or</span>
-
-<span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> getPrice(<span class="hljs-string">'★ Bayonet'</span>, { <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR })
-
 &gt; {
     <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Bayonet'</span>,
     <span class="hljs-attr">price</span>: {
@@ -192,10 +186,6 @@
 					<p>Get prices for a array of skins</p>
 				</blockquote>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ]);
-
-<span class="hljs-comment">// or</span>
-
-<span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ], { <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR })
 
 &gt; [
     {
@@ -339,40 +329,49 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/market.html" class="tsd-kind-icon">Market</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/cleanitem.html" class="tsd-kind-icon">Clean<wbr>Item</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/itemarray.html" class="tsd-kind-icon">Item<wbr>Array</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/itemerror.html" class="tsd-kind-icon">Item<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/marketoptions.html" class="tsd-kind-icon">Market<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="interfaces/marketoptionswithraw.html" class="tsd-kind-icon">Market<wbr>Options<wbr>With<wbr>Raw</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/overwritemarketoptions.html" class="tsd-kind-icon">Overwrite<wbr>Market<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="interfaces/overwritemarketoptionswithraw.html" class="tsd-kind-icon">Overwrite<wbr>Market<wbr>Options<wbr>With<wbr>Raw</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/price.html" class="tsd-kind-icon">Price</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/rawitem.html" class="tsd-kind-icon">Raw<wbr>Item</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/rawmarketoptions.html" class="tsd-kind-icon">Raw<wbr>Market<wbr>Options</a>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="interfaces/rawitemarray.html" class="tsd-kind-icon">Raw<wbr>Item<wbr>Array</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="interfaces/standardmarketoptions.html" class="tsd-kind-icon">Standard<wbr>Market<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/timing.html" class="tsd-kind-icon">Timing</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="globals.html#item" class="tsd-kind-icon">Item</a>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#callback" class="tsd-kind-icon">Callback</a>
 					</li>
-					<li class=" tsd-kind-function">
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#getprice" class="tsd-kind-icon">get<wbr>Price</a>
 					</li>
-					<li class=" tsd-kind-function">
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#getprices" class="tsd-kind-icon">get<wbr>Prices</a>
 					</li>
 				</ul>
