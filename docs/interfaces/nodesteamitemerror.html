@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RawItemArray | N|Steam Market-Pricing</title>
+	<title>NodeSteamItemError | N|Steam Market-Pricing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="rawitemarray.html">RawItemArray</a>
+					<a href="nodesteamitemerror.html">NodeSteamItemError</a>
 				</li>
 			</ul>
-			<h1>Interface RawItemArray</h1>
+			<h1>Interface NodeSteamItemError</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Object with arrays of raw item objects and/or errors</p>
+						<p>Thrown error when item was queried</p>
 					</div>
 				</div>
 			</section>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">RawItemArray</span>
+						<span class="target">NodeSteamItemError</span>
 					</li>
 				</ul>
 			</section>
@@ -88,8 +88,8 @@
 						<section class="tsd-index-section tsd-is-external tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported"><a href="rawitemarray.html#errors" class="tsd-kind-icon">errors</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported"><a href="rawitemarray.html#results" class="tsd-kind-icon">results</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported"><a href="nodesteamitemerror.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported"><a href="nodesteamitemerror.html#id" class="tsd-kind-icon">id</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,32 +98,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported">
-					<a name="errors" class="tsd-anchor"></a>
-					<h3>errors</h3>
-					<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <a href="itemerror.html" class="tsd-signature-type">ItemError</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L240">types.ts:240</a></li>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L208">types.ts:208</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Array of thrown errors</p>
+							<p>Error object</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported">
-					<a name="results" class="tsd-anchor"></a>
-					<h3>results</h3>
-					<div class="tsd-signature tsd-kind-icon">results<span class="tsd-signature-symbol">:</span> <a href="rawitem.html" class="tsd-signature-type">RawItem</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L244">types.ts:244</a></li>
+							<li>Defined in <a href="https://github.com/node-steam/market-pricing/blob/master/src/types.ts#L204">types.ts:204</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Array of item objects</p>
+							<p>Market hash name of the skin</p>
 						</div>
 					</div>
 				</section>
@@ -143,55 +143,55 @@
 						<a href="../classes/market.html" class="tsd-kind-icon">Market</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="cleanitem.html" class="tsd-kind-icon">Clean<wbr>Item</a>
+						<a href="nodesteamcleanitem.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Clean<wbr>Item</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="itemarray.html" class="tsd-kind-icon">Item<wbr>Array</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="itemerror.html" class="tsd-kind-icon">Item<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="marketoptions.html" class="tsd-kind-icon">Market<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="marketoptionswithraw.html" class="tsd-kind-icon">Market<wbr>Options<wbr>With<wbr>Raw</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="overwritemarketoptions.html" class="tsd-kind-icon">Overwrite<wbr>Market<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="overwritemarketoptionswithraw.html" class="tsd-kind-icon">Overwrite<wbr>Market<wbr>Options<wbr>With<wbr>Raw</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="price.html" class="tsd-kind-icon">Price</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="rawitem.html" class="tsd-kind-icon">Raw<wbr>Item</a>
+						<a href="nodesteamitemarray.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Item<wbr>Array</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="rawitemarray.html" class="tsd-kind-icon">Raw<wbr>Item<wbr>Array</a>
+						<a href="nodesteamitemerror.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Item<wbr>Error</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported">
-								<a href="rawitemarray.html#errors" class="tsd-kind-icon">errors</a>
+								<a href="nodesteamitemerror.html#error" class="tsd-kind-icon">error</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external tsd-is-not-exported">
-								<a href="rawitemarray.html#results" class="tsd-kind-icon">results</a>
+								<a href="nodesteamitemerror.html#id" class="tsd-kind-icon">id</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="standardmarketoptions.html" class="tsd-kind-icon">Standard<wbr>Market<wbr>Options</a>
+						<a href="nodesteammarketoptions.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Market<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
-						<a href="timing.html" class="tsd-kind-icon">Timing</a>
+						<a href="nodesteammarketoptionswithraw.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Market<wbr>Options<wbr>With<wbr>Raw</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamoverwritemarketoptions.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Overwrite<wbr>Market<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamoverwritemarketoptionswithraw.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Overwrite<wbr>Market<wbr>Options<wbr>With<wbr>Raw</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamprice.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Price</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamrawitem.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Raw<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamrawitemarray.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Raw<wbr>Item<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamstandardmarketoptions.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Standard<wbr>Market<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
+						<a href="nodesteamtiming.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Timing</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#callback" class="tsd-kind-icon">Callback</a>
+						<a href="../globals.html#nodesteamcallback" class="tsd-kind-icon">Node<wbr>Steam<wbr>Callback</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="../globals.html#getprice" class="tsd-kind-icon">get<wbr>Price</a>
