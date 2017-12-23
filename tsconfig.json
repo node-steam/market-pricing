@@ -31,7 +31,7 @@
     "noUnusedParameters": true,
     "outDir": "lib",
     "pretty": true,
-    "removeComments": true,
+    "removeComments": false,
     "sourceMap": true,
     "strict": true,
     "target": "es2015",
