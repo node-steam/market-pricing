@@ -115,8 +115,6 @@ function getPrice(
             currency = enums.Currency.USD;
         }
 
-        currency = currency || enums.Currency.USD;
-
         get({
             address,
             base,
@@ -136,7 +134,7 @@ function getPrice(
                 const item = body;
                 return resolve(item);
             } else {
-                const item = util.generateItem(name, body, currency);
+                const item = util.generateItem(name, body, currency || enums.Currency.USD);
                 return resolve(item);
             }
         })
@@ -191,8 +189,6 @@ function getPrices(
             currency = enums.Currency.USD;
         }
 
-        currency = currency || enums.Currency.USD;
-
         const i: any = {
             errors: [],
             results: [],
@@ -203,7 +199,7 @@ function getPrices(
                 address,
                 base,
                 country,
-                currency,
+                currency: currency || enums.Currency.USD,
                 gzip,
                 id,
                 name,
@@ -217,7 +213,7 @@ function getPrices(
                 if (raw) {
                     i.results.push(body as RawItem);
                 } else {
-                    const item = util.generateItem(name, body, currency);
+                    const item = util.generateItem(name, body, currency || enums.Currency.USD);
 
                     if (util.type(item) === 'error') return reject(item);
 

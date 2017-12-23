@@ -1,27 +1,45 @@
 {
+  "compileOnSave": true,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
     "baseUrl": "src/",
+    "charset": "utf8",
     "declaration": true,
     "declarationDir": "lib",
+    "diagnostics": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "locale": "en",
     "module": "commonjs",
     "moduleResolution": "node",
+    "newLine": "lf",
+    "noEmit": false,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noImplicitUseStrict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "lib",
     "pretty": true,
     "removeComments": true,
-    "sourceMap": false,
-    "target": "es5",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015",
     "lib": [
         "es2015",
         "es2016",
-        "es2017"
+        "es2017",
+        "esnext"
     ],
     "types": [
       "node"
