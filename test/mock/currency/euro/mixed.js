@@ -10,6 +10,7 @@ import {
 
 import {
     Market,
+    error,
 } from 'lib';
 
 import {
@@ -76,10 +77,12 @@ test('Multiple Mixed Items That Do And Do Not Exist', async (t) => {
     const should = {
         errors: [
             {
+                code: error.codes.ITEM_NOT_FOUND,
                 error: 'Item Not Found! Status: 500',
                 id: 'DoesNotExist500',
             },
             {
+                code: error.codes.ITEM_NOT_FOUND,
                 error: 'Item Not Found! Status: 404',
                 id: 'DoesNotExist404',
             },

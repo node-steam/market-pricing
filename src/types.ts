@@ -1,7 +1,7 @@
 /**
  * Constructor options
  */
-interface NodeSteamStandardMarketOptions {
+declare interface NodeSteamStandardMarketOptions {
     /**
      * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
      */
@@ -48,28 +48,28 @@ interface NodeSteamStandardMarketOptions {
     path?: string;
 }
 
-interface NodeSteamMarketOptions extends NodeSteamStandardMarketOptions {
+declare interface NodeSteamMarketOptions extends NodeSteamStandardMarketOptions {
     /**
      * Application ID of the game to query skin/s for
      */
     id: number;
 }
 
-interface NodeSteamOverwriteMarketOptions extends NodeSteamStandardMarketOptions {
+declare interface NodeSteamOverwriteMarketOptions extends NodeSteamStandardMarketOptions {
     /**
      * Application ID of the game to query skin/s for
      */
     id?: number;
 }
 
-interface NodeSteamMarketOptionsWithRaw extends NodeSteamMarketOptions {
+declare interface NodeSteamMarketOptionsWithRaw extends NodeSteamMarketOptions {
     /**
      * Request the raw object
      */
     raw: true;
 }
 
-interface NodeSteamOverwriteMarketOptionsWithRaw extends NodeSteamOverwriteMarketOptions {
+declare interface NodeSteamOverwriteMarketOptionsWithRaw extends NodeSteamOverwriteMarketOptions {
     /**
      * Request the raw object
      */
@@ -80,7 +80,7 @@ interface NodeSteamOverwriteMarketOptionsWithRaw extends NodeSteamOverwriteMarke
  * Options for the raw HTTP request
  * @hidden
  */
-interface NodeSteamHTTPRequestOptions {
+declare interface NodeSteamHTTPRequestOptions {
     address?:   string;
     base?:      string;
     country?:   string;
@@ -98,7 +98,7 @@ interface NodeSteamHTTPRequestOptions {
 /**
  * Price object
  */
-interface NodeSteamPrice {
+declare interface NodeSteamPrice {
     /**
      * Type of currency
      * @see {@link https://node-steam.github.io/data/enums/currencytype.html CurrencyType}
@@ -127,7 +127,7 @@ interface NodeSteamPrice {
 /**
  * Request timings object
  */
-interface NodeSteamTiming {
+declare interface NodeSteamTiming {
     start: number;
     timestamps: {
         socket: number;
@@ -149,7 +149,7 @@ interface NodeSteamTiming {
 /**
  * Clean item object
  */
-interface NodeSteamCleanItem {
+declare interface NodeSteamCleanItem {
     /**
      * Market hash name of the skin
      */
@@ -171,7 +171,7 @@ interface NodeSteamCleanItem {
 /**
  * Raw item object
  */
-interface NodeSteamRawItem {
+declare interface NodeSteamRawItem {
     /**
      * Lowest price on the [Steam Community Market](https://steamcommunity.com/market/)
      */
@@ -197,21 +197,25 @@ interface NodeSteamRawItem {
 /**
  * Thrown error when item was queried
  */
-interface NodeSteamItemError {
+declare interface NodeSteamItemError {
     /**
      * Market hash name of the skin
      */
     id: string;
     /**
-     * Error object
+     * Error message
      */
     error: string;
+    /**
+     * Error code
+     */
+    code: string;
 }
 
 /**
  * Object with arrays of item objects and/or errors
  */
-interface NodeSteamItemArray {
+declare interface NodeSteamItemArray {
     /**
      * Array of thrown errors
      */
@@ -225,7 +229,7 @@ interface NodeSteamItemArray {
 /**
  * Object with arrays of raw item objects and/or errors
  */
-interface NodeSteamRawItemArray {
+declare interface NodeSteamRawItemArray {
     /**
      * Array of thrown errors
      */
@@ -236,4 +240,4 @@ interface NodeSteamRawItemArray {
     results: NodeSteamRawItem[];
 }
 
-type NodeSteamCallback<T> = (error: Error, result: T) => void;
+declare type NodeSteamCallback<T> = (error: Error, result: T) => void;

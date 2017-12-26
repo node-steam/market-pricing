@@ -4,6 +4,14 @@
 import * as enums from '@node-steam/data';
 
 /**
+ * project dependencies
+ */
+import {
+    codes as code,
+    Exception,
+} from './error';
+
+/**
  * Determines the type of a variable.
  * Useful for e.g. checking if a object is an error
  * @hidden
@@ -102,6 +110,8 @@ export const generateItem = (name: string, response: NodeSteamRawItem, currency:
     if (response.timings) {
         result.timings = response.timings;
     }
+
+    if (!result.price.lowest && !result.price.median) return new Exception(code.ITEM_NO_DATA);
 
     return result;
 };

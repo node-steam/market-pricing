@@ -141,10 +141,17 @@ function getPrice(
                 return resolve(item);
             } else {
                 const item = util.generateItem(name, body, currency || enums.Currency.USD);
+
+                if (
+                    util.type(item) === 'error' ||
+                    item instanceof Exception ||
+                    item instanceof Error
+                ) return reject(item as Exception);
+
                 return resolve(item);
             }
         })
-        .catch((exception) => {
+        .catch((exception: Exception) => {
             return reject(exception);
         });
     });
@@ -221,18 +228,23 @@ function getPrices(
                 } else {
                     const item = util.generateItem(name, body, currency || enums.Currency.USD);
 
-                    if (util.type(item) === 'error') return reject(item);
+                    if (
+                        util.type(item) === 'error' ||
+                        item instanceof Exception ||
+                        item instanceof Error
+                    ) throw item as Exception;
 
                     i.results.push(item as NodeSteamCleanItem);
                 }
-                cb();
             })
             .catch((exception: Exception) => {
                 if (exception.code === code.RATELIMIT_EXCEEDED) {
                     return reject(exception);
                 }
 
-                i.errors.push({ id: name, error: exception.message });
+                i.errors.push({ id: name, error: exception.message, code: exception.code });
+            })
+            .finally(() => {
                 cb();
             });
         }, () => {
