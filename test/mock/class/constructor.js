@@ -10,5 +10,5 @@ test('Invalid Constructor', (t) => {
     const market = t.throws(() => {
         return new Market('null');
     });
-    t.deepEqual(market.message, 'Invalid options passed to constructor!');
+    t.deepEqual(market.message, 'Invalid Options Passed To Constructor!');
 });

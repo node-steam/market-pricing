@@ -11,8 +11,14 @@ import * as request  from 'request';
 /**
  * project dependencies
  */
-import * as data from './base';
-import * as util from './utils';
+import * as data  from './base';
+import * as error from './error';
+import * as util  from './utils';
+
+import {
+    codes as code,
+    Exception,
+} from './error';
 
 /**
  * Make a request to the Steam API
@@ -39,12 +45,12 @@ const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> =
             time: options.timings,
             timeout: options.timeout,
             uri: options.path || data.path,
-        }, (error, response, body) => {
+        }, (exception, response, body) => {
             if (response && response.statusCode === 429) {
-                return reject(new Error('Steam API Rate Limit Exceeded!'));
+                return reject(new Exception(code.RATELIMIT_EXCEEDED));
             } else if (response && response.statusCode === 500 || response && response.statusCode === 404) {
-                return reject(new Error(`Item Not Found! Status: ${response.statusCode}`));
-            } else if (!error && response.statusCode === 200) {
+                return reject(new Exception(code.ITEM_NOT_FOUND, response.statusCode));
+            } else if (!exception && response.statusCode === 200) {
                 const result = body;
                 if (options.timings) {
                     result.timings = {
@@ -54,22 +60,22 @@ const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> =
                     };
                 }
                 return resolve(result);
-            } else if (error) {
-                switch (error.message) {
+            } else if (exception) {
+                switch (exception.message) {
                   case 'ETIMEDOUT':
-                    return reject(new Error('Connection Timed Out!'));
+                    return reject(new Exception(code.CONNECTION_RESET));
                   case 'ESOCKETTIMEDOUT':
-                    return reject(new Error('Socket Timed Out!'));
+                    return reject(new Exception(code.SOCKET_TIMED_OUT));
                   case 'ECONNRESET':
-                    return reject(new Error('Connection Was Reset!'));
+                    return reject(new Exception(code.CONNECTION_RESET));
                   default:
-                    return reject(error);
+                    return reject(exception);
                 }
             } else if (response) {
-                return reject(new Error(`Unknown Error! Status: ${response.statusCode}`));
+                return reject(new Exception(code.UNKNOWN_RESPONSE, response.statusCode));
             }
 
-            return reject(new Error('Unknown Error!'));
+            return reject(new Exception(code.UNKNOWN));
         });
     }) as bluebird<NodeSteamRawItem>;
 };
@@ -108,7 +114,7 @@ function getPrice(
         } = options;
 
         if (!id || typeof id !== 'number') {
-            return reject(new Error('Invalid Application ID'));
+            return reject(new Exception(code.INVALID_APPLICATION_ID));
         }
 
         if (typeof currency !== 'number') {
@@ -138,8 +144,8 @@ function getPrice(
                 return resolve(item);
             }
         })
-        .catch((error) => {
-            return reject(error);
+        .catch((exception) => {
+            return reject(exception);
         });
     });
 
@@ -182,7 +188,7 @@ function getPrices(
         } = options;
 
         if (!id || typeof id !== 'number') {
-            return reject(new Error('Invalid Application ID'));
+            return reject(new Exception(code.INVALID_APPLICATION_ID));
         }
 
         if (typeof currency !== 'number') {
@@ -221,19 +227,19 @@ function getPrices(
                 }
                 cb();
             })
-            .catch((error) => {
-                if (error.message === 'Steam API Rate Limit Exceeded!') {
-                    return reject(error);
+            .catch((exception: Exception) => {
+                if (exception.code === code.RATELIMIT_EXCEEDED) {
+                    return reject(exception);
                 }
 
-                i.errors.push({ id: name, error: error.message });
+                i.errors.push({ id: name, error: exception.message });
                 cb();
             });
         }, () => {
             if (!i.results.length && i.errors.length) {
                 return reject(i.errors);
             } else if (!i.results.length && !i.errors.length) {
-                return reject(new Error('Something Really Weird Happened!'));
+                return reject(new Exception(code.UNKNOWN));
             }
             return resolve(i);
         });
@@ -310,7 +316,7 @@ export class Market {
      *
      */
     constructor(options: NodeSteamMarketOptions) {
-        if (typeof options !== 'object') throw new Error('Invalid options passed to constructor!');
+        if (typeof options !== 'object') throw new Exception(code.INVALID_OPTIONS);
 
         this.address   = options.address;
         this.appid     = options.id;
@@ -340,7 +346,7 @@ export class Market {
             useragent: this.useragent,
         };
 
-        if (typeof this.appid !== 'number') throw new Error('Invalid Application ID!');
+        if (typeof this.appid !== 'number') throw new Exception(code.INVALID_APPLICATION_ID);
     }
 
     /**
@@ -411,3 +417,5 @@ export class Market {
         return getPrices(names, this.settings, callback);
     }
 }
+
+export { error };
