@@ -11,6 +11,9 @@ export enum codes {
     UNKNOWN_RESPONSE =       'UNKNOWN_RESPONSE',
 }
 
+/**
+ * @hidden
+ */
 export enum messages {
     CONNECTION_RESET =       'Connection Was Reset!',
     CONNECTION_TIMED_OUT =   'Connection Timed Out!',
@@ -24,6 +27,9 @@ export enum messages {
     UNKNOWN_RESPONSE =       'Unknown Response! Status: %',
 }
 
+/**
+ * @hidden
+ */
 export class Exception extends Error {
     public code: string;
 
