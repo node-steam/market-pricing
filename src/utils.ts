@@ -27,7 +27,8 @@ export const type = (variable: any):
 'object'   |
 'string'   |
 'symbol' => {
-    return ({}).toString.call(variable).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+    const base: string = ({}).toString.call(variable);
+    return base.match(/\s([a-zA-Z]+)/)![1].toLowerCase() as any;
 };
 
 /**
