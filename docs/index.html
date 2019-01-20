@@ -74,9 +74,8 @@
 				<p><strong>Market-Pricing</strong> is a wrapper for the unofficial <strong>Steam Market Pricing API</strong> using Typescript and Promises.</p>
 				<h2 id="installation">Installation</h2>
 				<p>You can install <strong>Market-Pricing</strong> through the command line by using the following command:</p>
-				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing
-</code></pre><h2 id="usage-">Usage:</h2>
-				<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {
+				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing</code></pre><h2 id="usage-">Usage:</h2>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {
     Currency,
     Application,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/data'</span>;
@@ -85,89 +84,80 @@
     Market,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/market-pricing'</span>;
 
-<span class="hljs-keyword">const</span> API = <span class="hljs-keyword">new</span> Market({ <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR });
-</code></pre>
+<span class="hljs-keyword">const</span> API = <span class="hljs-keyword">new</span> Market({ <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR });</code></pre>
 				<h2 id="documentation-">Documentation:</h2>
 				<blockquote>
 					<p><strong><a href="https://node-steam.github.io/market-pricing/">Generated Documentation</a></strong></p>
 				</blockquote>
-				<h4 id="-new-market-options-"><code>new Market(Options)</code></h4>
+				<h4 id="new-market-options-"><code>new Market(Options)</code></h4>
 				<blockquote>
 					<p>API class</p>
 				</blockquote>
-				<h4 id="-options-id-number-"><code>Options.id: number</code></h4>
+				<h4 id="options-id-number"><code>Options.id: number</code></h4>
 				<blockquote>
 					<p>Application ID of the game you want to query skin/s for</p>
 					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/application.ts">enum</a></strong> for the most common used games.</p>
 				</blockquote>
-				<h4 id="-options-currency-number-"><code>Options.currency: number</code></h4>
+				<h4 id="options-currency-number"><code>Options.currency: number</code></h4>
 				<blockquote>
 					<p>Optional currency integer</p>
 					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/currency/base.ts">enum</a></strong>  for all available currencies</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-number">1</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-number">1</span></code></pre>
 				</blockquote>
-				<h4 id="-options-country-string-"><code>Options.country: string</code></h4>
+				<h4 id="options-country-string"><code>Options.country: string</code></h4>
 				<blockquote>
 					<p>Optional <strong><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166</a></strong> country code</p>
 				</blockquote>
-				<h4 id="-options-address-string-"><code>Options.address: string</code></h4>
+				<h4 id="options-address-string"><code>Options.address: string</code></h4>
 				<blockquote>
 					<p>Optional local interface to bind for network connections</p>
 				</blockquote>
-				<h4 id="-options-timeout-number-"><code>Options.timeout: number</code></h4>
+				<h4 id="options-timeout-number"><code>Options.timeout: number</code></h4>
 				<blockquote>
 					<p>Optional number of milliseconds before declaring the request as timed out</p>
 					<p>We recommend <strong><a href="https://github.com/zeit/ms">zeit/ms</a></strong> to easily convert human readable time to milliseconds.
 					(Or just use a calculator 😏)</p>
 				</blockquote>
-				<h4 id="-options-timings-boolean-"><code>Options.timings: boolean</code></h4>
+				<h4 id="options-timings-boolean"><code>Options.timings: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set request timings will be returned</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span></code></pre>
 				</blockquote>
-				<h4 id="-options-raw-boolean-"><code>Options.raw: boolean</code></h4>
+				<h4 id="options-raw-boolean"><code>Options.raw: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set all objects will be returned in their raw form when set to true</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span></code></pre>
 				</blockquote>
-				<h4 id="-options-base-string-"><code>Options.base: string</code></h4>
+				<h4 id="options-base-string"><code>Options.base: string</code></h4>
 				<blockquote>
 					<p>Optional - base domain</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'https://steamcommunity.com'</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'https://steamcommunity.com'</span></code></pre>
 				</blockquote>
-				<h4 id="-options-path-string-"><code>Options.path: string</code></h4>
+				<h4 id="options-path-string"><code>Options.path: string</code></h4>
 				<blockquote>
 					<p>Optional - base path</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'/market/priceoverview'</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'/market/priceoverview'</span></code></pre>
 				</blockquote>
-				<h4 id="-options-useragent-string-"><code>Options.useragent: string</code></h4>
+				<h4 id="options-useragent-string"><code>Options.useragent: string</code></h4>
 				<blockquote>
 					<p>Optional - custom user agent for the HTTP request</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">`N|Steam Market-Pricing v<span class="hljs-subst">${version}</span> (https://github.com/node-steam/market-pricing)`</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">`N|Steam Market-Pricing v<span class="hljs-subst">${version}</span> (https://github.com/node-steam/market-pricing)`</span></code></pre>
 				</blockquote>
-				<h4 id="-options-gzip-boolean-"><code>Options.gzip: boolean</code></h4>
+				<h4 id="options-gzip-boolean"><code>Options.gzip: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set GZIP compression will be used for the connection</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span></code></pre>
 				</blockquote>
-				<h4 id="-options-strictssl-boolean-"><code>Options.strictSSL: boolean</code></h4>
+				<h4 id="options-strictssl-boolean"><code>Options.strictSSL: boolean</code></h4>
 				<blockquote>
 					<p>Optional - if set strict SSL will be forced for the connection</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span>
-</code></pre>
+					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span></code></pre>
 				</blockquote>
-				<h4 id="-api-getprice-skin-string-options-object-callback-function-"><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
+				<h4 id="api-getprice-skin-string-options-object-callback-function-"><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
 				<blockquote>
 					<p>Get price for a skin</p>
 				</blockquote>
-				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
 
 &gt; {
     <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Bayonet'</span>,
@@ -179,13 +169,12 @@
         <span class="hljs-attr">median</span>: <span class="hljs-number">136.61</span>,
     },
     <span class="hljs-attr">volume</span>: <span class="hljs-number">8</span>,
-};
-</code></pre>
-				<h4 id="-api-getprices-skins-string-options-object-callback-function-"><code>API.getPrices(skins: string[], options?: object, callback?: function)</code></h4>
+};</code></pre>
+				<h4 id="api-getprices-skins-string-options-object-callback-function-"><code>API.getPrices(skins: string[], options?: object, callback?: function)</code></h4>
 				<blockquote>
 					<p>Get prices for a array of skins</p>
 				</blockquote>
-				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ]);
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> x = <span class="hljs-keyword">await</span> API.getPrices([ <span class="hljs-string">'★ Falchion Knife'</span>, <span class="hljs-string">'★ Karambit'</span> ]);
 
 &gt; [
     {
@@ -210,8 +199,7 @@
         },
         <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
     }
-];
-</code></pre>
+];</code></pre>
 				<h2 id="differences-from-the-raw-response-of-the-original-api-">Differences from the raw response of the original API:</h2>
 				<h3 id="object-layout-">Object Layout:</h3>
 				<blockquote>
@@ -219,15 +207,14 @@
 					<p>You can request the raw item by setting <code>{ raw: true }</code> in the options. This is not recommended though.</p>
 				</blockquote>
 				<p><strong>Raw:</strong></p>
-				<pre><code class="lang-javascript">{
+				<pre><code class="language-javascript">{
     <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">lowest_price</span>: <span class="hljs-string">"215,--€"</span>,
     <span class="hljs-attr">volume</span>: <span class="hljs-string">"6"</span>,
     <span class="hljs-attr">median_price</span>: <span class="hljs-string">"214,74€"</span>
-}
-</code></pre>
+}</code></pre>
 				<p><strong>This Module:</strong></p>
-				<pre><code class="lang-javascript">{
+				<pre><code class="language-javascript">{
     <span class="hljs-attr">id</span>: <span class="hljs-string">'★ Karambit'</span>,
     <span class="hljs-attr">price</span>: {
         <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
@@ -237,54 +224,48 @@
         <span class="hljs-attr">median</span>: <span class="hljs-number">214.74</span>,
     },
     <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
-}
-</code></pre>
+}</code></pre>
 				<h3 id="prices-">Prices:</h3>
 				<p>The prices aren&#39;t available as a string, but rather split up in object properties with more precise information:</p>
 				<p><strong>Example:</strong></p>
 				<p>Price you would get from the API:</p>
-				<pre><code class="lang-javascript">{
+				<pre><code class="language-javascript">{
     <span class="hljs-attr">lowest_price</span>: <span class="hljs-string">"57,86€"</span>,
     <span class="hljs-attr">median_price</span>: <span class="hljs-string">"59,63€"</span>
-}
-</code></pre>
+}</code></pre>
 				<p>Price you get from this module:</p>
-				<pre><code class="lang-javascript">{
+				<pre><code class="language-javascript">{
     <span class="hljs-attr">type</span>: <span class="hljs-string">'euro'</span>,
     <span class="hljs-attr">code</span>: <span class="hljs-string">'EUR'</span>,
     <span class="hljs-attr">sign</span>: <span class="hljs-string">'€'</span>,
     <span class="hljs-attr">lowest</span>: <span class="hljs-number">59.86</span>,
     <span class="hljs-attr">median</span>: <span class="hljs-number">57.74</span>,
-}
-</code></pre>
+}</code></pre>
 				<h3 id="volume-">Volume:</h3>
 				<p>The volume (of available skins) is a integer instead of a string</p>
 				<h2 id="async-promises-">Async / Promises:</h2>
 				<p>The examples are shown using <code>await</code> for simplicity  - if you don&#39;t want to make your function <code>async</code> you can always use <code>.catch().then()</code> or a <code>callback</code> instead.</p>
 				<h3 id="example-">Example:</h3>
 				<p><strong>Async:</strong></p>
-				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> item = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> item = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
 
-<span class="hljs-comment">// do something with the &lt;item&gt;</span>
-</code></pre>
+<span class="hljs-comment">// do something with the &lt;item&gt;</span></code></pre>
 				<p><strong>Promise:</strong></p>
-				<pre><code class="lang-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>)
+				<pre><code class="language-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>)
 .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
     <span class="hljs-built_in">console</span>.error(error);
 })
 .then(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
     <span class="hljs-comment">// do something with the &lt;item&gt;</span>
-});
-</code></pre>
+});</code></pre>
 				<p><strong>Callback:</strong></p>
-				<pre><code class="lang-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>, (error, item) =&gt; {
+				<pre><code class="language-javascript">API.getPrice(<span class="hljs-string">'★ Bayonet'</span>, (error, item) =&gt; {
     <span class="hljs-keyword">if</span> (error) {
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(error);
     }
 
     <span class="hljs-comment">// do something with the &lt;item&gt;</span>
-});
-</code></pre>
+});</code></pre>
 				<h2 id="contributors">Contributors</h2>
 				<ul>
 					<li>Silas Rech aka. <strong><a href="mailto:silas.rech@protonmail.com">lenovouser</a></strong></li>
@@ -293,20 +274,15 @@
 				<p>Interested in contributing to <strong>Market-Pricing</strong>? Contributions are welcome, and are accepted via pull requests. Please <a href="contributing.md">review these guidelines</a> before submitting any pull requests.</p>
 				<h3 id="help-">Help:</h3>
 				<p><strong>Install required global modules:</strong></p>
-				<pre><code class="lang-bash">yarn global add typescript tslint typedoc ava
-</code></pre>
+				<pre><code class="language-bash">yarn global add typescript tslint typedoc ava</code></pre>
 				<p><strong>Installing dependencies:</strong></p>
-				<pre><code class="lang-bash">yarn
-</code></pre>
+				<pre><code class="language-bash">yarn</code></pre>
 				<p><strong>Compile:</strong></p>
-				<pre><code class="lang-bash">yarn compile
-</code></pre>
+				<pre><code class="language-bash">yarn compile</code></pre>
 				<p><strong>Test:</strong></p>
-				<pre><code class="lang-bash">yarn <span class="hljs-built_in">test</span>
-</code></pre>
+				<pre><code class="language-bash">yarn <span class="hljs-built_in">test</span></code></pre>
 				<p><strong>Generate Docs:</strong></p>
-				<pre><code class="lang-bash">yarn docs
-</code></pre>
+				<pre><code class="language-bash">yarn docs</code></pre>
 				<h2 id="tests-">Tests:</h2>
 				<p>This module is thoroughly tested with <strong><a href="https://github.com/avajs/ava">ava</a></strong></p>
 				<blockquote>
@@ -368,7 +344,7 @@
 					<li class=" tsd-kind-interface tsd-is-external tsd-is-not-exported">
 						<a href="interfaces/nodesteamtiming.html" class="tsd-kind-icon">Node<wbr>Steam<wbr>Timing</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#nodesteamcallback" class="tsd-kind-icon">Node<wbr>Steam<wbr>Callback</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
