@@ -42,7 +42,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "tsc -p .",
-    "test": "TS_NODE_PROJECT=test/tsconfig.json ava",
+    "test": "yarn compile && TS_NODE_PROJECT=test/tsconfig.json ava",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts' 'src/*.ts' 'test/*.ts'",
     "docs": "typedoc src/index.ts",
     "prepublish": "yarn lint && yarn test && yarn docs"
