@@ -4,11 +4,11 @@ cache:
   yarn: false
 
 before_install:
-  - yarn
   - yarn global add typescript
   - yarn global add ava
   - yarn global add tslint
   - yarn global add typedoc
+  - yarn
 
 script: yarn test
 
