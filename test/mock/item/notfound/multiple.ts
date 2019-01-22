@@ -53,7 +53,7 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('Multiple Items That Do Not Exist', async (t) => {
-    const item: NodeSteamItemArray = await API.getPrices([
+    const item: nodesteam.ItemArray = await API.getPrices([
         'DoesNotExist500-One',
         'DoesNotExist500-Two',
         'DoesNotExist404-One',
@@ -81,6 +81,6 @@ test('Multiple Items That Do Not Exist', async (t) => {
             error: 'Item Not Found! Status: 404',
             id: 'DoesNotExist404-Two',
         },
-    ] as any as NodeSteamItemArray;
+    ] as any as nodesteam.ItemArray;
     t.deepEqual(item, should);
 });

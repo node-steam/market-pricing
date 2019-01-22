@@ -54,6 +54,6 @@ test('Multiple Empty Items', async (t) => {
             error: 'Item Was Found But No Data Transmitted!',
             id: 'SecondEmptyItem',
         },
-    ] as any as NodeSteamItemArray;
+    ] as any as nodesteam.ItemArray;
     t.deepEqual(should, exception);
 });

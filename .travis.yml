@@ -4,6 +4,7 @@ cache:
   yarn: false
 
 before_install:
+  - yarn
   - yarn global add typescript
   - yarn global add ava
   - yarn global add tslint
@@ -12,6 +13,8 @@ before_install:
 script: yarn test
 
 node_js:
+  - "10"
+  - "9"
   - "8"
   - "7"
   - "6"
