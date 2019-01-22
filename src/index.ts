@@ -24,7 +24,7 @@ import {
  * Make a request to the Steam API
  * @hidden
  */
-const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> => {
+const get = (options: nodesteam.HTTPRequestOptions): bluebird<nodesteam.RawItem> => {
     return new bluebird((resolve, reject) => {
         request({
             baseUrl: options.base || data.base,
@@ -91,8 +91,8 @@ const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> =
  */
 function getPrice(
     name:      string,
-    options:   NodeSteamMarketOptions,
-    callback?: NodeSteamCallback<any>,
+    options:   nodesteam.MarketOptions,
+    callback?: nodesteam.Callback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
         const {
@@ -172,8 +172,8 @@ function getPrice(
  */
 function getPrices(
     names:     string[],
-    options:   NodeSteamMarketOptions,
-    callback?: NodeSteamCallback<any>,
+    options:   nodesteam.MarketOptions,
+    callback?: nodesteam.Callback<any>,
 ) {
     const x = new bluebird((resolve, reject) => {
         const {
@@ -224,7 +224,7 @@ function getPrices(
             })
             .then((body) => {
                 if (raw) {
-                    i.results.push(body as NodeSteamRawItem);
+                    i.results.push(body as nodesteam.RawItem);
                 } else {
                     const item = util.generateItem(name, body, currency || enums.Currency.USD);
 
@@ -234,7 +234,7 @@ function getPrices(
                         item instanceof Error
                     ) throw item as Exception;
 
-                    i.results.push(item as NodeSteamCleanItem);
+                    i.results.push(item as nodesteam.CleanItem);
                 }
             })
             .catch((exception: Exception) => {
@@ -319,7 +319,7 @@ export class Market {
      * All the settings in one object
      * @hidden
      */
-    private settings: NodeSteamMarketOptions;
+    private settings: nodesteam.MarketOptions;
 
     /**
      * Create the API
@@ -327,7 +327,7 @@ export class Market {
      * @param {Object} options - Options
      *
      */
-    constructor(options: NodeSteamMarketOptions) {
+    constructor(options: nodesteam.MarketOptions) {
         if (typeof options !== 'object') throw new Exception(code.INVALID_OPTIONS);
 
         this.address   = options.address;
@@ -370,18 +370,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw): Promise<NodeSteamRawItem>;
-    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItem>): void;
+    public getPrice(name: string, options: nodesteam.OverwriteMarketOptionsWithRaw): Promise<nodesteam.RawItem>;
+    public getPrice(name: string, options: nodesteam.OverwriteMarketOptionsWithRaw, callback: nodesteam.Callback<nodesteam.RawItem>): void;
 
-    public getPrice(name: string, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
-    public getPrice(name: string, options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
+    public getPrice(name: string, callback: nodesteam.Callback<nodesteam.CleanItem>): void;
+    public getPrice(name: string, options:  nodesteam.OverwriteMarketOptions, callback: nodesteam.Callback<nodesteam.CleanItem>): void;
 
-    public getPrice(name: string, options?: NodeSteamOverwriteMarketOptions): Promise<NodeSteamCleanItem>;
+    public getPrice(name: string, options?: nodesteam.OverwriteMarketOptions): Promise<nodesteam.CleanItem>;
 
     public getPrice(
         name:      string,
-        options?:  NodeSteamOverwriteMarketOptions | NodeSteamCallback<NodeSteamCleanItem> | NodeSteamCallback<NodeSteamRawItem>,
-        callback?: NodeSteamCallback<NodeSteamCleanItem>    | NodeSteamCallback<NodeSteamRawItem>,
+        options?:  nodesteam.OverwriteMarketOptions | nodesteam.Callback<nodesteam.CleanItem> | nodesteam.Callback<nodesteam.RawItem>,
+        callback?: nodesteam.Callback<nodesteam.CleanItem>    | nodesteam.Callback<nodesteam.RawItem>,
     ) {
         if (typeof options === 'object') {
             const settings = {
@@ -404,18 +404,18 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw): Promise<NodeSteamRawItemArray>;
-    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItemArray>): void;
+    public getPrices(names: string[], options:  nodesteam.OverwriteMarketOptionsWithRaw): Promise<nodesteam.RawItemArray>;
+    public getPrices(names: string[], options:  nodesteam.OverwriteMarketOptionsWithRaw, callback: nodesteam.Callback<nodesteam.RawItemArray>): void;
 
-    public getPrices(names: string[], callback: NodeSteamCallback<NodeSteamItemArray>): void;
-    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamItemArray>): void;
+    public getPrices(names: string[], callback: nodesteam.Callback<nodesteam.ItemArray>): void;
+    public getPrices(names: string[], options:  nodesteam.OverwriteMarketOptions, callback: nodesteam.Callback<nodesteam.ItemArray>): void;
 
-    public getPrices(names: string[], options?: NodeSteamOverwriteMarketOptions): Promise<NodeSteamItemArray>;
+    public getPrices(names: string[], options?: nodesteam.OverwriteMarketOptions): Promise<nodesteam.ItemArray>;
 
     public getPrices(
         names:     string[],
-        options?:  NodeSteamOverwriteMarketOptions | NodeSteamCallback<NodeSteamItemArray> | NodeSteamCallback<NodeSteamRawItemArray>,
-        callback?: NodeSteamCallback<NodeSteamItemArray> | NodeSteamCallback<NodeSteamRawItemArray>,
+        options?:  nodesteam.OverwriteMarketOptions | nodesteam.Callback<nodesteam.ItemArray> | nodesteam.Callback<nodesteam.RawItemArray>,
+        callback?: nodesteam.Callback<nodesteam.ItemArray> | nodesteam.Callback<nodesteam.RawItemArray>,
     ) {
         if (typeof options === 'object') {
             const settings = {
