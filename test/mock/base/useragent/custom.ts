@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -31,15 +29,15 @@ nock(base, {
     market_hash_name: 'CustomUserAgent',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$1.00',
-    volume: '328',
     median_price: '$1.30',
+    success: true,
+    volume: '328',
 });
 
 const API = new Market({
-    id:        Application.CSGO,
     currency:  Currency.USD,
+    id:        Application.CSGO,
     useragent: `Custom User Agent v${version}`,
 });
 
@@ -48,11 +46,11 @@ test('Custom User Agent', async (t) => {
     const should = {
         id: 'CustomUserAgent',
         price: {
-            type: 'us-dollar',
             code: 'USD',
-            sign: '$',
             lowest: 1,
             median: 1.3,
+            sign: '$',
+            type: 'us-dollar',
         },
         volume: 328,
     };

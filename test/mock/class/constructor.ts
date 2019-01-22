@@ -1,5 +1,3 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
 
 import {
@@ -8,7 +6,7 @@ import {
 
 test('Invalid Constructor', (t) => {
     const market = t.throws(() => {
-        return new Market('null');
+        return new Market('null' as any);
     });
     t.deepEqual(market.message, 'Invalid Options Passed To Constructor!');
 });

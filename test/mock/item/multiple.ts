@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -27,10 +25,10 @@ nock(base)
     market_hash_name: 'FirstItem',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$1.00',
-    volume: '328',
     median_price: '$1.30',
+    success: true,
+    volume: '328',
 })
 
 // Second Valid Item Request
@@ -41,28 +39,38 @@ nock(base)
     market_hash_name: 'SecondItem',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$2.00',
-    volume: '612',
     median_price: '$1.70',
+    success: true,
+    volume: '612',
 });
 
-const API = new Market({ id: Application.CSGO, currency: Currency.USD, raw: true });
+const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
-test('Raw Request For Multiple Items', async (t) => {
+test('Multiple Items', async (t) => {
     const item = await API.getPrices(['FirstItem', 'SecondItem']);
     const should = [
         {
-            success: true,
-            lowest_price: '$1.00',
-            volume: '328',
-            median_price: '$1.30',
+            id: 'FirstItem',
+            price: {
+                code: 'USD',
+                lowest: 1,
+                median: 1.3,
+                sign: '$',
+                type: 'us-dollar',
+            },
+            volume: 328,
         },
         {
-            success: true,
-            lowest_price: '$2.00',
-            volume: '612',
-            median_price: '$1.70',
+            id: 'SecondItem',
+            price: {
+                code: 'USD',
+                lowest: 2,
+                median: 1.7,
+                sign: '$',
+                type: 'us-dollar',
+            },
+            volume: 612,
         },
     ];
     t.deepEqual(item.results, should);

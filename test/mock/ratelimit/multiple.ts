@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -38,7 +36,7 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('Steam API Rate Limiting For Several Items', async (t) => {
-    const error = await t.throws(API.getPrices([
+    const error = await t.throwsAsync(API.getPrices([
         'TestRateLimitForSeveralItemsOne',
         'TestRateLimitForSeveralItemsTwo',
     ]));

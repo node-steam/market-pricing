@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -23,31 +21,31 @@ nock(base)
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.EUR,
+    currency: Currency.GBP,
     market_hash_name: 'FirstItem',
 })
 .reply(200, {
+    lowest_price: '£1.00',
+    median_price: '£1.30',
     success: true,
-    lowest_price: '1,00€',
     volume: '328',
-    median_price: '1,30€',
 })
 
 // Second Valid Item Request
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.EUR,
+    currency: Currency.GBP,
     market_hash_name: 'SecondItem',
 })
 .reply(200, {
+    lowest_price: '£2.00',
+    median_price: '£1.70',
     success: true,
-    lowest_price: '2,00€',
     volume: '612',
-    median_price: '1,70€',
 });
 
-const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
+const API = new Market({ id: Application.CSGO, currency: Currency.GBP });
 
 test('Multiple Items', async (t) => {
     const item = await API.getPrices(['FirstItem', 'SecondItem']);
@@ -55,22 +53,22 @@ test('Multiple Items', async (t) => {
         {
             id: 'FirstItem',
             price: {
-                type: 'euro',
-                code: 'EUR',
-                sign: '€',
+                code: 'GBP',
                 lowest: 1,
                 median: 1.3,
+                sign: '£',
+                type: 'pound',
             },
             volume: 328,
         },
         {
             id: 'SecondItem',
             price: {
-                type: 'euro',
-                code: 'EUR',
-                sign: '€',
+                code: 'GBP',
                 lowest: 2,
                 median: 1.7,
+                sign: '£',
+                type: 'pound',
             },
             volume: 612,
         },

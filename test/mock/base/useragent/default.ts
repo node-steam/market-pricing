@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -15,38 +13,42 @@ import {
 import {
     base,
     path,
+    version,
 } from 'test/settings';
 
-// First Valid Item Request
-nock(base)
+// First Valid Request
+nock(base, {
+    reqheaders: {
+        'User-Agent': `N|Steam Market-Pricing v${version} (https://github.com/node-steam/market-pricing)`,
+    },
+})
 .get(path)
 .query({
     appid: Application.CSGO,
     currency: Currency.USD,
-    market_hash_name: 'FirstItem',
+    market_hash_name: 'UserAgent',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$1.00',
-    volume: '328',
     median_price: '$1.30',
+    success: true,
+    volume: '328',
 });
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
-test('Callback Support For Single Item', (t) => {
+test('Default User Agent', async (t) => {
+    const item = await API.getPrice('UserAgent');
     const should = {
-        id: 'FirstItem',
+        id: 'UserAgent',
         price: {
-            type: 'us-dollar',
             code: 'USD',
-            sign: '$',
             lowest: 1,
             median: 1.3,
+            sign: '$',
+            type: 'us-dollar',
         },
         volume: 328,
     };
-    return API.getPrice('FirstItem', (error, item) => {
-        t.deepEqual(item, should);
-    });
+    t.deepEqual(item, should);
 });

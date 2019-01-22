@@ -1,5 +1,3 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
 
 import {
@@ -8,7 +6,7 @@ import {
 
 test('Invalid Application ID', (t) => {
     const market = t.throws(() => {
-        return new Market({ id: '730' });
+        return new Market({ id: '730' } as any);
     });
     t.deepEqual(market.message, 'Invalid Application ID!');
 });

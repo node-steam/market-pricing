@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -26,27 +24,27 @@ nock(base)
     market_hash_name: 'FirstItem',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$1.00',
-    volume: '328',
     median_price: '$1.30',
+    success: true,
+    volume: '328',
 });
 
-const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
+const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('Callback Support For Single Item', (t) => {
     const should = {
         id: 'FirstItem',
         price: {
-            type: 'us-dollar',
             code: 'USD',
-            sign: '$',
             lowest: 1,
             median: 1.3,
+            sign: '$',
+            type: 'us-dollar',
         },
         volume: 328,
     };
-    return API.getPrice('FirstItem', { currency: Currency.USD }, (error, item) => {
+    return API.getPrice('FirstItem', (_, item) => {
         t.deepEqual(item, should);
     });
 });

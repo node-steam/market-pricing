@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -31,6 +29,6 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD, timeout: 500 });
 
 test('Steam API Timeout', async (t) => {
-    const error = await t.throws(API.getPrice('TestTimeout'));
+    const error = await t.throwsAsync(API.getPrice('TestTimeout'));
     t.is(error.message, 'Socket Timed Out!');
 });

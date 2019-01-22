@@ -1,16 +1,14 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
-    Market,
     error,
+    Market,
 } from 'lib';
 
 import {
@@ -24,7 +22,7 @@ nock(base)
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.GBP,
+    currency: Currency.EUR,
     market_hash_name: 'DoesNotExist500',
 })
 .reply(500, {success: false})
@@ -32,7 +30,7 @@ nock(base)
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.GBP,
+    currency: Currency.EUR,
     market_hash_name: 'DoesNotExist404',
 })
 .reply(404, {success: false})
@@ -41,31 +39,31 @@ nock(base)
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.GBP,
+    currency: Currency.EUR,
     market_hash_name: 'FirstItem',
 })
 .reply(200, {
+    lowest_price: '1,00€',
+    median_price: '1,30€',
     success: true,
-    lowest_price: '£1.00',
     volume: '328',
-    median_price: '£1.30',
 })
 
 // Second Valid Item Request
 .get(path)
 .query({
     appid: Application.CSGO,
-    currency: Currency.GBP,
+    currency: Currency.EUR,
     market_hash_name: 'SecondItem',
 })
 .reply(200, {
+    lowest_price: '2,00€',
+    median_price: '1,70€',
     success: true,
-    lowest_price: '£2.00',
     volume: '612',
-    median_price: '£1.70',
 });
 
-const API = new Market({ id: Application.CSGO, currency: Currency.GBP });
+const API = new Market({ id: Application.CSGO, currency: Currency.EUR });
 
 test('Multiple Mixed Items That Do And Do Not Exist', async (t) => {
     const item = await API.getPrices([
@@ -91,22 +89,22 @@ test('Multiple Mixed Items That Do And Do Not Exist', async (t) => {
             {
                 id: 'FirstItem',
                 price: {
-                    type: 'pound',
-                    code: 'GBP',
-                    sign: '£',
+                    code: 'EUR',
                     lowest: 1,
                     median: 1.3,
+                    sign: '€',
+                    type: 'euro',
                 },
                 volume: 328,
             },
             {
                 id: 'SecondItem',
                 price: {
-                    type: 'pound',
-                    code: 'GBP',
-                    sign: '£',
+                    code: 'EUR',
                     lowest: 2,
                     median: 1.7,
+                    sign: '€',
+                    type: 'euro',
                 },
                 volume: 612,
             },

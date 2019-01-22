@@ -1,16 +1,13 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
     Market,
-    error,
 } from 'lib';
 
 import {
@@ -45,7 +42,7 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('Multiple Empty Items', async (t) => {
-    const exception = await t.throws(API.getPrices(['FirstEmptyItem', 'SecondEmptyItem']));
+    const exception = await API.getPrices(['FirstEmptyItem', 'SecondEmptyItem']).catch((e) => e);
     const should = [
         {
             code: 'ITEM_NO_DATA',
@@ -57,6 +54,6 @@ test('Multiple Empty Items', async (t) => {
             error: 'Item Was Found But No Data Transmitted!',
             id: 'SecondEmptyItem',
         },
-    ];
+    ] as any as NodeSteamItemArray;
     t.deepEqual(should, exception);
 });

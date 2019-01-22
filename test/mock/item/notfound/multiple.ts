@@ -1,16 +1,14 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
-    Market,
     error,
+    Market,
 } from 'lib';
 
 import {
@@ -55,12 +53,13 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('Multiple Items That Do Not Exist', async (t) => {
-    const item = await t.throws(API.getPrices([
+    const item: NodeSteamItemArray = await API.getPrices([
         'DoesNotExist500-One',
         'DoesNotExist500-Two',
         'DoesNotExist404-One',
         'DoesNotExist404-Two',
-    ]));
+    ])
+    .catch((e) => e);
     const should = [
         {
             code: error.codes.ITEM_NOT_FOUND,
@@ -82,6 +81,6 @@ test('Multiple Items That Do Not Exist', async (t) => {
             error: 'Item Not Found! Status: 404',
             id: 'DoesNotExist404-Two',
         },
-    ];
+    ] as any as NodeSteamItemArray;
     t.deepEqual(item, should);
 });

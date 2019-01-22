@@ -1,16 +1,14 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
-    Market,
     error,
+    Market,
 } from 'lib';
 
 import {
@@ -33,7 +31,7 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test('One Empty Item', async (t) => {
-    const exception = await t.throws(API.getPrice('FirstEmptyItem'));
+    const exception: error.Exception = await t.throwsAsync(API.getPrice('FirstEmptyItem')) as any;
     t.is(exception.code, error.codes.ITEM_NO_DATA);
     t.is(exception.message, error.messages.ITEM_NO_DATA);
 });

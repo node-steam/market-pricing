@@ -1,16 +1,14 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
-    Market,
     error,
+    Market,
 } from 'lib';
 
 import {
@@ -20,6 +18,23 @@ import {
 
 nock(base)
 
+// Non-Existent Item With Status Code 500
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist500',
+})
+.reply(500, {success: false})
+// Non-Existent Item With Status Code 404
+.get(path)
+.query({
+    appid: Application.CSGO,
+    currency: Currency.USD,
+    market_hash_name: 'DoesNotExist404',
+})
+.reply(404, {success: false})
+
 // First Valid Item Request
 .get(path)
 .query({
@@ -28,10 +43,10 @@ nock(base)
     market_hash_name: 'FirstItem',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$1.00',
-    volume: '328',
     median_price: '$1.30',
+    success: true,
+    volume: '328',
 })
 
 // Second Valid Item Request
@@ -42,76 +57,54 @@ nock(base)
     market_hash_name: 'SecondItem',
 })
 .reply(200, {
-    success: true,
     lowest_price: '$2.00',
-    volume: '612',
     median_price: '$1.70',
-})
-
-// First Valid Item Request
-.get(path)
-.query({
-    appid: Application.CSGO,
-    currency: Currency.USD,
-    market_hash_name: 'FirstEmptyItem',
-})
-.reply(200, {
     success: true,
-})
-
-// Second Valid Item Request
-.get(path)
-.query({
-    appid: Application.CSGO,
-    currency: Currency.USD,
-    market_hash_name: 'SecondEmptyItem',
-})
-.reply(200, {
-    success: true,
+    volume: '612',
 });
 
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
-test('Multiple Mixed Items That Are Empty And Are Not Empty', async (t) => {
+test('Multiple Mixed Items That Do And Do Not Exist', async (t) => {
     const item = await API.getPrices([
-        'FirstEmptyItem',
-        'SecondEmptyItem',
+        'DoesNotExist500',
+        'DoesNotExist404',
         'FirstItem',
         'SecondItem',
     ]);
     const should = {
         errors: [
             {
-                code: 'ITEM_NO_DATA',
-                error: 'Item Was Found But No Data Transmitted!',
-                id: 'FirstEmptyItem',
+                code: error.codes.ITEM_NOT_FOUND,
+                error: 'Item Not Found! Status: 500',
+                id: 'DoesNotExist500',
             },
             {
-                code: 'ITEM_NO_DATA',
-                error: 'Item Was Found But No Data Transmitted!',
-                id: 'SecondEmptyItem',
+                code: error.codes.ITEM_NOT_FOUND,
+                error: 'Item Not Found! Status: 404',
+                id: 'DoesNotExist404',
             },
         ],
         results: [
             {
                 id: 'FirstItem',
                 price: {
-                    type: 'us-dollar',
                     code: 'USD',
-                    sign: '$',
                     lowest: 1,
                     median: 1.3,
+                    sign: '$',
+                    type: 'us-dollar',
                 },
                 volume: 328,
             },
             {
                 id: 'SecondItem',
                 price: {
-                    type: 'us-dollar',
                     code: 'USD',
-                    sign: '$',
                     lowest: 2,
                     median: 1.7,
+                    sign: '$',
+                    type: 'us-dollar',
                 },
                 volume: 612,
             },

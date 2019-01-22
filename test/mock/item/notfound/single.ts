@@ -1,11 +1,9 @@
-import 'app-module-path/cwd';
-
 import test from 'ava';
-import nock from 'nock';
+import * as nock from 'nock';
 
 import {
-    Currency,
     Application,
+    Currency,
 } from '@node-steam/data';
 
 import {
@@ -39,11 +37,11 @@ nock(base)
 const API = new Market({ id: Application.CSGO, currency: Currency.USD });
 
 test(`One Item That Doesn't Exist | 500`, async (t) => {
-    const item = await t.throws(API.getPrice('DoesNotExist500'));
+    const item = await t.throwsAsync(API.getPrice('DoesNotExist500'));
     t.deepEqual(item.message, 'Item Not Found! Status: 500');
 });
 
 test(`One Item That Doesn't Exist | 404`, async (t) => {
-    const item = await t.throws(API.getPrice('DoesNotExist404'));
+    const item = await t.throwsAsync(API.getPrice('DoesNotExist404'));
     t.deepEqual(item.message, 'Item Not Found! Status: 404');
 });
