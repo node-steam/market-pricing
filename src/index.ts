@@ -77,7 +77,7 @@ const get = (options: NodeSteamHTTPRequestOptions): bluebird<NodeSteamRawItem> =
 
             return reject(new Exception(code.UNKNOWN));
         });
-    }) as bluebird<NodeSteamRawItem>;
+    });
 };
 
 /**
@@ -158,7 +158,7 @@ function getPrice(
 
     if (callback) return x.asCallback(callback);
 
-    return x;
+    return x as PromiseLike<any>;
 }
 
 /**
@@ -259,7 +259,7 @@ function getPrices(
 
     if (callback) return x.asCallback(callback);
 
-    return x;
+    return x as PromiseLike<any>;
 }
 
 /**
@@ -370,13 +370,13 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw): bluebird<NodeSteamRawItem>;
+    public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw): Promise<NodeSteamRawItem>;
     public getPrice(name: string, options: NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItem>): void;
 
     public getPrice(name: string, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
     public getPrice(name: string, options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamCleanItem>): void;
 
-    public getPrice(name: string, options?: NodeSteamOverwriteMarketOptions): bluebird<NodeSteamCleanItem>;
+    public getPrice(name: string, options?: NodeSteamOverwriteMarketOptions): Promise<NodeSteamCleanItem>;
 
     public getPrice(
         name:      string,
@@ -404,13 +404,13 @@ export class Market {
      * @return {Promise<Item>}
      *
      */
-    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw): bluebird<NodeSteamRawItemArray>;
+    public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw): Promise<NodeSteamRawItemArray>;
     public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptionsWithRaw, callback: NodeSteamCallback<NodeSteamRawItemArray>): void;
 
     public getPrices(names: string[], callback: NodeSteamCallback<NodeSteamItemArray>): void;
     public getPrices(names: string[], options:  NodeSteamOverwriteMarketOptions, callback: NodeSteamCallback<NodeSteamItemArray>): void;
 
-    public getPrices(names: string[], options?: NodeSteamOverwriteMarketOptions): bluebird<NodeSteamItemArray>;
+    public getPrices(names: string[], options?: NodeSteamOverwriteMarketOptions): Promise<NodeSteamItemArray>;
 
     public getPrices(
         names:     string[],
