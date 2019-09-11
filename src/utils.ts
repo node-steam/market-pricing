@@ -63,7 +63,7 @@ const determineCurrencyCode = (currency: number): string => {
  * @hidden
  */
 const determineCurrencyType = (currency: number): string => {
-    return enums.CurrencyType[enums.Currency[currency] as any];
+    return enums.CurrencyType[enums.Currency[currency] as keyof typeof enums.CurrencySign];
 };
 
 /**
@@ -71,7 +71,7 @@ const determineCurrencyType = (currency: number): string => {
  * @hidden
  */
 const determineCurrencySign = (currency: number): string => {
-    return enums.CurrencySign[enums.Currency[currency] as any];
+    return enums.CurrencySign[enums.Currency[currency] as keyof typeof enums.CurrencySign];
 };
 
 /**

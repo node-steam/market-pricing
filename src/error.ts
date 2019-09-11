@@ -31,10 +31,10 @@ export enum messages {
  * @hidden
  */
 export class Exception extends Error {
-    public code: string;
+    public code: keyof typeof messages;
 
-    constructor(code: string, info?: string | number) {
-        let text: string = messages[code as any];
+    constructor(code: keyof typeof messages, info?: string | number) {
+        let text: string = messages[code];
         if (info) text = text.replace('%', `${info}`);
 
         super(text);
