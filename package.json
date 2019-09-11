@@ -7,7 +7,7 @@
   "homepage": "https://github.com/node-steam/market-pricing",
   "bugs": "https://github.com/node-steam/market-pricing/issues",
   "repository": {
-    "url": "https://github.com/node-steam/market-pricing",
+    "url": "https://github.com/node-steam/market-pricing.git",
     "type": "git"
   },
   "author": "N|Steam",
@@ -33,11 +33,15 @@
     "example/*.js"
   ],
   "contributors": [
-    "Silas Rech <silas.rech@protonmail.com> (https://lenovouser.me)"
+    {
+      "name": "Silas Rech",
+      "email": "silas.rech@protonmail.com",
+      "url": "https://lenovouser.me"
+    }
   ],
   "runkitExampleFilename": "example/runkit.js",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "license": "MIT",
   "scripts": {
