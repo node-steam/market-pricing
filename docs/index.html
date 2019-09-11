@@ -72,9 +72,14 @@
 					<a href="https://yarnpkg.com/en/package/@node-steam/market-pricing"><img src="https://img.shields.io/github/license/node-steam/market-pricing.svg?style=flat-square" alt="License"></a>
 				<a href="https://runkit.com/npm/@node-steam/market-pricing"><img src="https://img.shields.io/badge/try%20on%20runkit-market--pricing-blue.svg?style=flat-square" alt="Runkit"></a></p>
 				<p><strong>Market-Pricing</strong> is a wrapper for the unofficial <strong>Steam Market Pricing API</strong> using Typescript and Promises.</p>
-				<h2 id="installation">Installation</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
 				<p>You can install <strong>Market-Pricing</strong> through the command line by using the following command:</p>
-				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing</code></pre><h2 id="usage-">Usage:</h2>
+				<pre><code>yarn add @<span class="hljs-keyword">node</span><span class="hljs-title">-steam</span>/market-pricing</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage:</h2>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {
     Currency,
     Application,
@@ -85,75 +90,105 @@
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@node-steam/market-pricing'</span>;
 
 <span class="hljs-keyword">const</span> API = <span class="hljs-keyword">new</span> Market({ <span class="hljs-attr">id</span>: Application.CSGO, <span class="hljs-attr">currency</span>: Currency.EUR });</code></pre>
-				<h2 id="documentation-">Documentation:</h2>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation:</h2>
+				</a>
 				<blockquote>
 					<p><strong><a href="https://node-steam.github.io/market-pricing/">Generated Documentation</a></strong></p>
 				</blockquote>
-				<h4 id="new-market-options-"><code>new Market(Options)</code></h4>
+				<a href="#codenew-marketoptionscode" id="codenew-marketoptionscode" style="color: inherit; text-decoration: none;">
+					<h4><code>new Market(Options)</code></h4>
+				</a>
 				<blockquote>
 					<p>API class</p>
 				</blockquote>
-				<h4 id="options-id-number"><code>Options.id: number</code></h4>
+				<a href="#codeoptionsid-numbercode" id="codeoptionsid-numbercode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.id: number</code></h4>
+				</a>
 				<blockquote>
 					<p>Application ID of the game you want to query skin/s for</p>
 					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/application.ts">enum</a></strong> for the most common used games.</p>
 				</blockquote>
-				<h4 id="options-currency-number"><code>Options.currency: number</code></h4>
+				<a href="#codeoptionscurrency-numbercode" id="codeoptionscurrency-numbercode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.currency: number</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional currency integer</p>
 					<p>We provide a <strong><a href="https://github.com/node-steam/data/blob/master/src/currency/base.ts">enum</a></strong>  for all available currencies</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-number">1</span></code></pre>
 				</blockquote>
-				<h4 id="options-country-string"><code>Options.country: string</code></h4>
+				<a href="#codeoptionscountry-stringcode" id="codeoptionscountry-stringcode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.country: string</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional <strong><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166</a></strong> country code</p>
 				</blockquote>
-				<h4 id="options-address-string"><code>Options.address: string</code></h4>
+				<a href="#codeoptionsaddress-stringcode" id="codeoptionsaddress-stringcode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.address: string</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional local interface to bind for network connections</p>
 				</blockquote>
-				<h4 id="options-timeout-number"><code>Options.timeout: number</code></h4>
+				<a href="#codeoptionstimeout-numbercode" id="codeoptionstimeout-numbercode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.timeout: number</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional number of milliseconds before declaring the request as timed out</p>
 					<p>We recommend <strong><a href="https://github.com/zeit/ms">zeit/ms</a></strong> to easily convert human readable time to milliseconds.
 					(Or just use a calculator 😏)</p>
 				</blockquote>
-				<h4 id="options-timings-boolean"><code>Options.timings: boolean</code></h4>
+				<a href="#codeoptionstimings-booleancode" id="codeoptionstimings-booleancode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.timings: boolean</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - if set request timings will be returned</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span></code></pre>
 				</blockquote>
-				<h4 id="options-raw-boolean"><code>Options.raw: boolean</code></h4>
+				<a href="#codeoptionsraw-booleancode" id="codeoptionsraw-booleancode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.raw: boolean</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - if set all objects will be returned in their raw form when set to true</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">false</span></code></pre>
 				</blockquote>
-				<h4 id="options-base-string"><code>Options.base: string</code></h4>
+				<a href="#codeoptionsbase-stringcode" id="codeoptionsbase-stringcode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.base: string</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - base domain</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'https://steamcommunity.com'</span></code></pre>
 				</blockquote>
-				<h4 id="options-path-string"><code>Options.path: string</code></h4>
+				<a href="#codeoptionspath-stringcode" id="codeoptionspath-stringcode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.path: string</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - base path</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">'/market/priceoverview'</span></code></pre>
 				</blockquote>
-				<h4 id="options-useragent-string"><code>Options.useragent: string</code></h4>
+				<a href="#codeoptionsuseragent-stringcode" id="codeoptionsuseragent-stringcode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.useragent: string</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - custom user agent for the HTTP request</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-string">`N|Steam Market-Pricing v<span class="hljs-subst">${version}</span> (https://github.com/node-steam/market-pricing)`</span></code></pre>
 				</blockquote>
-				<h4 id="options-gzip-boolean"><code>Options.gzip: boolean</code></h4>
+				<a href="#codeoptionsgzip-booleancode" id="codeoptionsgzip-booleancode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.gzip: boolean</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - if set GZIP compression will be used for the connection</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span></code></pre>
 				</blockquote>
-				<h4 id="options-strictssl-boolean"><code>Options.strictSSL: boolean</code></h4>
+				<a href="#codeoptionsstrictssl-booleancode" id="codeoptionsstrictssl-booleancode" style="color: inherit; text-decoration: none;">
+					<h4><code>Options.strictSSL: boolean</code></h4>
+				</a>
 				<blockquote>
 					<p>Optional - if set strict SSL will be forced for the connection</p>
 					<pre><code class="language-js"><span class="hljs-keyword">default</span> = <span class="hljs-literal">true</span></code></pre>
 				</blockquote>
-				<h4 id="api-getprice-skin-string-options-object-callback-function-"><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
+				<a href="#codeapigetpriceskin-string-options-object-callback-functioncode" id="codeapigetpriceskin-string-options-object-callback-functioncode" style="color: inherit; text-decoration: none;">
+					<h4><code>API.getPrice(skin: string, options?: object, callback?: function)</code></h4>
+				</a>
 				<blockquote>
 					<p>Get price for a skin</p>
 				</blockquote>
@@ -170,7 +205,9 @@
     },
     <span class="hljs-attr">volume</span>: <span class="hljs-number">8</span>,
 };</code></pre>
-				<h4 id="api-getprices-skins-string-options-object-callback-function-"><code>API.getPrices(skins: string[], options?: object, callback?: function)</code></h4>
+				<a href="#codeapigetpricesskins-string-options-object-callback-functioncode" id="codeapigetpricesskins-string-options-object-callback-functioncode" style="color: inherit; text-decoration: none;">
+					<h4><code>API.getPrices(skins: string[], options?: object, callback?: function)</code></h4>
+				</a>
 				<blockquote>
 					<p>Get prices for a array of skins</p>
 				</blockquote>
@@ -200,8 +237,12 @@
         <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
     }
 ];</code></pre>
-				<h2 id="differences-from-the-raw-response-of-the-original-api-">Differences from the raw response of the original API:</h2>
-				<h3 id="object-layout-">Object Layout:</h3>
+				<a href="#differences-from-the-raw-response-of-the-original-api" id="differences-from-the-raw-response-of-the-original-api" style="color: inherit; text-decoration: none;">
+					<h2>Differences from the raw response of the original API:</h2>
+				</a>
+				<a href="#object-layout" id="object-layout" style="color: inherit; text-decoration: none;">
+					<h3>Object Layout:</h3>
+				</a>
 				<blockquote>
 					<p><strong>Info:</strong></p>
 					<p>You can request the raw item by setting <code>{ raw: true }</code> in the options. This is not recommended though.</p>
@@ -225,7 +266,9 @@
     },
     <span class="hljs-attr">volume</span>: <span class="hljs-number">6</span>,
 }</code></pre>
-				<h3 id="prices-">Prices:</h3>
+				<a href="#prices" id="prices" style="color: inherit; text-decoration: none;">
+					<h3>Prices:</h3>
+				</a>
 				<p>The prices aren&#39;t available as a string, but rather split up in object properties with more precise information:</p>
 				<p><strong>Example:</strong></p>
 				<p>Price you would get from the API:</p>
@@ -241,11 +284,17 @@
     <span class="hljs-attr">lowest</span>: <span class="hljs-number">59.86</span>,
     <span class="hljs-attr">median</span>: <span class="hljs-number">57.74</span>,
 }</code></pre>
-				<h3 id="volume-">Volume:</h3>
+				<a href="#volume" id="volume" style="color: inherit; text-decoration: none;">
+					<h3>Volume:</h3>
+				</a>
 				<p>The volume (of available skins) is a integer instead of a string</p>
-				<h2 id="async-promises-">Async / Promises:</h2>
+				<a href="#async--promises" id="async--promises" style="color: inherit; text-decoration: none;">
+					<h2>Async / Promises:</h2>
+				</a>
 				<p>The examples are shown using <code>await</code> for simplicity  - if you don&#39;t want to make your function <code>async</code> you can always use <code>.catch().then()</code> or a <code>callback</code> instead.</p>
-				<h3 id="example-">Example:</h3>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h3>Example:</h3>
+				</a>
 				<p><strong>Async:</strong></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> item = <span class="hljs-keyword">await</span> API.getPrice(<span class="hljs-string">'★ Bayonet'</span>);
 
@@ -266,13 +315,19 @@
 
     <span class="hljs-comment">// do something with the &lt;item&gt;</span>
 });</code></pre>
-				<h2 id="contributors">Contributors</h2>
+				<a href="#contributors" id="contributors" style="color: inherit; text-decoration: none;">
+					<h2>Contributors</h2>
+				</a>
 				<ul>
 					<li>Silas Rech aka. <strong><a href="mailto:silas.rech@protonmail.com">lenovouser</a></strong></li>
 				</ul>
-				<h2 id="contributing-">Contributing:</h2>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing:</h2>
+				</a>
 				<p>Interested in contributing to <strong>Market-Pricing</strong>? Contributions are welcome, and are accepted via pull requests. Please <a href="contributing.md">review these guidelines</a> before submitting any pull requests.</p>
-				<h3 id="help-">Help:</h3>
+				<a href="#help" id="help" style="color: inherit; text-decoration: none;">
+					<h3>Help:</h3>
+				</a>
 				<p><strong>Install required global modules:</strong></p>
 				<pre><code class="language-bash">yarn global add typescript tslint typedoc ava</code></pre>
 				<p><strong>Installing dependencies:</strong></p>
@@ -283,12 +338,16 @@
 				<pre><code class="language-bash">yarn <span class="hljs-built_in">test</span></code></pre>
 				<p><strong>Generate Docs:</strong></p>
 				<pre><code class="language-bash">yarn docs</code></pre>
-				<h2 id="tests-">Tests:</h2>
+				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
+					<h2>Tests:</h2>
+				</a>
 				<p>This module is thoroughly tested with <strong><a href="https://github.com/avajs/ava">ava</a></strong></p>
 				<blockquote>
 					<p><strong>Note:</strong> All responses from the steam API are currently mocked because of rate limiting. Might change in the future, not sure how to proceed about this though.</p>
 				</blockquote>
-				<h2 id="license-">License:</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License:</h2>
+				</a>
 				<p>Code licensed under <a href="license.md">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
 			</div>
 		</div>
@@ -337,6 +396,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -385,7 +445,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
