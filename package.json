@@ -69,21 +69,21 @@
   },
   "devDependencies": {
     "@node-steam/data": "^1",
-    "@types/async": "^2",
+    "@types/async": "^3",
     "@types/bluebird": "^3",
-    "@types/form-data": "^2",
-    "@types/nock": "^9",
-    "@types/node": "^10",
+    "@types/nock": "^10",
+    "@types/node": "^12",
     "@types/request": "^2",
-    "ava": "^1.0.0-rc.2",
-    "nock": "^10",
+    "ava": "^2",
+    "nock": "^11",
     "ts-node": "^8",
     "tsconfig-paths": "^3",
+    "tslint": "^5",
     "typescript": "^3"
   },
   "dependencies": {
-    "async": "2.6.1",
-    "bluebird": "3.5.3",
+    "async": "3.1.0",
+    "bluebird": "3.5.5",
     "request": "2.88.0"
   }
 }
